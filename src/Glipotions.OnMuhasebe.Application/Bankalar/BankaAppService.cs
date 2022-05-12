@@ -12,12 +12,14 @@ namespace Glipotions.OnMuhasebe.Bankalar;
 public class BankaAppService : OnMuhasebeAppService, IBankaAppService
 {
     private readonly IBankaRepository _bankaRepository;
+    private readonly BankaManager _bankaManager;
 
     /// <Özet>
     /// <param name="bankaRepository"></param> Yukarıda Oluşturduktan Sonra Generate Constructor yaptık
-    public BankaAppService(IBankaRepository bankaRepository)
+    public BankaAppService(IBankaRepository bankaRepository, BankaManager bankaManager)
     {
         _bankaRepository = bankaRepository;
+        _bankaManager = bankaManager;
     }
 
     /// <Özet>
@@ -56,7 +58,7 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
     public virtual async Task<SelectBankaDto> CreateAsync(CreateBankaDto input)
     {
-
+        await _bankaManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
 
         var entity = ObjectMapper.Map<CreateBankaDto, Banka>(input);
         await _bankaRepository.InsertAsync(entity);
@@ -66,6 +68,9 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
     public virtual async Task<SelectBankaDto> UpdateAsync(Guid id, UpdateBankaDto input)
     {
         var entity = await _bankaRepository.GetAsync(id, x => x.Id == id);
+
+        await _bankaManager.CheckUpdateAsync(id, input.Kod, entity, input.OzelKod1Id, input.OzelKod2Id);
+
         var mappedEntity = ObjectMapper.Map(input, entity);
         await _bankaRepository.UpdateAsync(mappedEntity);
 
@@ -74,6 +79,8 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
 
     public virtual async Task DeleteAsync(Guid id)
     {
+        await _bankaManager.CheckDeleteAsync(id);
+
         await _bankaRepository.DeleteAsync(id);
     }
 

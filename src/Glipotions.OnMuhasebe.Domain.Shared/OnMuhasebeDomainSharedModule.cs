@@ -52,7 +52,7 @@ public class OnMuhasebeDomainSharedModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("OnMuhasebe", typeof(OnMuhasebeResource));
+            options.MapCodeNamespace("Exception", typeof(OnMuhasebeResource));
         });
     }
 }

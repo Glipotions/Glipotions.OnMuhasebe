@@ -1,8 +1,11 @@
 {
+  //Domain.Shared projesi içinde DomainSharedModule.cs içinde Exception olarak belirtilmesi gerekir. (1/5) 111.Video 25.dk
   "culture": "tr",
   "texts": {
     "Menu:Home": "Ana sayfa",
     "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz."
+    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+    "Exception:00001": "Girmiş olduğunuz {kod} kodu daha önce kullanılmıştır.",
+    "Exception:00002": "Kartın işlem görmüş hareketleri var. Kart Silinemez!"
   }
 }

@@ -5,6 +5,7 @@ public static class OnMuhasebeDomainErrorCodes
     /// <Özet>
     /// Alabileceğimiz hatalara bir kod verdik ve bu kodu json da localize işlemlerinde diğer diller
     /// için belirtilir.
+    /// Localization klasörü Domain.Shared içindedir.
     /// </summary>
     /* You can add your business exception error codes here, as constants */
     public const string DuplicateKod = "Exception:00001";
