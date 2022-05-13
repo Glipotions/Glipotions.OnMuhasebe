@@ -64,7 +64,12 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         await _bankaRepository.InsertAsync(entity);
         return ObjectMapper.Map<Banka, SelectBankaDto>(entity);
     }
-
+    /// <Özet>
+    /// Maplerken Elimizde 2 entity var o yüzden generic yapı kullanılmaz. 
+    /// UI dan gelen input ile entity maplenir. Arada oluşan farklar update edilir.
+    /// <param name="id"></param>
+    /// <param name="input"></param> UI dan gelir
+    /// <returns> Maplenmiş entity return edilir. </returns>
     public virtual async Task<SelectBankaDto> UpdateAsync(Guid id, UpdateBankaDto input)
     {
         var entity = await _bankaRepository.GetAsync(id, x => x.Id == id);

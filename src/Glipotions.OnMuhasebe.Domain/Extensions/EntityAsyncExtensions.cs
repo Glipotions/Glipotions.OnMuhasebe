@@ -22,6 +22,16 @@ public static class EntityAsyncExtensions
             throw new DuplicateCodeException(kod);
     }
 
+    /// <Özet>
+    /// Entityler var mı? kontrolü için bu fonksiyon yazıldı
+    /// 
+    /// <typeparam name="TEntity"></typeparam>  Bir Entity Gönderilir. TEntity bir classtır aynı zamanda IEntitydir.
+    /// <param name="repository"></param>       
+    /// <param name="id"></param>               id object olarak alınır farklı türlerde olabileceği için
+    /// <param name="predicate"></param>
+    /// <param name="check"></param>            
+    /// <returns></returns>                     AnyAsync ile Bu Entity var mı işlemi yapılmış olur.
+    /// <exception cref="EntityNotFoundException"></exception>
     public static async Task EntityAnyAsync<TEntity>(
         this IReadOnlyRepository<TEntity> repository, object id,
         Expression<Func<TEntity, bool>> predicate, bool check = true)

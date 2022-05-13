@@ -6,6 +6,13 @@
     "Welcome": "Hoşgeldiniz",
     "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
     "Exception:00001": "Girmiş olduğunuz {kod} kodu daha önce kullanılmıştır.",
-    "Exception:00002": "Kartın işlem görmüş hareketleri var. Kart Silinemez!"
+    "Exception:00002": "Kartın işlem görmüş hareketleri var. Kart Silinemez!",
+    "Enum:BankaHesapTuru:1": "Vadesiz Mevduat Hesabı",
+    "Enum:BankaHesapTuru:2": "Vadeli Mevduat Hesabı",
+    "Enum:BankaHesapTuru:3": "Kredi Hesabı",
+    "Enum:BankaHesapTuru:4": "Pos Bloke Hesabı",
+    "Enum:BankaHesapTuru:5": "Fon Hesabı",
+    "Enum:BankaHesapTuru:6": "Yatırım Hesabı"
+
   }
 }
