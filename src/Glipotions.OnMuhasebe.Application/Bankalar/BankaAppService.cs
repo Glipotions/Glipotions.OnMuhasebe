@@ -30,7 +30,12 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         var entity = await _bankaRepository.GetAsync(id, x => x.Id == id, x => x.OzelKod1, x => x.OzelKod2);
         return ObjectMapper.Map<Banka, SelectBankaDto>(entity);
     }
-
+    /// <Özet>
+    /// Listeyi Çağırır
+    /// predicate --> filtre görebi görür
+    /// <param name="input"></param>
+    /// include propertyler girilir.
+    /// return olarak Entity'i List(Entity)Dto ya mapleriz.
     public virtual async Task<PagedResultDto<ListBankaDto>> GetListAsync(BankaListParameterDto input)
     {
         var entities = await _bankaRepository.GetPagedListAsync(
@@ -65,6 +70,7 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
         return ObjectMapper.Map<Banka, SelectBankaDto>(entity);
     }
     /// <Özet>
+    /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
     /// Maplerken Elimizde 2 entity var o yüzden generic yapı kullanılmaz. 
     /// UI dan gelen input ile entity maplenir. Arada oluşan farklar update edilir.
     /// <param name="id"></param>
@@ -81,7 +87,8 @@ public class BankaAppService : OnMuhasebeAppService, IBankaAppService
 
         return ObjectMapper.Map<Banka, SelectBankaDto>(mappedEntity);
     }
-
+    /// <Özet>
+    /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaManager.CheckDeleteAsync(id);

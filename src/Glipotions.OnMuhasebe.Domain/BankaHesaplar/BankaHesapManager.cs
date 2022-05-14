@@ -27,7 +27,7 @@ public class BankaHesapManager : DomainService
     /// diye kontrol eder. hata varsa hata fırlatır.
     /// 
     /// <param name="kod"></param>          varsa tekrar eden kod hatası
-    /// <param name="bankaId"></param>      böyle bir bankaId var mı kontrolü için gerekir
+    /// <param name="bankaSubeId"></param>      böyle bir bankaSubeId var mı kontrolü için gerekir
     /// <param name="ozelKod1Id"></param>   böyle bir ozelKod1Id var mı kontrolü için gerekir
     /// <param name="ozelKod2Id"></param>   böyle bir ozelKod2Id var mı kontrolü için gerekir
     /// EntityAnyAsync ile database de var mı kontrolü yapılır.

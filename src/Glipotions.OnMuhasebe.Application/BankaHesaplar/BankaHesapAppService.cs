@@ -94,7 +94,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
-    /// Maplerken Elimizde 2 entity var o yüzden generic yapı kullanılmaz. 
+    /// Maplerken Elimizde 2 entity var o yüzden generic yapı ile entity üretmeye gerek olmadığından yapılmaz. 
     /// UI dan gelen input ile entity maplenir. Arada oluşan farklar update edilir.
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
