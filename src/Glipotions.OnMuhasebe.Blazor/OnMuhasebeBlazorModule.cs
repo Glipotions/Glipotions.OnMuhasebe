@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using Blazorise.Bootstrap5;
@@ -41,6 +41,7 @@ using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using System.Text.Json.Serialization;
 
 namespace Glipotions.OnMuhasebe.Blazor;
 
@@ -92,6 +93,19 @@ public class OnMuhasebeBlazorModule : AbpModule
         ConfigureBlazorise(context);
         ConfigureRouter(context);
         ConfigureMenu(context);
+
+        // Bizim oluşturduğumuz Configureler
+        //ConfigureJson(context);
+    }
+    /// <Özet>
+    /// (2/5) 14. Video 55. Dk dan itibaren
+    /// DEVRE DIŞI BIRAKTIK
+    /// <param name="context"></param>
+    private void ConfigureJson(ServiceConfigurationContext context)
+    {
+        context.Services.AddControllers()
+            .AddJsonOptions(x => x.JsonSerializerOptions
+            .ReferenceHandler = ReferenceHandler.IgnoreCycles);
     }
 
     private void ConfigureUrls(IConfiguration configuration)

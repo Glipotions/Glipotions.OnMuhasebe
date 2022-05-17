@@ -12,7 +12,10 @@
     "Enum:BankaHesapTuru:3": "Kredi Hesabı",
     "Enum:BankaHesapTuru:4": "Pos Bloke Hesabı",
     "Enum:BankaHesapTuru:5": "Fon Hesabı",
-    "Enum:BankaHesapTuru:6": "Yatırım Hesabı"
+    "Enum:BankaHesapTuru:6": "Yatırım Hesabı",
+    "Enum:FaturaHareketTuru:1": "Stok",
+    "Enum:FaturaHareketTuru:2": "Hizmet",
+    "Enum:FaturaHareketTuru:3": "Masraf"
 
   }
 }

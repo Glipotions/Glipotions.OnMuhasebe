@@ -11,6 +11,7 @@ public class OzelKodManager : DomainService
 
     public OzelKodManager(IOzelKodRepository ozelKodRepository)
     {
+        _ozelKodRepository = ozelKodRepository;
     }
 
     /// <Özet>

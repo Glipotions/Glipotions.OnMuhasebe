@@ -13,7 +13,10 @@ public class EfCoreFaturaRepository : EfCoreCommonRepository<Fatura>, IFaturaRep
         : base(dbContextProvider)
     {
     }
-
+    /// <Özet>
+    /// (2/5) 13. Video 42.dk
+    /// </summary>
+    /// <returns></returns>
     public override async Task<IQueryable<Fatura>> WithDetailsAsync()
     {
         return (await GetQueryableAsync())
@@ -21,14 +24,18 @@ public class EfCoreFaturaRepository : EfCoreCommonRepository<Fatura>, IFaturaRep
             .Include(x => x.OzelKod1)
             .Include(x => x.OzelKod2)
 
+            // Sadece Depo Include edilir.
             .Include(x => x.FaturaHareketler).ThenInclude(x => x.Depo)
 
+            // Sadece Stok'un Birim'i Include edilir.
             .Include(x => x.FaturaHareketler).ThenInclude(x => x.Stok)
                                              .ThenInclude(x => x.Birim)
 
+            // Sadece Hizmet'in Birim'i Include edilir.
             .Include(x => x.FaturaHareketler).ThenInclude(x => x.Hizmet)
                                              .ThenInclude(x => x.Birim)
 
+            // Sadece Masraf'ın Birim'i Include edilir.
             .Include(x => x.FaturaHareketler).ThenInclude(x => x.Masraf)
                                              .ThenInclude(x => x.Birim);
     }
