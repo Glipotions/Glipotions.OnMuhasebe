@@ -101,12 +101,12 @@ public class OnMuhasebeBlazorModule : AbpModule
     /// (2/5) 14. Video 55. Dk dan itibaren
     /// DEVRE DIŞI BIRAKTIK
     /// <param name="context"></param>
-    private void ConfigureJson(ServiceConfigurationContext context)
-    {
-        context.Services.AddControllers()
-            .AddJsonOptions(x => x.JsonSerializerOptions
-            .ReferenceHandler = ReferenceHandler.IgnoreCycles);
-    }
+    //private void ConfigureJson(ServiceConfigurationContext context)
+    //{
+    //    context.Services.AddControllers()
+    //        .AddJsonOptions(x => x.JsonSerializerOptions
+    //        .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+    //}
 
     private void ConfigureUrls(IConfiguration configuration)
     {
@@ -135,9 +135,22 @@ public class OnMuhasebeBlazorModule : AbpModule
                 BlazorBasicThemeBundles.Styles.Global,
                 bundle =>
                 {
+                    bundle.AddFiles("/css/blazing_berry/bootstrap.min.css");
+                    bundle.AddFiles("/css/site.css");
                     bundle.AddFiles("/blazor-global-styles.css");
-                    //You can remove the following line if you don't use Blazor CSS isolation for components
                     bundle.AddFiles("/Glipotions.OnMuhasebe.Blazor.styles.css");
+                    bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
+                    bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
+                    bundle.AddFiles("/_content/Glipotions.Blazor.Core/css/component.css");
+                }
+            );
+
+            options.ScriptBundles.Configure(
+                BlazorBasicThemeBundles.Scripts.Global,
+                bundle=>
+                {
+                    //Varsa js dosya yolları eklenecek.
+                    //bundle.AddFiles()
                 }
             );
         });

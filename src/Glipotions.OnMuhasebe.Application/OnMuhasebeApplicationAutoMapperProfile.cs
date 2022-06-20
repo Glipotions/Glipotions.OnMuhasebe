@@ -11,8 +11,10 @@ using Glipotions.OnMuhasebe.FaturaHareketler;
 using Glipotions.OnMuhasebe.Faturalar;
 using Glipotions.OnMuhasebe.Hizmetler;
 using Glipotions.OnMuhasebe.Kasalar;
+using Glipotions.OnMuhasebe.MakbuzHareketler;
 using Glipotions.OnMuhasebe.Makbuzlar;
 using Glipotions.OnMuhasebe.Masraflar;
+using Glipotions.OnMuhasebe.OdemeBelgeleri;
 using Glipotions.OnMuhasebe.OzelKodlar;
 using Glipotions.OnMuhasebe.Parametreler;
 using Glipotions.OnMuhasebe.Stoklar;
@@ -228,6 +230,62 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
         CreateMap<UpdateKasaDto, Kasa>();
         CreateMap<SelectKasaDto, CreateKasaDto>();
         CreateMap<SelectKasaDto, UpdateKasaDto>();
+
+        //Makbuz
+        CreateMap<Makbuz, SelectMakbuzDto>()
+            .ForMember(x => x.CariKodu, y => y.MapFrom(z => z.Cari.Kod))
+            .ForMember(x => x.CariAdi, y => y.MapFrom(z => z.Cari.Ad))
+            .ForMember(x => x.KasaAdi, y => y.MapFrom(z => z.Kasa.Ad))
+            .ForMember(x => x.BankaHesapAdi, y => y.MapFrom(z => z.BankaHesap.Ad))
+            .ForMember(x => x.OzelKod1Adi, y => y.MapFrom(z => z.OzelKod1.Ad))
+            .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad))
+            .ForMember(x => x.SubeAdi, y => y.MapFrom(z => z.Sube.Ad));
+
+        CreateMap<Makbuz, ListMakbuzDto>()
+            .ForMember(x => x.CariAdi, y => y.MapFrom(z => z.Cari.Ad))
+            .ForMember(x => x.KasaAdi, y => y.MapFrom(z => z.Kasa.Ad))
+            .ForMember(x => x.BankaHesapAdi, y => y.MapFrom(z => z.BankaHesap.Ad))
+            .ForMember(x => x.OzelKod1Adi, y => y.MapFrom(z => z.OzelKod1.Ad))
+            .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
+
+        CreateMap<CreateMakbuzDto, Makbuz>();
+        /// ÖZET
+        /// Update işlemi yaparken silinmiş hareketleri tespit edilen yerde tüm hareketleri
+        /// silmesin diye Ignore eklenmesi gerekir.
+        CreateMap<UpdateMakbuzDto, Makbuz>()
+            .ForMember(x => x.MakbuzTuru, y => y.Ignore())
+            .ForMember(x => x.MakbuzHareketler, y => y.Ignore());
+        CreateMap<SelectMakbuzDto, CreateMakbuzDto>();
+        CreateMap<SelectMakbuzDto, UpdateMakbuzDto>();
+        CreateMap<SelectMakbuzDto, MakbuzReportDto>();
+
+        //Makbuz Hareket
+        CreateMap<MakbuzHareket, SelectMakbuzHareketDto>()
+            .ForMember(x => x.CekBankaAdi, y => y.MapFrom(z => z.CekBanka.Ad))
+            .ForMember(x => x.CekBankaSubeAdi, y => y.MapFrom(z => z.CekBankaSube.Ad))
+            .ForMember(x => x.KasaAdi, y => y.MapFrom(z => z.Kasa.Ad))
+            .ForMember(x => x.BankaHesapAdi, y => y.MapFrom(z => z.BankaHesap.Ad));
+
+        CreateMap<MakbuzHareketDto, MakbuzHareket>();
+
+        CreateMap<MakbuzHareket, ListOdemeBelgesiHareketDto>()
+            .ForMember(x => x.MakbuzNo, y => y.MapFrom(z => z.Makbuz.MakbuzNo))
+            .ForMember(x => x.Tarih, y => y.MapFrom(z => z.Makbuz.Tarih))
+            .ForMember(x => x.MakbuzTuru, y => y.MapFrom(z => z.Makbuz.MakbuzTuru))
+            .ForMember(x => x.Aciklama,
+                y => y.MapFrom(z => string.IsNullOrEmpty(z.Makbuz.Aciklama) ? z.Aciklama : z.Makbuz.Aciklama));
+
+        CreateMap<MakbuzHareket, ListCariHareketDto>()
+            .ForMember(x => x.CariId, y => y.MapFrom(z => z.Makbuz.CariId))
+            .ForMember(x => x.Tarih, y => y.MapFrom(z => z.Makbuz.Tarih))
+            .ForMember(x => x.BelgeNo, y => y.MapFrom(z => z.Makbuz.MakbuzNo))
+            .ForMember(x => x.MakbuzTuru, y => y.MapFrom(z => z.Makbuz.MakbuzTuru))
+            .ForMember(x => x.Aciklama,
+                y => y.MapFrom(z => string.IsNullOrEmpty(z.Makbuz.Aciklama) ? z.Aciklama : z.Makbuz.Aciklama));
+
+        CreateMap<SelectMakbuzHareketDto, MakbuzHareketDto>();
+        CreateMap<SelectMakbuzHareketDto, SelectMakbuzHareketDto>();
+        CreateMap<SelectMakbuzHareketDto, MakbuzHareketReportDto>();
 
         //Masraf
         CreateMap<Masraf, SelectMasrafDto>()

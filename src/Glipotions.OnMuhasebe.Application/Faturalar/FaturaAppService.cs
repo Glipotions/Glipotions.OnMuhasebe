@@ -69,6 +69,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
     /// UI'dan Create(Entity)Dto gelecek bunu Entity'e mapler ve o şekilde database e gönderir
     /// Sadece Domain katmanındaki Entityler Database'e gönderilebilir, DTO lar gönderilemez.
     /// Bu nedenle Mapleme yapıldı.
+    /// foreach döngüsü içinde hareketlerin kontrol işlemleri yapılır.
     /// 
     /// InsertAsync ile Databasede Create yapılmış oluyor.
     /// 

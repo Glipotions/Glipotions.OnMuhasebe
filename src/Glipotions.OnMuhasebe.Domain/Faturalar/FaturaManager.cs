@@ -25,6 +25,8 @@ public class FaturaManager : DomainService
     /// <Özet>
     /// Create işlemi yaparken gelen id ve kod alanı ile ilgili hata var mı yok mu
     /// diye kontrol eder. hata varsa hata fırlatır.
+    /// İlk olarak Şube ve Dönem kontrolü yapılır çünkü kod kontrolü yaparken şube ve dönem'e bakılır.
+    /// 
     /// <param name="faturaNo"></param>     varsa tekrar eden kod hatası
     /// <param name="ozelKod1Id"></param>   yoksa böyle bir id yok hatası
     /// <param name="ozelKod2Id"></param>   yoksa böyle bir id yok hatası

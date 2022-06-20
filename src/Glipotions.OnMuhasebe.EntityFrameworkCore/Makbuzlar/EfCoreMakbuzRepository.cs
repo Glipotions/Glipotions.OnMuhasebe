@@ -13,7 +13,10 @@ public class EfCoreMakbuzRepository : EfCoreCommonRepository<Makbuz>, IMakbuzRep
         : base(dbContextProvider)
     {
     }
-
+    /// <ÖZET>
+    /// GetAsync işleminde kullanmak için include edildi.
+    /// </summary>
+    /// <returns></returns>
     public override async Task<IQueryable<Makbuz>> WithDetailsAsync()
     {
         return (await GetQueryableAsync())

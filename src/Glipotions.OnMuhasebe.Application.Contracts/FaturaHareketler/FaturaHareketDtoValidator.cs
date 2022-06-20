@@ -8,6 +8,23 @@ namespace Glipotions.OnMuhasebe.FaturaHareketler;
 
 public class FaturaHareketDtoValidator : AbstractValidator<FaturaHareketDto>
 {
+    /// <ÖZET>
+    /// (2/5) Kurs
+    /// FluentValidator da RuleFor ile kural verilir.
+    /// 
+    /// hataları localizer ile vermemiz gerekir dil problemi olmaması için
+    /// her bir property için kural varsa teker teker girilir.
+    /// Örneğin Kod için Boş olmaması gerekir ve Maximum uzunluğu geçmemelidir hataları verildi.
+    /// 
+    /// Enumda olmayan için IsInEnum komutu kullanılır ve enumdaki kullanılmıyorsa hatayı verir.
+    /// 
+    /// Must kendi yapımızı oluşturmak için kullanılır, kendi kuralımızı koyduktan sonra validation yapılır.
+    /// 
+    /// GreaterThanOrEqualTo ile 0 dan büyük olması gerektiği belirtilir.
+    /// 
+    /// When ile koşula bağlı Validator Eklenir. Örnek: FaturaHareketTuru.Stok ise Stok alanı boş olamaz.
+    /// </summary>
+    /// <param name="localizer"></param>
     public FaturaHareketDtoValidator(IStringLocalizer localizer)
     {
         RuleFor(x => x.Id)

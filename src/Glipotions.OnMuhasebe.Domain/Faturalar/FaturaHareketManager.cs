@@ -20,7 +20,14 @@ public class FaturaHareketManager : DomainService
         _masrafRepository = masrafRepository;
         _depoRepository = depoRepository;
     }
-
+    /// <ÖZET>
+    /// stok, hizmet, masraf, depo kontrolü yapılır.
+    /// </summary>
+    /// <param name="stokId"></param>
+    /// <param name="hizmetId"></param>
+    /// <param name="masrafId"></param>
+    /// <param name="depoId"></param>
+    /// <returns></returns>
     public async Task CheckCreateAsync(Guid? stokId, Guid? hizmetId, Guid? masrafId,
         Guid? depoId)
     {
@@ -29,7 +36,14 @@ public class FaturaHareketManager : DomainService
         await _masrafRepository.EntityAnyAsync(masrafId, x => x.Id == masrafId);
         await _depoRepository.EntityAnyAsync(depoId, x => x.Id == depoId);
     }
-
+    /// <ÖZET>
+    /// stok, hizmet, masraf, depo kontrolü yapılır.
+    /// </summary>
+    /// <param name="stokId"></param>
+    /// <param name="hizmetId"></param>
+    /// <param name="masrafId"></param>
+    /// <param name="depoId"></param>
+    /// <returns></returns>
     public async Task CheckUpdateAsync(Guid? stokId, Guid? hizmetId, Guid? masrafId,
         Guid? depoId)
     {

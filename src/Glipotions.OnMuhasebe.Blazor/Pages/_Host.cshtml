@@ -10,6 +10,7 @@
 }
 
 <!DOCTYPE html>
+@*Bilgisayarın adını bulur.*@
 <html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
 <head>
     <meta charset="utf-8" />
@@ -17,9 +18,11 @@
     <title>Glipotions.OnMuhasebe.Blazor</title>
     <base href="~/" />
 
+    @*.css dosyalarını yazma kısmı, bu dosyanın daha sade olmasını sağlar*@
     <abp-style-bundle name="@BlazorBasicThemeBundles.Styles.Global" />
 </head>
-<body class="abp-application-layout bg-light @rtl">
+<body class="abp-application-layout @rtl">
+    
     <component type="typeof(App)" render-mode="Server" />
 
     <div id="blazor-error-ui">
