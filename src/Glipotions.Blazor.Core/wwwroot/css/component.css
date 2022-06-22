@@ -1,0 +1,79 @@
+﻿/* PROJE COMPONENTLERİNDE KULLANILAN CSS KODLARI*/
+
+.caption {
+    padding-top: 4px !important;
+    font-weight: bold;
+    font-size: small;
+}
+
+.number input{
+    text-align:right;
+    padding-right:28px !important;
+}
+
+.currency input {
+    text-align: right;
+    padding-right: 3px !important;
+}
+
+.text-center input {
+    text-align:center;
+}
+
+.button-edit{
+    background-image:url("../images/buttonedit.svg");
+    width:16px;
+    height:16px;
+}
+
+.form-control:focus{
+    background-color:#ecef9a
+}
+
+/*-------------------Toolbar Image------------------------*/
+.newimage {
+    background-image: url("../images/New.svg");
+}
+
+.editimage {
+    background-image: url("../images/Edit.svg");
+}
+
+.deleteimage {
+    background-image: url("../images/delete.svg");
+}
+
+.filterimage {
+    background-image: url("../images/filter.svg");
+}
+
+.grouppanelimage {
+    background-image: url("../images/grouppanel.svg");
+}
+
+.printimage {
+    background-image: url("../images/Print.svg");
+}
+
+.tableimage {
+    background-image: url("../images/Table.svg");
+}
+
+.selectimage {
+    background-image: url("../images/Select.svg");
+}
+
+.cancelimage {
+    background-image: url("../images/Cancel.svg");
+}
+
+.saveimage{
+    background-image:url("../images/Save.svg")
+}
+
+.newimage, .editimage, .deleteimage, .printimage, .filterimage, .grouppanelimage,
+.tableimage, .selectimage, .cancelimage, .saveimage {
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0;
+}

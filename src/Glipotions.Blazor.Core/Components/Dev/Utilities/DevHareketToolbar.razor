@@ -1,0 +1,68 @@
+﻿<DxToolbar ItemRenderStyleMode="ItemRenderStyleMode"
+           ItemSizeMode="ItemSizeMode">
+
+    <DxToolbarItem Click="NewButtonClick"
+                   Enabled="NewButtonEnabled"
+                   IconCssClass="newimage"
+                   Text="@L["New"]"
+                   Tooltip="@L["AddNewItem"]"
+                   Visible="NewButtonVisible" />
+
+    <DxToolbarItem IconCssClass="newimage"
+                   Text="@L["New"]"
+                   Tooltip="@L["ChooseTransactionType"]"
+                   Visible="NewDropDownButtonVisible"
+                   DropDownDisplayMode="DropDownDisplayMode.DropDown">
+        <Items>
+            <DxToolbarItem Click="NewDropDownButton1Click"
+                           IconCssClass="@DropDownButton1IconCssClass"
+                           Text="@DropDownButton1Text" />
+
+            <DxToolbarItem Click="NewDropDownButton2Click"
+                           IconCssClass="@DropDownButton2IconCssClass"
+                           Text="@DropDownButton2Text" />
+        </Items>
+    </DxToolbarItem>
+
+    <DxToolbarItem Click="UpdateButtonClick"
+                   Enabled="UpdateButtonEnabled"
+                   IconCssClass="editimage"
+                   Text="@L["Update"]"
+                   Tooltip="@L["UpdateSelectedItem"]"
+                   Visible="UpdateButtonVisible" />
+
+    <DxToolbarItem Click="DeleteButtonClick"
+                   Enabled="DeleteButtonEnabled"
+                   IconCssClass="deleteimage"
+                   Text="@L["Delete"]"
+                   Tooltip="@L["DeleteSelectedItem"]"
+                   Visible="DeleteButtonVisible" />
+</DxToolbar>
+
+@code {
+
+    [Parameter] public ToolbarRenderStyleMode ItemRenderStyleMode { get; set; }
+    [Parameter] public SizeMode ItemSizeMode { get; set; }
+    [Parameter, EditorRequired] public IStringLocalizer L { get; set; }
+
+    [Parameter] public EventCallback NewButtonClick { get; set; }
+    [Parameter] public EventCallback NewDropDownButton1Click { get; set; }
+    [Parameter] public EventCallback NewDropDownButton2Click { get; set; }
+    [Parameter] public EventCallback UpdateButtonClick { get; set; }
+    [Parameter] public EventCallback DeleteButtonClick { get; set; }
+
+    [Parameter] public bool NewButtonEnabled { get; set; }
+    [Parameter] public bool UpdateButtonEnabled { get; set; }
+    [Parameter] public bool DeleteButtonEnabled { get; set; }
+
+    [Parameter] public string DropDownButton1IconCssClass { get; set; }
+    [Parameter] public string DropDownButton2IconCssClass { get; set; }
+
+    [Parameter] public bool NewButtonVisible { get; set; }
+    [Parameter] public bool UpdateButtonVisible { get; set; }
+    [Parameter] public bool DeleteButtonVisible { get; set; }
+    [Parameter] public bool NewDropDownButtonVisible { get; set; }
+
+    [Parameter] public string DropDownButton1Text { get; set; }
+    [Parameter] public string DropDownButton2Text { get; set; }
+}

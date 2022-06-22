@@ -1,0 +1,113 @@
+﻿@*@typeparam TDataSource
+
+<DxPopup @ref="_dxPopup"
+         ApplyBackgroundShading="ApplyBackgroundShading"
+         Closed="Closed"
+         Closing="Closing"
+         CloseOnEscape="CloseOnEscape"
+         CloseOnOutsideClick="CloseOnOutsideClick"
+         HeaderCssClass="@HeaderCssClass"
+         HeaderText="@Caption"
+         Height="@Height"
+         HorizontalAlignment="HorizontalAlignment"
+         MaxHeight="@MaxHeight"
+         MaxWidth="@MaxWidth"
+         Scrollable="Scrollable"
+         ShowCloseButton="ShowCloseButton"
+         ShowFooter="ShowFooter"
+         ShowHeader="ShowHeader"
+         Showing="Showing"
+         Shown="Shown"
+         VerticalAlignment="VerticalAlignment"
+         @bind-Visible="Visible"
+         Width="@Width">
+
+    <BodyContentTemplate>
+        @ListPageContent
+    </BodyContentTemplate>
+
+    <FooterContentTemplate>
+        <DxButton Click="async ()=> await SelectButtonClickAsync()"
+                  Enabled="DataGridService.ShowSelectionCheckBox ?
+                           DataGridService.SelectedItems?.Count() > 0 :
+                           DataGridService.ListDataSource?.Count > 0"
+                  IconCssClass="selectimage"
+                  RenderStyle="SelectButtonRenderStyle"
+                  RenderStyleMode="SelectButtonRenderStyleMode"
+                  Text="@SelectButtonText"
+                  Visible="SelectButtonVisible">
+        </DxButton>
+
+        <DxButton Click="context.CloseCallback"
+                  IconCssClass="cancelimage"
+                  RenderStyle="CancelButtonRenderStyle"
+                  RenderStyleMode="CancelButtonRenderStyleMode"
+                  Text="@CancelButtonText">
+        </DxButton>
+    </FooterContentTemplate>
+</DxPopup>
+
+@code {
+
+    private DxPopup _dxPopup;
+
+    [Parameter] public ICoreDataGridService<TDataSource> DataGridService { get; set; }
+    [Parameter] public RenderFragment ListPageContent { get; set; }
+
+    [Parameter] public bool ApplyBackgroundShading { get; set; } = true;
+    [Parameter] public EventCallback<PopupClosedEventArgs> Closed { get; set; }
+    [Parameter] public EventCallback<PopupClosingEventArgs> Closing { get; set; }
+    [Parameter] public bool CloseOnEscape { get; set; } = true;
+    [Parameter] public bool CloseOnOutsideClick { get; set; }
+    [Parameter] public string HeaderCssClass { get; set; } = "bg-primary text-white";
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public string Height { get; set; }
+    [Parameter] public HorizontalAlignment? HorizontalAlignment { get; set; }
+    [Parameter] public string MaxHeight { get; set; }
+    [Parameter] public string MaxWidth { get; set; }
+    [Parameter] public bool Scrollable { get; set; } = true;
+    [Parameter] public bool ShowCloseButton { get; set; } = true;
+    [Parameter] public bool ShowFooter { get; set; } = true;
+    [Parameter] public bool ShowHeader { get; set; } = true;
+    [Parameter] public EventCallback<PopupShowingEventArgs> Showing { get; set; }
+    [Parameter] public EventCallback<PopupShownEventArgs> Shown { get; set; }
+    [Parameter] public VerticalAlignment? VerticalAlignment { get; set; }
+    [Parameter] public string Width { get; set; } = "660px";
+    [Parameter] public EventCallback SelectButtonInvokeFunction { get; set; }
+    [Parameter] public bool Visible { get; set; }
+    [Parameter] public bool SelectButtonVisible { get; set; } = true;
+
+    [Parameter]
+    public ButtonRenderStyle SelectButtonRenderStyle { get; set; }
+                       = ButtonRenderStyle.Secondary;
+
+    [Parameter]
+    public ButtonRenderStyleMode SelectButtonRenderStyleMode { get; set; }
+                       = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string SelectButtonText { get; set; }
+
+    [Parameter]
+    public ButtonRenderStyle CancelButtonRenderStyle { get; set; }
+                       = ButtonRenderStyle.Secondary;
+
+    [Parameter]
+    public ButtonRenderStyleMode CancelButtonRenderStyleMode { get; set; }
+                       = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string CancelButtonText { get; set; }
+
+    async Task SelectButtonClickAsync()
+    {
+        await InvokeAsync(async () =>
+        {
+            await SelectButtonInvokeFunction.InvokeAsync();
+            await _dxPopup.CloseAsync();
+        });
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+}*@

@@ -1,0 +1,124 @@
+﻿@*@typeparam TDataGridItem
+
+<DxToolbar ItemRenderStyleMode="ItemRenderStyleMode"
+           ItemSizeMode="ItemSizeMode">
+
+    <DxToolbarItem Click="NewButtonClick"
+                   Enabled="NewButtonEnabled && ListPageService.IsGrantedCreate"
+                   IconCssClass="newimage"
+                   Text="@L["New"]"
+                   Tooltip="@L["AddNewItem"]"
+                   Visible="NewButtonVisible" />
+
+    <DxToolbarItem Click="UpdateButtonClick"
+                   Enabled="UpdateButtonEnabled && ListPageService.IsGrantedUpdate"
+                   IconCssClass="editimage"
+                   Text="@L["Update"]"
+                   Tooltip="@L["UpdateSelectedItem"]"
+                   Visible="UpdateButtonVisible" />
+
+    <DxToolbarItem Click="DeleteButtonClick"
+                   Enabled="DeleteButtonEnabled && ListPageService.IsGrantedDelete"
+                   IconCssClass="deleteimage"
+                   Text="@L["Delete"]"
+                   Tooltip="@L["DeleteSelectedItem"]"
+                   Visible="DeleteButtonVisible" />
+
+    <DxToolbarItem BeginGroup="true"
+                   Click="ShowHideGroupPanel"
+                   IconCssClass="grouppanelimage"
+                   Text="@L["Grouping"]"
+                   Tooltip="@L["ShowGroupPanel"]"
+                   Visible="GroupButtonVisible" />
+
+    <DxToolbarItem Click="ShowHideFilterRow"
+                   IconCssClass="filterimage"
+                   Text="@L["Filtering"]"
+                   Tooltip="@L["ShowFilterRow"]"
+                   Visible="FilterButtonVisible" />
+
+    <DxToolbarItem BeginGroup="true"
+                   Click="PrintButtonClick"
+                   Enabled="PrintButtonEnabled && ListPageService.IsGrantedPrint"
+                   IconCssClass="printimage"
+                   Text="@L["Print"]"
+                   Tooltip="@L["Print"]"
+                   Visible="PrintButtonVisible" />
+
+    <DxToolbarItem BeginGroup="ReserveButtonBeginGroup"
+                   Click="ReserveButtonClick"
+                   Enabled="ReserveButtonEnabled && ListPageService.IsGrantedReserve"
+                   IconCssClass="@ReserveButtonIconCssClass"
+                   Text="@ReserveButtonText"
+                   Tooltip="@ReserveButtonTooltip"
+                   Visible="ReserveButtonVisible" />
+
+    <DxToolbarItem Alignment="ToolbarItemAlignment.Right"
+                   BeginGroup="true"
+                   Visible="ListPageService.ToolbarCheckBoxVisible">
+        <DevCheckBox CheckedChangedInvokeFunction="CheckedChangedAsync"
+                     FalseCaption="@L["PassiveCards"]"
+                     TrueCaption="@L["ActiveCards"]">
+
+        </DevCheckBox>
+    </DxToolbarItem>
+</DxToolbar>
+
+@code {
+
+    [Parameter, EditorRequired] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
+    [Parameter, EditorRequired] public ICoreCommonService CommonService { get; set; }
+    [Parameter, EditorRequired] public ICoreListPageService ListPageService { get; set; }
+
+    [Parameter]
+    public ToolbarRenderStyleMode ItemRenderStyleMode { get; set; }
+           = ToolbarRenderStyleMode.Plain;
+
+    [Parameter] public SizeMode ItemSizeMode { get; set; } = SizeMode.Small;
+    [Parameter, EditorRequired] public IStringLocalizer L { get; set; }
+
+    [Parameter] public bool ReserveButtonBeginGroup { get; set; } = true;
+    [Parameter] public string ReserveButtonIconCssClass { get; set; } = "tableimage";
+    [Parameter] public string ReserveButtonText { get; set; }
+    [Parameter] public string ReserveButtonTooltip { get; set; }
+
+    [Parameter] public EventCallback NewButtonClick { get; set; }
+    [Parameter] public EventCallback UpdateButtonClick { get; set; }
+    [Parameter] public EventCallback DeleteButtonClick { get; set; }
+    [Parameter] public EventCallback PrintButtonClick { get; set; }
+    [Parameter] public EventCallback ReserveButtonClick { get; set; }
+    [Parameter] public EventCallback<Task> GetListDataSource { get; set; }
+
+    [Parameter] public bool NewButtonEnabled { get; set; } = true;
+    [Parameter] public bool UpdateButtonEnabled { get; set; }
+    [Parameter] public bool DeleteButtonEnabled { get; set; }
+    [Parameter] public bool PrintButtonEnabled { get; set; }
+    [Parameter] public bool ReserveButtonEnabled { get; set; }
+
+    [Parameter] public bool NewButtonVisible { get; set; }
+    [Parameter] public bool UpdateButtonVisible { get; set; }
+    [Parameter] public bool DeleteButtonVisible { get; set; }
+    [Parameter] public bool GroupButtonVisible { get; set; }
+    [Parameter] public bool FilterButtonVisible { get; set; }
+    [Parameter] public bool PrintButtonVisible { get; set; }
+    [Parameter] public bool ReserveButtonVisible { get; set; }
+
+    private void ShowHideGroupPanel()
+    {
+        DataGridService.ShowGroupPanel = !DataGridService.ShowGroupPanel;
+        CommonService.HasChanged();
+    }
+
+    private void ShowHideFilterRow()
+    {
+        DataGridService.ShowFilterRow = !DataGridService.ShowFilterRow;
+        CommonService.HasChanged();
+    }
+
+    private async Task CheckedChangedAsync(bool state)
+    {
+        ListPageService.IsActiveCards = state;
+        DataGridService.SelectFirstDataRow = true;
+        await GetListDataSource.InvokeAsync();
+    }
+}*@

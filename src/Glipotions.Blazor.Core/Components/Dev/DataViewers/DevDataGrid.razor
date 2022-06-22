@@ -1,0 +1,105 @@
+﻿@inherits DevBaseViewer
+@typeparam TDataGridItem
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  Row="RowIndex"
+                  RowSpan="RowSpan">
+    <Template>
+        <DxDataGrid @ref="DataGridService.DataGrid"
+                    AllowColumnDragDrop="AllowColumnDragDrop"
+                    AllowSort="AllowSort"
+                    ColumnResizeMode="ColumnResizeMode"
+                    Data="DataGridService.ListDataSource"
+                    DataNavigationMode="DataNavigationMode"
+                    HorizontalScrollBarMode="HorizontalScrollBarMode"
+                    @bind-MultipleSelectedDataRows="DataGridService.SelectedItems"
+                    PagerAllDataRowsItemVisible="PagerAllDataRowsItemVisible"
+                    PagerAllowedPageSizes="PagerAllowedPageSizes"
+                    PagerNavigationMode="PagerNavigationMode"
+                    PagerPageSizeSelectorVisible="PagerPageSizeSelectorVisible"
+                    SelectAllMode="SelectAllMode"
+                    SelectionMode="SelectionMode"
+                    ShowFilterRow="DataGridService.ShowFilterRow"
+                    ShowGroupedColumns="ShowGroupedColumns"
+                    ShowGroupPanel="DataGridService.ShowGroupPanel"
+                    @bind-SingleSelectedDataRow="DataGridService.SelectedItem"
+                    VerticalScrollableHeight="VerticalScrollableHeight"
+                    VerticalScrollBarMode="VerticalScrollBarMode"
+                    @ondblclick="DoubleClick">
+
+            <HeaderTemplate>
+                @HeaderTemplate
+            </HeaderTemplate>
+
+            <Columns>
+                @if (GridSelectionColumnVisible)
+                {
+                    <DxDataGridSelectionColumn SelectAllCheckboxVisible=true
+                                           Visible=true
+                                           VisibleIndex="0"
+                                           Width="30px">
+                    </DxDataGridSelectionColumn>
+                }
+                @Columns
+            </Columns>
+
+            <GroupSummary>
+                @GroupSummary
+            </GroupSummary>
+
+            <TotalSummary>
+                @TotalSummary
+            </TotalSummary>
+
+        </DxDataGrid>
+    </Template>
+</DxGridLayoutItem>
+
+@code {
+
+    [Parameter] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
+    [Parameter] public bool AllowColumnDragDrop { get; set; } = true;
+    [Parameter] public bool AllowSort { get; set; } = true;
+
+    [Parameter]
+    public DataGridColumnResizeMode ColumnResizeMode { get; set; }
+           = DataGridColumnResizeMode.Component;
+
+    [Parameter]
+    public DataGridNavigationMode DataNavigationMode { get; set; }
+           = DataGridNavigationMode.Paging;
+
+    [Parameter] public EventCallback<MouseEventArgs> DoubleClick { get; set; }
+    [Parameter] public bool GridSelectionColumnVisible { get; set; }
+    [Parameter] public ScrollBarMode HorizontalScrollBarMode { get; set; } = ScrollBarMode.Auto;
+    [Parameter] public bool PagerAllDataRowsItemVisible { get; set; } = true;
+
+    [Parameter]
+    public IEnumerable<int> PagerAllowedPageSizes { get; set; }
+           = new[] { 10, 20, 30, 40, 50, 100 };
+
+    [Parameter]
+    public PagerNavigationMode PagerNavigationMode { get; set; }
+           = PagerNavigationMode.NumericButtons;
+
+    [Parameter] public bool PagerPageSizeSelectorVisible { get; set; } = true;
+
+    [Parameter]
+    public DataGridSelectAllMode SelectAllMode { get; set; }
+           = DataGridSelectAllMode.Page;
+
+    [Parameter]
+    public DataGridSelectionMode SelectionMode { get; set; }
+           = DataGridSelectionMode.SingleSelectedDataRow;
+
+    [Parameter] public bool ShowGroupedColumns { get; set; }
+    [Parameter] public int VerticalScrollableHeight { get; set; } = 310;
+    [Parameter] public ScrollBarMode VerticalScrollBarMode { get; set; } = ScrollBarMode.Auto;
+
+    [Parameter] public RenderFragment HeaderTemplate { get; set; }
+    [Parameter] public RenderFragment Columns { get; set; }
+    [Parameter] public RenderFragment GroupSummary { get; set; }
+    [Parameter] public RenderFragment TotalSummary { get; set; }
+
+}

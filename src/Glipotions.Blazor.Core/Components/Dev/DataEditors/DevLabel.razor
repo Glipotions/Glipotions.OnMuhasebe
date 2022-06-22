@@ -1,0 +1,27 @@
+﻿<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@CssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        @Caption
+    </Template>
+</DxGridLayoutItem>
+@* *** LABEL PROPERTIES *** 
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır.
+*@
+@code {
+
+    [Parameter, EditorRequired] public string Caption { get; set; }
+    [Parameter, EditorRequired] public int ColumnIndex { get; set; }
+    [Parameter] public int ColumnSpan { get; set; }
+    [Parameter] public string CssClass { get; set; } = "caption";
+    [Parameter, EditorRequired] public int RowIndex { get; set; }
+    [Parameter] public int RowSpan { get; set; }
+    [Parameter] public bool Visible { get; set; } = true;
+
+}

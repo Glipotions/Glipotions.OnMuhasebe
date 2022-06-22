@@ -1,0 +1,87 @@
+﻿@* Satır Yüksekliği ve Sütun Genişliği Girilir.*@
+<DxGridLayout ColumnSpacing="@ColumnSpacing"
+              RowSpacing="@RowSpacing"
+              style="height:auto">
+    @*  ÖZET
+        Parametre olarak Gelen Satır Sayısı Kadar Döngü Yapılır.
+        Eğer Kullanıcı RowHeight Belirtmemişse Default Değeri Alır.
+        Eğer Belirtmişse döngü sayısı(i) RowHeights Uzunluğundan küçükse...
+        ..Kullanıcının i. indexini Satır Yüksekliği Olarak Tanımlanır.
+        Kullanıcı Satır Sayısına Oranla RowHeights Dizisinde az parametre..
+        ..girmişse yine Default Yükseklik Girilir.
+    *@
+    <Rows>
+        @for (var i = 0; i < RowCount; i++)
+        {
+            if (RowHeights == null)
+            {
+                <DxGridLayoutRow Height="@DefaultRowHeight" />
+            }
+            else if (i < RowHeights.Length)
+            {
+                <DxGridLayoutRow Height="@RowHeights[i]" />
+            }
+            else
+            {
+                <DxGridLayoutRow Height="@DefaultRowHeight" />
+            }
+        }
+    </Rows>
+    @*  ÖZET
+        Parametre olarak Gelen Sütun Sayısı Kadar Döngü Yapılır.
+        Eğer Kullanıcı ColumnWidths Belirtmemişse yıldız(*) yani Otomatik Ayarlanmış Sütun Genişliği Alır.
+        Eğer Belirtmişse döngü sayısı(i) ColumnWidths Uzunluğundan küçükse...
+        ..Kullanıcının i. indexini Sütun Genişliği Olarak Tanımlanır.
+        Kullanıcı Sütun Sayısına Oranla ColumnWidths Dizisinde az parametre..
+        ..girmişse yine Otomatik Ayarlanmış Sütun Genişliği Olur.
+    *@
+    <Columns>
+        @for (var i = 0; i < ColumnCount; i++)
+        {
+            if (ColumnWidths == null)
+            {
+                <DxGridLayoutColumn Width="*" />
+            }
+            else if (i < ColumnWidths.Length)
+            {
+                <DxGridLayoutColumn Width="@ColumnWidths[i]" />
+            }
+            else
+            {
+                <DxGridLayoutColumn Width="*" />
+            }
+        }
+    </Columns>
+
+    <Items>
+        @GridLayoutItems
+    </Items>
+
+</DxGridLayout>
+
+@* *** Property Ekleme Yeri ***
+
+    ColumnSpacing= Sütunlar arası boşluk,
+    RowSpacing= Satırlar arası boşluk,
+    RowCount= Satır Sayısı,
+    ColumnCount= Sütun Sayısı,
+    RowHeights = Dizi olarak Gönderilir Her bir Satırın Yüksekliği Girilir. Örn: [10 25 30]
+    ColumnHeights = Dizi olarak Gönderilir Her bir Sütunun Yüksekliği Girilir. Örn: [10 25 30]
+    DefaultRowHeight= Default olan Satır Yüksekliği.
+
+    GridLayoutItems a ne gönderilirse Items Kısmında o Gösterilir. Bir nevi yer tutucu olarak
+    görülür.
+    EditorRequired Attribute= Kullanılması zorunlu
+*@
+@code {
+
+    [Parameter] public string ColumnSpacing { get; set; } = "5px";
+    [Parameter] public string RowSpacing { get; set; } = "5px";
+    [Parameter] public int RowCount { get; set; } = 1;
+    [Parameter] public int ColumnCount { get; set; } = 1;
+    [Parameter] public string[] RowHeights { get; set; }
+    [Parameter] public string[] ColumnWidths { get; set; }
+    [Parameter] public string DefaultRowHeight { get; set; } = "28";
+    [Parameter, EditorRequired] public RenderFragment GridLayoutItems { get; set; }
+
+}

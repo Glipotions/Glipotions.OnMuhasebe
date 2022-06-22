@@ -1,0 +1,92 @@
+﻿@*@typeparam TDataSource
+
+<EditForm Model="EditPageService.DataSource"
+          Context="EditFormContext">
+    <DxPopup ApplyBackgroundShading="ApplyBackgroundShading"
+             Closed="Closed"
+             Closing="Closing"
+             CloseOnEscape="CloseOnEscape"
+             CloseOnOutsideClick="CloseOnOutsideClick"
+             HeaderCssClass="@HeaderCssClass"
+             HeaderText="@Caption"
+             Height="@Height"
+             HorizontalAlignment="HorizontalAlignment"
+             MaxHeight="@MaxHeight"
+             MaxWidth="@MaxWidth"
+             Scrollable="Scrollable"
+             ShowCloseButton="ShowCloseButton"
+             ShowFooter="ShowFooter"
+             ShowHeader="ShowHeader"
+             Showing="Showing"
+             Shown="Shown"
+             VerticalAlignment="VerticalAlignment"
+             @bind-Visible="ListPageService.EditPageVisible"
+             Width="@Width">
+
+        <BodyContentTemplate>
+            <div style="padding:15px 25px 5px 25px">
+                @EditPageContent
+            </div>
+        </BodyContentTemplate>
+
+        <FooterContentTemplate>
+            <DxButton Click="OnSubmit"
+                      IconCssClass="saveimage"
+                      RenderStyle="SubmitButtonRenderStyle"
+                      RenderStyleMode="SubmitButtonRenderStyleMode"
+                      Text="@SubmitButtonText">
+            </DxButton>
+
+            <DxButton Click="context.CloseCallback"
+                      IconCssClass="cancelimage"
+                      RenderStyle="CancelButtonRenderStyle"
+                      RenderStyleMode="CancelButtonRenderStyleMode"
+                      Text="@CancelButtonText">
+            </DxButton>
+        </FooterContentTemplate>
+    </DxPopup>
+</EditForm>
+
+@code {
+
+    [Parameter] public ICoreListPageService ListPageService { get; set; }
+    [Parameter] public ICoreEditPageService<TDataSource> EditPageService { get; set; }
+    [Parameter] public RenderFragment EditPageContent { get; set; }
+
+    [Parameter] public bool ApplyBackgroundShading { get; set; } = true;
+    [Parameter] public EventCallback<PopupClosedEventArgs> Closed { get; set; }
+    [Parameter] public EventCallback<PopupClosingEventArgs> Closing { get; set; }
+    [Parameter] public bool CloseOnEscape { get; set; } = true;
+    [Parameter] public bool CloseOnOutsideClick { get; set; }
+    [Parameter] public string HeaderCssClass { get; set; } = "bg-primary text-white";
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public string Height { get; set; }
+    [Parameter] public HorizontalAlignment? HorizontalAlignment { get; set; }
+    [Parameter] public string MaxHeight { get; set; }
+    [Parameter] public string MaxWidth { get; set; }
+    [Parameter] public bool Scrollable { get; set; } = true;
+    [Parameter] public bool ShowCloseButton { get; set; } = true;
+    [Parameter] public bool ShowFooter { get; set; } = true;
+    [Parameter] public bool ShowHeader { get; set; } = true;
+    [Parameter] public EventCallback<PopupShowingEventArgs> Showing { get; set; }
+    [Parameter] public EventCallback<PopupShownEventArgs> Shown { get; set; }
+    [Parameter] public VerticalAlignment? VerticalAlignment { get; set; }
+    [Parameter] public string Width { get; set; } = "660px";
+    [Parameter] public EventCallback OnSubmit { get; set; }
+
+    [Parameter] public ButtonRenderStyle SubmitButtonRenderStyle { get; set; }
+                       = ButtonRenderStyle.Secondary;
+
+    [Parameter] public ButtonRenderStyleMode SubmitButtonRenderStyleMode { get; set; }
+                       = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string SubmitButtonText { get; set; }
+
+    [Parameter] public ButtonRenderStyle CancelButtonRenderStyle { get; set; }
+                       = ButtonRenderStyle.Secondary;
+
+    [Parameter] public ButtonRenderStyleMode CancelButtonRenderStyleMode { get; set; }
+                       = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string CancelButtonText { get; set; }
+}*@

@@ -1,0 +1,32 @@
+﻿<DevPopupPageLayout CancelButtonText="@CancelButtonText" 
+                    Caption="@Caption"
+                    Closed="Closed"
+                    Height="@Height"
+                    Visible="true"
+                    Width="@Width">
+    <PageContent>
+        <DxReportViewer @ref="_reportViewer" Report="Report" RootCssClasses="w-100 h-100" Zoom="0.65" />
+    </PageContent>
+</DevPopupPageLayout>
+
+@code {
+
+    private DxReportViewer _reportViewer;
+
+    [Parameter] public string CancelButtonText { get; set; }
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public EventCallback Closed { get; set; }
+    [Parameter] public object DataSource { get; set; }
+    [Parameter] public string Height { get; set; } = "900px";
+    [Parameter] public string Width { get; set; } = "900px";
+    [Parameter] public XtraReport Report { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Report.DataSource = new ObjectDataSource
+        {
+            DataSource = DataSource
+        };
+    }
+
+}

@@ -1,0 +1,54 @@
+﻿@inherits DevBaseEditor
+@typeparam TItem
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxComboBox @ref="_dxComboBox"
+                    @bind-Value="@Value"
+                    CssClass="@EditorCssClass"
+                    Data="DataSource"
+                    Enabled="Enabled"
+                    InputCssClass="@InputCssClass"
+                    ReadOnly="ReadOnly"
+                    TextFieldName="@TextFieldName"
+                    SelectedItemChanged="SelectedItemChanged">
+        </DxComboBox>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+</DevLabel>
+
+@code {
+
+    private DxComboBox<TItem, TItem> _dxComboBox;
+
+    [Parameter, EditorRequired] public IEnumerable<TItem> DataSource { get; set; }
+    [Parameter] public string TextFieldName { get; set; }
+    [Parameter] public Action<TItem> SelectedItemChanged { get; set; }
+    [Parameter, EditorRequired] public TItem Value { get; set; }
+    [Parameter] public EventCallback<TItem> ValueChanged { get; set; }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxComboBox.FocusAsync();
+    }
+
+}

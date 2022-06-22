@@ -1,0 +1,134 @@
+﻿@*@inherits DevBaseViewer
+@typeparam TDataGridItem
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  Row="RowIndex"
+                  RowSpan="RowSpan">
+    <Template>
+        <DxDataGrid @ref="Service.DataGrid"
+                    AllowColumnDragDrop="AllowColumnDragDrop"
+                    AllowSort="AllowSort"
+                    ColumnResizeMode="ColumnResizeMode"
+                    Data="DataSource"
+                    DataNavigationMode="DataNavigationMode"
+                    HorizontalScrollBarMode="HorizontalScrollBarMode"
+                    SelectionMode="SelectionMode"
+                    SingleSelectedDataRow="Service.SelectedItem"
+                    SingleSelectedDataRowChanged="SingleSelectedDataRowChanged"
+                    VerticalScrollableHeight="VerticalScrollableHeight"
+                    VerticalScrollBarMode="VerticalScrollBarMode"
+                    @ondblclick="DoubleClick">
+            <HeaderTemplate>
+                <DevHareketPageHeader Caption="@ToolbarCaption" />
+                <div style="padding-top:5px">
+                    <DevHareketToolbar DeleteButtonClick="ToolbarDeleteButtonClick"
+                                       DeleteButtonEnabled="ToolbarDeleteButtonEnabled"
+                                       DeleteButtonVisible="ToolbarDeleteButtonVisible"
+                                       DropDownButton1IconCssClass="@ToolbarDropDownButton1IconCssClass"
+                                       DropDownButton1Text="@ToolbarDropDownButton1Text"
+                                       DropDownButton2IconCssClass="@ToolbarDropDownButton2IconCssClass"
+                                       DropDownButton2Text="@ToolbarDropDownButton2Text"
+                                       ItemRenderStyleMode="ToolbarItemRenderStyleMode"
+                                       ItemSizeMode="ToolbarItemSizeMode"
+                                       L="L"
+                                       NewButtonClick="ToolbarNewButtonClick"
+                                       NewButtonEnabled="ToolbarNewButtonEnabled"
+                                       NewButtonVisible="ToolbarNewButtonVisible"
+                                       NewDropDownButton1Click="ToolbarNewDropDownButton1Click"
+                                       NewDropDownButton2Click="ToolbarNewDropDownButton2Click"
+                                       NewDropDownButtonVisible="ToolbarNewDropDownButtonVisible"
+                                       UpdateButtonClick="ToolbarUpdateButtonClick"
+                                       UpdateButtonEnabled="ToolbarUpdateButtonEnabled"
+                                       UpdateButtonVisible="ToolbarUpdateButtonVisible">
+                    </DevHareketToolbar>
+                </div>
+            </HeaderTemplate>
+
+            <Columns>
+                @Columns
+            </Columns>
+
+            <GroupSummary>
+                @GroupSummary
+            </GroupSummary>
+
+            <TotalSummary>
+                @TotalSummary
+            </TotalSummary>
+
+        </DxDataGrid>
+    </Template>
+</DxGridLayoutItem>
+
+@code {
+
+    [Parameter] public ICoreHareketService<TDataGridItem> Service { get; set; }
+    [Parameter] public IEnumerable<TDataGridItem> DataSource { get; set; }
+
+    [Parameter] public bool AllowColumnDragDrop { get; set; } = true;
+    [Parameter] public bool AllowSort { get; set; } = true;
+
+    [Parameter]
+    public DataGridColumnResizeMode ColumnResizeMode { get; set; }
+           = DataGridColumnResizeMode.Component;
+
+    [Parameter]
+    public DataGridNavigationMode DataNavigationMode { get; set; }
+           = DataGridNavigationMode.ShowAllDataRows;
+
+    [Parameter]
+    public ScrollBarMode HorizontalScrollBarMode { get; set; }
+                       = ScrollBarMode.Auto;
+
+    [Parameter]
+    public DataGridSelectionMode SelectionMode { get; set; }
+           = DataGridSelectionMode.SingleSelectedDataRow;
+
+    [Parameter] public int VerticalScrollableHeight { get; set; } = 322;
+
+    [Parameter]
+    public ScrollBarMode VerticalScrollBarMode { get; set; }
+                       = ScrollBarMode.Auto;
+
+    [Parameter] public EventCallback<MouseEventArgs> DoubleClick { get; set; }
+    [Parameter] public RenderFragment Columns { get; set; }
+    [Parameter] public RenderFragment GroupSummary { get; set; }
+    [Parameter] public RenderFragment TotalSummary { get; set; }
+    [Parameter] public IStringLocalizer L { get; set; }
+
+    [Parameter] public string ToolbarCaption { get; set; }
+    [Parameter] public EventCallback ToolbarDeleteButtonClick { get; set; }
+    [Parameter] public bool ToolbarDeleteButtonEnabled { get; set; }
+    [Parameter] public bool ToolbarDeleteButtonVisible { get; set; } = true;
+    [Parameter] public string ToolbarDropDownButton1IconCssClass { get; set; } = "newimage";
+    [Parameter] public string ToolbarDropDownButton1Text { get; set; }
+    [Parameter] public string ToolbarDropDownButton2IconCssClass { get; set; } = "tableimage";
+    [Parameter] public string ToolbarDropDownButton2Text { get; set; }
+
+    [Parameter] public ToolbarRenderStyleMode ToolbarItemRenderStyleMode { get; set; }
+                       = ToolbarRenderStyleMode.Plain;
+
+    [Parameter] public SizeMode ToolbarItemSizeMode { get; set; } = SizeMode.Small;
+    [Parameter] public EventCallback ToolbarNewButtonClick { get; set; }
+    [Parameter] public bool ToolbarNewButtonEnabled { get; set; } = true;
+    [Parameter] public bool ToolbarNewButtonVisible { get; set; } = true;
+    [Parameter] public EventCallback ToolbarNewDropDownButton1Click { get; set; }
+    [Parameter] public EventCallback ToolbarNewDropDownButton2Click { get; set; }
+    [Parameter] public bool ToolbarNewDropDownButtonVisible { get; set; }
+    [Parameter] public EventCallback ToolbarUpdateButtonClick { get; set; }
+    [Parameter] public bool ToolbarUpdateButtonEnabled { get; set; }
+    [Parameter] public bool ToolbarUpdateButtonVisible { get; set; } = true;
+
+    private void SingleSelectedDataRowChanged(TDataGridItem item)
+    {
+        Service.SelectedItem = item;
+        Service.HasChanged();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && Service.ListDataSource.Count > 0)
+            Service.SetDataRowSelected(true);
+    }
+}*@

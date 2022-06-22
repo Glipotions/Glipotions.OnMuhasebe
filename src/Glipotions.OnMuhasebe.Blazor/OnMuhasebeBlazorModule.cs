@@ -42,6 +42,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using System.Text.Json.Serialization;
+using DevExpress.Blazor.Configuration;
 
 namespace Glipotions.OnMuhasebe.Blazor;
 
@@ -96,6 +97,8 @@ public class OnMuhasebeBlazorModule : AbpModule
 
         // Bizim oluşturduğumuz Configureler
         //ConfigureJson(context);
+        ConfigureDevExpress(context);
+        ConfigureDevExpressReport(context);
     }
     /// <Özet>
     /// (2/5) 14. Video 55. Dk dan itibaren
@@ -129,7 +132,7 @@ public class OnMuhasebeBlazorModule : AbpModule
                     bundle.AddFiles("/global-styles.css");
                 }
             );
-
+              
             //BLAZOR UI
             options.StyleBundles.Configure(
                 BlazorBasicThemeBundles.Styles.Global,
@@ -139,8 +142,8 @@ public class OnMuhasebeBlazorModule : AbpModule
                     bundle.AddFiles("/css/site.css");
                     bundle.AddFiles("/blazor-global-styles.css");
                     bundle.AddFiles("/Glipotions.OnMuhasebe.Blazor.styles.css");
-                    bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
-                    bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
+                    //bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
+                    //bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
                     bundle.AddFiles("/_content/Glipotions.Blazor.Core/css/component.css");
                 }
             );
@@ -258,7 +261,19 @@ public class OnMuhasebeBlazorModule : AbpModule
             options.AddMaps<OnMuhasebeBlazorModule>();
         });
     }
+    private void ConfigureDevExpress(ServiceConfigurationContext context)
+    {
+        context.Services.AddDevExpressBlazor();
+        context.Services.Configure<GlobalOptions>(options =>
+        {
+            options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+        });
+    }
 
+    private void ConfigureDevExpressReport(ServiceConfigurationContext context)
+    {
+        context.Services.AddDevExpressServerSideBlazorReportViewer();
+    }
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
         var env = context.GetEnvironment();

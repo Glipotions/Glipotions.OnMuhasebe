@@ -1,0 +1,23 @@
+﻿@if(isLoaded)
+{
+    @ChildContent
+}
+else
+{
+    <CircleLoading Caption="@Caption" Text="@Text"/>
+}
+
+@code {
+
+    private bool isLoaded;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public string Text { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1);
+        isLoaded = true;
+    }
+}

@@ -1,0 +1,6 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg viewBox="-4 -4 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="Save" transform="translate(-4, -4)">
+    <path d="M27, 4L24, 4L24, 14L8, 14L8, 4L5, 4C4.4, 4 4, 4.4 4, 5L4, 27C4, 27.6 4.4, 28 5, 28L27, 28C27.6, 28 28, 27.6 28, 27L28, 5C28, 4.4 27.6, 4 27, 4zM24, 24L8, 24L8, 18L24, 18L24, 24zM10, 4L10, 12L20, 12L20, 4L10, 4zM14, 10L12, 10L12, 6L14, 6L14, 10z" fill="#727272" class="Black" />
+  </g>
+</svg>

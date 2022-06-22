@@ -1,0 +1,35 @@
+﻿<DxCheckBox T="bool"
+            Alignment="Alignment"
+            Checked="_state"
+            CheckedChanged="CheckedChanged"
+            CheckType="CheckType"
+            CssClass="@CssClass"
+            LabelPosition="LabelPosition">
+
+    <ChildContent>
+        @(_state ? TrueCaption : FalseCaption)
+    </ChildContent>
+</DxCheckBox>
+
+
+@code {
+
+    private bool _state = true;
+
+    [Parameter] public CheckBoxContentAlignment Alignment { get; set; }
+                       = CheckBoxContentAlignment.Right;
+
+    [Parameter] public EventCallback<bool> CheckedChangedInvokeFunction { get; set; }
+    [Parameter] public CheckType CheckType { get; set; } = CheckType.Switch;
+    [Parameter] public string CssClass { get; set; }
+    [Parameter] public LabelPosition LabelPosition { get; set; } = LabelPosition.Right;
+    [Parameter] public string TrueCaption { get; set; }
+    [Parameter] public string FalseCaption { get; set; }
+
+    private async Task CheckedChanged(bool state)
+    {
+        _state = state;
+        await CheckedChangedInvokeFunction.InvokeAsync(state);
+    }
+
+}

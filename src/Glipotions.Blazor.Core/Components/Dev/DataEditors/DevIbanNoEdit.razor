@@ -1,0 +1,61 @@
+﻿@inherits DevBaseEditor
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxMaskedInput @ref="_dxMaskedInput"
+                       @bind-Value="@Value"
+                       CssClass="@EditorCssClass"                       
+                       Enabled="Enabled"
+                       InputCssClass="@InputCssClass"
+                       Mask="LL00 0000 0000 0000 0000 0000 00"
+                       ReadOnly="ReadOnly">
+            <DxTextMaskProperties Placeholder="'_'" SaveLiteral="false" />
+        </DxMaskedInput>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+</DevLabel>
+
+@code {
+
+    private DxMaskedInput<string> _dxMaskedInput;
+    private string _value;
+
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxMaskedInput.FocusAsync();
+    }
+
+}

@@ -1,0 +1,70 @@
+﻿@inherits DevBaseEditor
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxCheckBox @ref="_dxCheckBox"
+                    @bind-Checked="@Value"
+                    Alignment="Alignment"
+                    CheckType="CheckType"
+                    CssClass="@EditorCssClass"
+                    Enabled="Enabled"
+                    LabelPosition="LabelPosition">
+            <ChildContent>
+                @(_value ? TrueCaption : FalseCaption)
+            </ChildContent>
+        </DxCheckBox>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+</DevLabel>
+
+@code {
+
+    private DxCheckBox<bool> _dxCheckBox;
+    private bool _value;
+
+    [Parameter] public CheckBoxContentAlignment Alignment { get; set; } = CheckBoxContentAlignment.Right;
+    [Parameter] public CheckType CheckType { get; set; } = CheckType.Switch;
+    [Parameter] public LabelPosition LabelPosition { get; set; } = LabelPosition.Left;
+    [Parameter] public string TrueCaption { get; set; }
+    [Parameter] public string FalseCaption { get; set; }
+    [Parameter] public EventCallback<bool> ValueChanged { get; set; }
+    [Parameter] public override bool SeparateCaptionVisible { get; set; } = false;
+    [Parameter] public override bool CaptionVisible { get; set; } = false;
+
+    [Parameter]
+    public bool Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxCheckBox.FocusAsync();
+    }
+
+}

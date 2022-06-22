@@ -1,0 +1,60 @@
+﻿@*<DevPopupPageLayout ActionButtonEnabled="_dataSource != null && _dataSource.Count > 0"
+                    ActionButtonInvokeFunction="SelectButtonClick"
+                    ActionButtonText="@L["Select"]"
+                    ActionButtonVisible="true"
+                    CancelButtonText="@L["Close"]"
+                    Caption="@L["SelectReport"]"
+                    Closed="Closed"
+                    Height="@Height"
+                    Visible="Visible"
+                    Width="@Width">
+    <PageContent>
+        <div style="padding-left: 30px; margin-top: 35px; height: 60px;">
+            <DevGridLayout ColumnCount="3"
+                           ColumnWidths="@ColumnWidths("70","3","380")"
+                           RowCount="1" >
+                <GridLayoutItems>
+                    <DevComboBoxEdit @ref="_comboBoxEdit"
+                                     Caption="@L["ReportName"]"
+                                     ColumnIndex="2"
+                                     DataSource="_dataSource"
+                                     IsFocus="true"
+                                     RowIndex="0"
+                                     Value="_dataSource.FirstOrDefault()">
+                    </DevComboBoxEdit>
+                </GridLayoutItems>
+            </DevGridLayout>
+        </div>
+    </PageContent>
+</DevPopupPageLayout>
+
+@code {
+    private DevComboBoxEdit<string> _comboBoxEdit;
+    private List<string> _dataSource;
+
+    [Parameter] public ICoreListPageService ListPageService { get; set; }
+    [Parameter] public EventCallback Closed { get; set; }
+    [Parameter] public string Height { get; set; }
+    [Parameter] public string Width { get; set; }
+    [Parameter] public bool Visible { get; set; } = true;
+    [Parameter] public IStringLocalizer L { get; set; }
+
+    private void SelectButtonClick()
+    {
+        ListPageService.SelectedReportName = _comboBoxEdit.Value ?? null;
+    }
+
+    private void GetDataSource()
+    {
+        var path = $@"{ListPageService.BaseReportFolder}\{ListPageService.ReportFolder}";
+        _dataSource = Directory.GetFiles(path, "*.vsrepx").
+            Select(Path.GetFileNameWithoutExtension).ToList();
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        GetDataSource();
+    }
+
+}*@

@@ -1,0 +1,62 @@
+﻿@inherits DevBaseEditor
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxDateEdit @ref="_dxDateEdit"
+                    @bind-Date="@Value"
+                    CssClass="@EditorCssClass"
+                    Enabled="Enabled"
+                    InputCssClass="@InputCssClass"
+                    Mask="@DateTimeMask.ShortDate"
+                    ReadOnly="ReadOnly">
+            <MaskProperties>
+                <DxDateTimeMaskProperties CaretMode="MaskCaretMode.Advancing"
+                                          Culture="CultureInfo.CurrentCulture" />
+            </MaskProperties>
+        </DxDateEdit>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+</DevLabel>
+
+@code {
+
+    private DxDateEdit<DateTime> _dxDateEdit;
+    private DateTime _value;
+
+    [Parameter] public EventCallback<DateTime> ValueChanged { get; set; }
+    [Parameter]
+    public DateTime Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxDateEdit.FocusAsync();
+    }
+}

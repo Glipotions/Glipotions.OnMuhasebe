@@ -1,0 +1,20 @@
+﻿<style>
+    .page-header {
+        padding: 5px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: @TextAlign
+    }
+</style>
+
+<div class="page-header @CssClass">
+    @Caption
+</div>
+
+@code {
+
+    [Parameter] public string CssClass { get; set; } = "bg-primary text-white";
+    [Parameter] public string TextAlign { get; set; } = "center";
+    [Parameter] public string Caption { get; set; }
+
+}

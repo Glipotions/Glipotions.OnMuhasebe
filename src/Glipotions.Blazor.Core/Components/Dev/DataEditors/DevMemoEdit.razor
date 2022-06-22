@@ -1,0 +1,62 @@
+﻿@inherits DevBaseEditor
+
+<DxGridLayoutItem Column="ColumnIndex"
+                  ColumnSpan="ColumnSpan"
+                  CssClass="@LayoutItemCssClass"
+                  Row="RowIndex"
+                  RowSpan="RowSpan"
+                  Visible="Visible">
+    <Template>
+        <DxMemo @ref="_dxMemo"
+                @bind-Text="@Value"
+                ClearButtonDisplayMode="ClearButtonDisplayMode"
+                CssClass="@EditorCssClass"
+                Enabled="Enabled"
+                NullText="@NullText"
+                ReadOnly="ReadOnly"
+                ResizeMode="MemoResizeMode">
+        </DxMemo>
+    </Template>
+</DxGridLayoutItem>
+
+<DevLabel Caption="@Caption"
+          ColumnIndex="ColumnIndex-2"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && CaptionVisible">
+</DevLabel>
+
+<DevLabel Caption="@SeparateCaption"
+          ColumnIndex="ColumnIndex-1"
+          CssClass="@CaptionCssClass"
+          RowIndex="RowIndex"
+          Visible="Visible && SeparateCaptionVisible">
+</DevLabel>
+
+@code {
+
+    private DxMemo _dxMemo;
+    private string _value;
+
+    [Parameter] public MemoResizeMode MemoResizeMode { get; set; } = MemoResizeMode.Disabled;
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Value
+    {
+        get => _value;
+        set
+        {
+            if (_value == value) return;
+            _value = value;
+            ValueChanged.InvokeAsync(value);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsFocus && Visible && firstRender)
+            await _dxMemo.FocusAsync();
+    }
+
+}

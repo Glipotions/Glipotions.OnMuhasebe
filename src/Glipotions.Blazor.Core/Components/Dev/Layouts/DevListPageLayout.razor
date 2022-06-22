@@ -1,0 +1,50 @@
+﻿@*@typeparam TDataGridItem
+
+
+@if (!DataGridService.IsLoaded)
+{
+    <CircleLoading Caption="@ListPageService.LoadingCaption"
+                   Text="@ListPageService.LoadingText" />
+}
+
+else
+{
+    if (!ListPageService.IsPopupListPage)
+    {
+        <DevPageHeader Caption="@Caption" />
+    }
+
+    <DevGridLayout ColumnCount="ColumnCount"
+                   ColumnSpacing="@ColumnSpacing"
+                   ColumnWidths="@ColumnWidths"
+                   RowCount="RowCount"
+                   RowHeights="@RowHeights"
+                   RowSpacing="@RowSpacing">
+        <GridLayoutItems>
+            @ListPageContext
+        </GridLayoutItems>
+    </DevGridLayout>
+
+    @if (ListPageService.EditPageVisible)
+    {
+        @EditPageContent
+    }
+}
+
+@code {
+
+    [Parameter, EditorRequired] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
+    [Parameter, EditorRequired] public ICoreListPageService ListPageService { get; set; }
+
+    [Parameter] public string Caption { get; set; }
+    [Parameter] public int ColumnCount { get; set; } = 1;
+    [Parameter] public string ColumnSpacing { get; set; }
+    [Parameter] public string[] ColumnWidths { get; set; }
+    [Parameter] public int RowCount { get; set; } = 1;
+    [Parameter] public string[] RowHeights { get; set; }
+    [Parameter] public string RowSpacing { get; set; }
+
+    [Parameter, EditorRequired] public RenderFragment ListPageContext { get; set; }
+    [Parameter] public RenderFragment EditPageContent { get; set; }
+
+}*@

@@ -1,0 +1,116 @@
+﻿@*<DxPopup @ref="_dxPopup"
+         ApplyBackgroundShading="ApplyBackgroundShading"
+         Closed="Closed"
+         Closing="Closing"
+         CloseOnEscape="CloseOnEscape"
+         CloseOnOutsideClick="CloseOnOutsideClick"
+         HeaderCssClass="@HeaderCssClass"
+         HeaderText="@Caption"
+         Height="@Height"
+         HorizontalAlignment="HorizontalAlignment"
+         MaxHeight="@MaxHeight"
+         MaxWidth="@MaxWidth"
+         Scrollable="Scrollable"
+         ShowCloseButton="ShowCloseButton"
+         ShowFooter="ShowFooter"
+         ShowHeader="ShowHeader"
+         Showing="Showing"
+         Shown="Shown"
+         VerticalAlignment="VerticalAlignment"
+         @bind-Visible="Visible"
+         Width="@Width">
+
+    <BodyContentTemplate>
+        @PageContent
+    </BodyContentTemplate>
+
+    <FooterContentTemplate>
+        <DxButton Click="async ()=> await ActionButtonClickAsync()"
+                  Enabled="ActionButtonEnabled"
+                  IconCssClass="@ActionButtonIconCssClass"
+                  RenderStyle="ActionButtonRenderStyle"
+                  RenderStyleMode="ActionButtonRenderStyleMode"
+                  Text="@ActionButtonText"
+                  Visible="ActionButtonVisible">
+        </DxButton>
+
+        <DxButton Click="context.CloseCallback"
+                  IconCssClass="@CancelButtonIconCssClass"
+                  RenderStyle="CancelButtonRenderStyle"
+                  RenderStyleMode="CancelButtonRenderStyleMode"
+                  Text="@CancelButtonText"
+                  Visible="CancelButtonVisible">
+        </DxButton>
+    </FooterContentTemplate>
+</DxPopup>
+
+@code {
+
+    private DxPopup _dxPopup;
+
+    [Parameter] public RenderFragment PageContent { get; set; }
+
+    [Parameter] public bool ActionButtonEnabled { get; set; }
+
+    [Parameter]
+    public string ActionButtonIconCssClass { get; set; }
+                   = "pe-2 fas fa-check";
+
+    [Parameter] public EventCallback ActionButtonInvokeFunction { get; set; }
+
+    [Parameter]
+    public ButtonRenderStyle ActionButtonRenderStyle { get; set; }
+                   = ButtonRenderStyle.Secondary;
+
+    [Parameter]
+    public ButtonRenderStyleMode ActionButtonRenderStyleMode { get; set; }
+                   = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string ActionButtonText { get; set; }
+    [Parameter] public bool ActionButtonVisible { get; set; } = false;
+
+    [Parameter] public bool ApplyBackgroundShading { get; set; } = true;
+    [Parameter]
+    public string CancelButtonIconCssClass { get; set; }
+                   = "pe-2 fas fa-times-circle";
+
+    [Parameter]
+    public ButtonRenderStyle CancelButtonRenderStyle { get; set; }
+                   = ButtonRenderStyle.Secondary;
+
+    [Parameter]
+    public ButtonRenderStyleMode CancelButtonRenderStyleMode { get; set; }
+                   = ButtonRenderStyleMode.Outline;
+
+    [Parameter] public string CancelButtonText { get; set; }
+    [Parameter] public bool CancelButtonVisible { get; set; } = true;
+    [Parameter] public string Caption { get; set; }
+
+    [Parameter] public EventCallback<PopupClosedEventArgs> Closed { get; set; }
+    [Parameter] public EventCallback<PopupClosingEventArgs> Closing { get; set; }
+    [Parameter] public bool CloseOnEscape { get; set; } = true;
+    [Parameter] public bool CloseOnOutsideClick { get; set; }
+    [Parameter] public string HeaderCssClass { get; set; } = "bg-primary text-white";
+    [Parameter] public string Height { get; set; }
+    [Parameter] public HorizontalAlignment? HorizontalAlignment { get; set; }
+    [Parameter] public string MaxHeight { get; set; }
+    [Parameter] public string MaxWidth { get; set; }
+    [Parameter] public bool Scrollable { get; set; } = true;
+    [Parameter] public bool ShowCloseButton { get; set; } = true;
+    [Parameter] public bool ShowFooter { get; set; } = true;
+    [Parameter] public bool ShowHeader { get; set; } = true;
+    [Parameter] public EventCallback<PopupShowingEventArgs> Showing { get; set; }
+    [Parameter] public EventCallback<PopupShownEventArgs> Shown { get; set; }
+    [Parameter] public VerticalAlignment? VerticalAlignment { get; set; }
+    [Parameter] public string Width { get; set; } = "660px";
+    [Parameter] public bool Visible { get; set; }
+
+    async Task ActionButtonClickAsync()
+    {
+        await InvokeAsync(async () =>
+        {
+            await ActionButtonInvokeFunction.InvokeAsync();
+            await _dxPopup.CloseAsync();
+        });
+    }
+}*@
