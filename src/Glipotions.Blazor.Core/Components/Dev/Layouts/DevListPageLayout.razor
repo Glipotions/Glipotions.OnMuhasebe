@@ -1,4 +1,4 @@
-﻿@*@typeparam TDataGridItem
+﻿@typeparam TDataGridItem
 
 
 @if (!DataGridService.IsLoaded)
@@ -30,7 +30,15 @@ else
         @EditPageContent
     }
 }
+@*  ListPageLayout Properties
 
+    Veriler Yüklenmediyse CircleLoading Ekranda Görünür.
+
+    Eğer Popup Page değilse Caption ekler.
+    
+    DevGridLayout doldurulur.
+    GridLayoutItems= içeriği ListPage İçeriği olarak doldurulur.
+*@
 @code {
 
     [Parameter, EditorRequired] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
@@ -47,4 +55,4 @@ else
     [Parameter, EditorRequired] public RenderFragment ListPageContext { get; set; }
     [Parameter] public RenderFragment EditPageContent { get; set; }
 
-}*@
+}

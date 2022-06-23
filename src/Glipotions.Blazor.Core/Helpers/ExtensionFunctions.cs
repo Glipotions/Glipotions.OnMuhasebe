@@ -5,12 +5,20 @@ namespace Glipotions.Blazor.Core.Helpers;
 
 public static class ExtensionFunctions
 {
+    /// <ÖZET>
+    /// typeof(TEntity) ile TEntity nin tipi alınır.
+    /// GetProperty("Id") ile id si bulunur.
+    /// <returns> Geriye Id döndürülür.</returns> 
+    /// Kullanıldığı yere örn: BaseListPage =>DeleteAsync
     public static Guid GetEntityId<TEntity>(this TEntity entity)
     {
         var property = typeof(TEntity).GetProperty("Id");
         return (Guid)property.GetValue(entity);
     }
-
+    /// <ÖZET>
+    /// 
+    /// Silme işleminde bir sonraki satır'ın indexine geçmek için yapılmış fonksiyon.
+    /// <returns></returns>
     public static TItem SetSelectedItem<TItem>(this IList<TItem> listDataSource,
         int index)
     {

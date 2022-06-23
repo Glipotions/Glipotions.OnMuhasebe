@@ -5,6 +5,7 @@ namespace Glipotions.Blazor.Core.Services;
 
 /// <ÖZET>
 /// 
+/// HasChanged = Değişikliği Ekrana Hemen Yansıtan Görev.
 /// ActiveEditComponent= "Şu an üzerinde işlem yaptığımız component"
 public interface ICoreCommonService
 {

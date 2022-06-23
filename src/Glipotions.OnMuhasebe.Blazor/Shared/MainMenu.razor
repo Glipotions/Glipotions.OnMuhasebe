@@ -1,0 +1,309 @@
+﻿@using Volo.Abp.Identity
+@using Volo.Abp.TenantManagement
+@inject IStringLocalizer<OnMuhasebeResource> L
+@inject AppService AppService
+@inject NavigationManager NavigationManager
+@*@inject IAuthorizationService AuthorizationService*@
+
+@*  ÖZET
+    CollapseItemsToHamburgerMenu= Pencere Küçültüldüğünde Otomatik olarak
+        hamburger menu oluşturuluyor ve butonlar onun içine giriyor.
+
+    Items içinde butonlar ve özellikleri belirtilir. navigate urller de belirtilir.
+    BeginGroup= Home tuşu diğerlerinden farklı olarak gruplu buton olduğu için true değeri girilir.
+
+    Ana Sekmeler olarak, cards, Invoices, Receipts, MeansOfPayment, Parameters, Administration(alt menüleri var)
+        bunların içinde ayrı itemler oluşturulur. diğer işlemler aynı.
+
+    Administrator içindeki menülerin kısmı Abpframework tarafından verilir. direkt hazırdır.
+*@
+<div class="card w-100 bg-light">
+    <div class="accordion-body p-0">
+        <DxMenu Title="@($"Glipotions {L["Pre-Accounting"]}")"
+                ItemsPosition="ItemPosition.Start"
+                CollapseItemsToHamburgerMenu="true">
+            <Items>
+@*                <AuthorizeView Context="AuthorizeContext">
+                    <Authorized>*@
+                        <DxMenuItem Text="@L["Home"]"
+                                    NavigateUrl="/"
+                                    IconCssClass="fa fa-home"
+                                    BeginGroup="true" />
+
+                        <DxMenuItem Text="@L["Cards"]"
+                                    IconCssClass="fa fa-clone">
+                            <Items>
+                                @*@if (_birim)*@
+                                {
+                                    <DxMenuItem Text="@L["UnitCards"]"
+                                            NavigateUrl="unitcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_banka)*@
+                                {
+                                    <DxMenuItem Text="@L["BankCards"]"
+                                            NavigateUrl="bankcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_bankaHesap)*@
+                                {
+                                    <DxMenuItem Text="@L["BankAccountCards"]"
+                                            NavigateUrl="bankaccountcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_cari)*@
+                                {
+                                    <DxMenuItem Text="@L["CustomerCards"]"
+                                            NavigateUrl="customercards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_kasa)*@
+                                {
+                                    <DxMenuItem Text="@L["CashCards"]"
+                                            NavigateUrl="cashcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_depo)*@
+                                {
+                                    <DxMenuItem Text="@L["WarehouseCards"]"
+                                            NavigateUrl="warehousecards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_stok)*@
+                                {
+                                    <DxMenuItem Text="@L["StockCards"]"
+                                            NavigateUrl="stockcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_hizmet)*@
+                                {
+                                    <DxMenuItem Text="@L["ServiceCards"]"
+                                            NavigateUrl="servicecards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_masraf)*@
+                                {
+                                    <DxMenuItem Text="@L["ExpenseCards"]"
+                                            NavigateUrl="expensecards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_sube)*@
+                                {
+                                    <DxMenuItem Text="@L["BranchCards"]"
+                                            NavigateUrl="branchcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+
+                                @*@if (_donem)*@
+                                {
+                                    <DxMenuItem Text="@L["PeriodCards"]"
+                                            NavigateUrl="periodcards"
+                                            IconCssClass="fa fa-clone" />
+                                }
+                            </Items>
+                        </DxMenuItem>
+
+                        @*@if (_fatura)*@
+                        {
+                            <DxMenuItem Text="@L["Invoices"]"
+                                    IconCssClass="fas fa-file-invoice">
+                                <Items>
+                                    <DxMenuItem Text="@L["PurchaseInvoices"]"
+                                            NavigateUrl="purchaseinvoicecards"
+                                            IconCssClass="fas fa-file-invoice" />
+
+                                    <DxMenuItem Text="@L["SalesInvoices"]"
+                                            NavigateUrl="salesinvoicecards"
+                                            IconCssClass="fas fa-file-invoice" />
+                                </Items>
+                            </DxMenuItem>
+                        }
+
+                        @*@if (_makbuz)*@
+                        {
+                            <DxMenuItem Text="@L["Receipts"]"
+                                    IconCssClass="fas fa-receipt">
+                                <Items>
+                                    <DxMenuItem Text="@L["CollectionReceipts"]"
+                                            NavigateUrl="collectionreceiptcards"
+                                            IconCssClass="fas fa-receipt" />
+
+                                    <DxMenuItem Text="@L["PaymentReceipts"]"
+                                            NavigateUrl="paymentreceiptcards"
+                                            IconCssClass="fas fa-receipt" />
+
+                                    <DxMenuItem Text="@L["CashTransactionReceipts"]"
+                                            NavigateUrl="cashtransactionreceiptcards"
+                                            IconCssClass="fas fa-receipt" />
+
+                                    <DxMenuItem Text="@L["BankTransactionReceipts"]"
+                                            NavigateUrl="banktransactionreceiptcards"
+                                            IconCssClass="fas fa-receipt" />
+                                </Items>
+                            </DxMenuItem>
+                        }
+
+                        @*@if (_odemeBelgesi)*@
+                        {
+                            <DxMenuItem Text="@L["MeansOfPayment"]"
+                                    IconCssClass="fa fa-money-check">
+                                <Items>
+                                    <DxMenuItem Text="@L["MeansOfPayment"]"
+                                            NavigateUrl="meansofpayment"
+                                            IconCssClass="fa fa-money-check" />
+
+                                    <DxMenuItem Text="@L["ReceiveMeansOfPayment"]"
+                                            NavigateUrl="receivemeansofpayment"
+                                            IconCssClass="fa fa-money-check" />
+
+                                    <DxMenuItem Text="@L["OurOwnMeansOfPayment"]"
+                                            NavigateUrl="ourownmeansofpayment"
+                                            IconCssClass="fa fa-money-check" />
+                                </Items>
+                            </DxMenuItem>
+                        }
+
+                        @*@if (_parametre)*@
+                        {
+                            <DxMenuItem Text="@L["Parameters"]"
+                                    IconCssClass="fas fa-clipboard-check">
+                                <Items>
+                                    <DxMenuItem Text="@L["FirmParameters"]"
+                                            Click="()=> AppService.ShowFirmaParametreEditPage=true"
+                                            IconCssClass="fas fa-clipboard-check" />
+                                </Items>
+                            </DxMenuItem>
+                        }
+
+                        @*@if (_tenant || _role || _user || _ayar)*@
+                        {
+                            <DxMenuItem Text="@L["Administration"]"
+                                    IconCssClass="fas fa-wrench">
+                                <Items>
+
+                                    @*@if (_tenant)*@
+                                    {
+                                        <DxMenuItem Text="@L["TenantManagement"]"
+                                            IconCssClass="fas fa-user">
+                                            <Items>
+                                                <DxMenuItem Text="@L["Tenants"]"
+                                                    NavigateUrl="tenant-management/tenants"
+                                                    IconCssClass="fas fa-user" />
+                                            </Items>
+                                        </DxMenuItem>
+                                    }
+
+                                    @*@if (_role || _user)*@
+                                    {
+                                        <DxMenuItem Text="@L["IdentityManagement"]"
+                                            IconCssClass="fas fa-user-lock">
+                                            <Items>
+                                                @*@if (_role)*@
+                                                {
+                                                    <DxMenuItem Text="@L["Roles"]"
+                                                    NavigateUrl="Identity/Roles"
+                                                    IconCssClass="fas fa-user-lock" />
+                                                }
+
+                                                @*@if (_user)*@
+                                                {
+                                                    <DxMenuItem Text="@L["Users"]"
+                                                    NavigateUrl="Identity/Users"
+                                                    IconCssClass="fas fa-user-lock" />
+                                                }
+                                            </Items>
+                                        </DxMenuItem>
+                                    }
+
+                                    @*@if (_ayar)*@
+                                    {
+                                        <DxMenuItem Text="@L["Settings"]"
+                                            NavigateUrl="setting-management"
+                                            IconCssClass="fas fa-cog" />
+                                    }
+                                </Items>
+                            </DxMenuItem>
+                        }
+                        <DxMenuItem Click="()=> AppService.ShowSubeDonemEditPage = true"
+                                    Position="ItemPosition.End"
+                                    BeginGroup="true">
+                            <TextTemplate>
+                                <i class="far fa-building pe-2" />
+                                @AppService.FirmaParametre.SubeAdi
+
+                                <i class="ps-3 fas fa-minus pe-3" />
+
+                                <i class="fas fa-calendar-alt pe-2" />
+                                @AppService.FirmaParametre.DonemAdi
+                            </TextTemplate>
+                        </DxMenuItem>
+@*                    </Authorized>
+                </AuthorizeView>*@
+
+                @*<LoginDisplay />*@
+
+            </Items>
+        </DxMenu>
+    </div>
+</div>
+
+@if (AppService.ShowFirmaParametreEditPage)
+{
+    <FirmaParametreEditPage />
+}
+
+@if (AppService.ShowSubeDonemEditPage)
+{
+    <SubeDonemSecimEditPage />
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        var url = NavigationManager.Uri.RemovePreFix(NavigationManager.BaseUri).
+                  EnsureStartsWith('/');
+
+        if (url != "/")
+            NavigationManager.NavigateTo("/", true);
+
+        AppService.HasChanged = StateHasChanged;
+    }
+
+@*    bool _birim, _banka, _bankaHesap, _cari, _kasa, _depo, _stok, _hizmet, _masraf, _sube, _donem, _fatura,
+    _makbuz, _odemeBelgesi, _parametre, _tenant, _role, _user, _ayar;*@
+
+@*    protected override async Task OnParametersSetAsync()
+    {
+        _birim = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Birim.Default);
+        _banka = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Banka_.Default);
+        _bankaHesap = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.BankaHesap.Default);
+        _cari = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Cari.Default);
+        _kasa = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Kasa.Default);
+        _depo = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Depo.Default);
+        _stok = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Stok.Default);
+        _hizmet = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Hizmet.Default);
+        _masraf = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Masraf.Default);
+        _sube = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Sube.Default);
+        _donem = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Donem.Default);
+
+        _fatura = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Fatura.Default);
+        _makbuz = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Makbuz.Default);
+        _odemeBelgesi = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.OdemeBelgesi.Default);
+        _parametre = true;
+
+        _tenant = await AuthorizationService.IsGrantedAsync(TenantManagementPermissions.Tenants.Default);
+        _role = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Roles.Default);
+        _user = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.Default);
+        _ayar = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Ayar.Default);
+    }*@
+}

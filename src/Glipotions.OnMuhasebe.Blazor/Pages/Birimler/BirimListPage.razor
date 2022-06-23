@@ -1,0 +1,86 @@
+﻿@page "/unitcards"
+
+
+
+@*@attribute [Authorize(OnMuhasebePermissions.Birim.Default)]*@
+@inherits BaseListPage<SelectBirimDto, ListBirimDto, BirimListParameterDto,
+                       CreateBirimDto, UpdateBirimDto, CodeParameterDto>
+
+@inject BirimAppService CrudService
+@inject BirimService Service
+
+@*
+    DataGridService ve ListPageService => BirimService'in içinde var bu yüzden oradan alındı
+*@
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["UnitCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Any()"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Any()"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListBirimDto.Kod)"
+                                  Width="150px" />
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListBirimDto.Ad)"
+                                  Width="250px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListBirimDto.OzelKod1Adi)"
+                                  Width="175px" />
+
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListBirimDto.OzelKod2Adi)"
+                                  Width="175px" />
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListBirimDto.Aciklama)"
+                                  Width="*" />
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <BirimEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Birim.Default;
+        //CreatePolicy = OnMuhasebePermissions.Birim.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Birim.Update;
+        //DeletePolicy = OnMuhasebePermissions.Birim.Delete;
+    }
+
+}

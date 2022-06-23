@@ -21,11 +21,17 @@ public interface ICoreDataGridService<TDataGridItem>
     public bool SelectFirstDataRow { get; set; }
     public bool ShowFilterRow { get; set; }
     public bool ShowGroupPanel { get; set; }
+    /// <ÖZET>
+    /// Veriler Yüklendi mi Yüklenmedi Mi tutan Prop
     public bool IsLoaded { get; set; }
     public bool ShowSelectionCheckBox { get; set; }
     public Guid PopupListPageFocusedRowId { get; set; }
     public IList<string> ExcludeListItems { get; set; }
+    /// <ÖZET>
+    /// Listeyi görüntüleme prop'u, eğer ilk kez renderlıyorsa ilk satırı seçmesi sağlanır.
     void ShowListPage(bool firstRender);
+    /// <ÖZET>
+    /// Gönderilen itemin bulunduğu satırı seçer.
     void SetDataRowSelected(TDataGridItem item);
     void SetDataRowSelected(bool first);
     //void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged);

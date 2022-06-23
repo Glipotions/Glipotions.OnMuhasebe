@@ -1,24 +1,24 @@
-﻿@*@typeparam TDataGridItem
+﻿@typeparam TDataGridItem
 
 <DxToolbar ItemRenderStyleMode="ItemRenderStyleMode"
            ItemSizeMode="ItemSizeMode">
 
     <DxToolbarItem Click="NewButtonClick"
-                   Enabled="NewButtonEnabled && ListPageService.IsGrantedCreate"
+                   Enabled="NewButtonEnabled"
                    IconCssClass="newimage"
                    Text="@L["New"]"
                    Tooltip="@L["AddNewItem"]"
                    Visible="NewButtonVisible" />
 
     <DxToolbarItem Click="UpdateButtonClick"
-                   Enabled="UpdateButtonEnabled && ListPageService.IsGrantedUpdate"
+                   Enabled="UpdateButtonEnabled"
                    IconCssClass="editimage"
                    Text="@L["Update"]"
                    Tooltip="@L["UpdateSelectedItem"]"
                    Visible="UpdateButtonVisible" />
 
     <DxToolbarItem Click="DeleteButtonClick"
-                   Enabled="DeleteButtonEnabled && ListPageService.IsGrantedDelete"
+                   Enabled="DeleteButtonEnabled"
                    IconCssClass="deleteimage"
                    Text="@L["Delete"]"
                    Tooltip="@L["DeleteSelectedItem"]"
@@ -39,7 +39,7 @@
 
     <DxToolbarItem BeginGroup="true"
                    Click="PrintButtonClick"
-                   Enabled="PrintButtonEnabled && ListPageService.IsGrantedPrint"
+                   Enabled="PrintButtonEnabled"
                    IconCssClass="printimage"
                    Text="@L["Print"]"
                    Tooltip="@L["Print"]"
@@ -47,7 +47,7 @@
 
     <DxToolbarItem BeginGroup="ReserveButtonBeginGroup"
                    Click="ReserveButtonClick"
-                   Enabled="ReserveButtonEnabled && ListPageService.IsGrantedReserve"
+                   Enabled="ReserveButtonEnabled"
                    IconCssClass="@ReserveButtonIconCssClass"
                    Text="@ReserveButtonText"
                    Tooltip="@ReserveButtonTooltip"
@@ -64,6 +64,28 @@
     </DxToolbarItem>
 </DxToolbar>
 
+@*  LISTPAGETOOLBAR PROPERTIES
+
+    ItemRenderStyleMode= Butonların üzerine gelindiğinde buton renginin değişmesini sağlayan prop.
+    ItemSizeMode= item boyutu.
+
+    ToolTip= Butonun üzerine gelindiğinde ipucu veren özellik. (Ör: Yeni Kart Açar)
+
+    ShowHideGroupPanel= Grup paneli gösterip gizleyen buton. 
+    BeginGroup=true yani dışardan kullanıcı değiştiremez.
+
+    HasChanged= Yapılan değişiklikleri Ekrana yansıtılması için kullanılır. ***ÖNEMLİ***
+    StateHasChanged yerine CommonService.HasChanged() kullanılması (3/5) 22. Video dk 60
+        StateHasChanged kullanılırsa ekrana yansımıyor çünkü listpage dışında bir şeyi değiştiriyor
+        Servisten kullanınca ekrana yansır çünkü servisten kullanıyor.
+
+
+    EventCallBack= Örneğin NewButtonClick Invoke Edildiğinde StateHasChanged ini otomatik olarak
+        çalıştırma görevi var.
+
+    IStringLocalizer= Localizer Servise
+
+*@
 @code {
 
     [Parameter, EditorRequired] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }
@@ -121,4 +143,4 @@
         DataGridService.SelectFirstDataRow = true;
         await GetListDataSource.InvokeAsync();
     }
-}*@
+}

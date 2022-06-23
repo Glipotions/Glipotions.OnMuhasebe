@@ -1,0 +1,72 @@
+﻿@inject IStringLocalizer<OnMuhasebeResource> L
+
+<DxPopup @ref="@ModalRef"
+         HeaderCssClass="@HeaderCssClass"
+         ShowFooter="true">
+
+    <HeaderContentTemplate>
+        @if (Title == null)
+        {
+            @* switch case yeni tarzı*@
+            Title = MessageType switch
+            {
+                UiMessageType.Info => L["InfoMessageTitle"],
+                UiMessageType.Success => L["SuccessMessageTitle"],
+                UiMessageType.Warning => L["WarningMessageTitle"],
+                UiMessageType.Error => L["ErrorMessageTitle"],
+                UiMessageType.Confirmation => L["ConfirmationMessageTitle"],
+                _ => null,
+            };
+        }
+        @Title
+    </HeaderContentTemplate>
+
+    @* Gövdede yer alacak görüntüler *@
+    <BodyContentTemplate>
+        @if (ShowMessageIcon)
+        {
+            <DisplayHeading Size="DisplayHeadingSize.Is2"
+                        Alignment="TextAlignment.Center">
+                <Icon Name="@MessageIcon" Style="@MessageIconStyle" />
+            </DisplayHeading>
+        }
+
+        <div style="padding-top: 15px; padding-left: 25px; padding-right: 25px;">
+            <pre readonly style="width:100%; border:none; height:100%; resize:none;
+                                 overflow:auto; outline: none;">
+                @Message
+            </pre>
+        </div>
+
+    </BodyContentTemplate>
+
+    @* Butonlara göre işlemler.. *@
+    <FooterContentTemplate>
+        @if (IsConfirmation)
+        {
+            <DxButton Click="OnConfirmClicked"
+                  IconCssClass="selectimage"
+                  RenderStyle="SelectButtonRenderStyle"
+                  RenderStyleMode="SelectButtonRenderStyleMode"
+                  Text="@ConfirmButtonText">
+            </DxButton>
+
+            <DxButton Click="OnCancelClicked"
+                  IconCssClass="cancelimage"
+                  RenderStyle="CancelButtonRenderStyle"
+                  RenderStyleMode="CancelButtonRenderStyleMode"
+                  Text="@CancelButtonText">
+            </DxButton>
+        }
+        else
+        {
+            <DxButton Click="OnOkClicked"
+                  IconCssClass="selectimage"
+                  RenderStyle="OkButtonRenderStyle"
+                  RenderStyleMode="OkButtonRenderStyleMode"
+                  Text="@OkButtonText">
+            </DxButton>
+        }
+    </FooterContentTemplate>
+
+</DxPopup>

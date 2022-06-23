@@ -142,7 +142,7 @@ public class OnMuhasebeBlazorModule : AbpModule
                     bundle.AddFiles("/css/site.css");
                     bundle.AddFiles("/blazor-global-styles.css");
                     bundle.AddFiles("/Glipotions.OnMuhasebe.Blazor.styles.css");
-                    //bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
+                    bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
                     //bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
                     bundle.AddFiles("/_content/Glipotions.Blazor.Core/css/component.css");
                 }
