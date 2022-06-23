@@ -36,6 +36,40 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  DATEEDIT PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    ClearButtonDisplayMode= tıklandığında metindeki yazıyı siler.
+    NullText= Boşken Bir şey yazılmasıyla ilgili.
+    Mask= DateEdit'in görünümünü ayarlar.
+    CaretMode="MaskCaretMode.Advancing ise tarih yazarken noktadan sonra otomatik geçişi sağlar.
+    CurrentCulture=Hangi ülkede çalıştırılıyorsa ona göre format düzenler.
+
+
+    @ref = _dxDateEdit DxDateEdit tipinin referansıdır. Bu DxDateEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan dateEditin değerini
+        değiştirmişse bind kullanılmazsa dateEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka dateEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= dateEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda dateEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxDateEdit<DateTime> _dxDateEdit;

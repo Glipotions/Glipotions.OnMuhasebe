@@ -33,6 +33,42 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  IBANEDIT PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. Sağa dayalı olmasını sağlayacak
+    NullText= Boşken Bir şey yazılmasıyla ilgili.
+    DisplayFormat=n2 formatında gösterilir.
+    Mask=LL00 0000 0000 0000 0000 0000 00   Bu formata maskler.
+    Placeholder= Değer girilmeyen rakam yerine olacak değer belirtilir. 
+    SaveLiteral= Placeholderlar database e kaydedilsin mi(Boşken).
+
+
+    private DxMaskedInput<string> _dxMaskedInput= ile içinin string olacağı belirtilir.
+
+    @ref = _dxIbanEdit DxIbanEdit tipinin referansıdır. Bu DxIbanEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan IbanEditin değerini
+        değiştirmişse bind kullanılmazsa IbanEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka IbanEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= IbanEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda IbanEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxMaskedInput<string> _dxMaskedInput;

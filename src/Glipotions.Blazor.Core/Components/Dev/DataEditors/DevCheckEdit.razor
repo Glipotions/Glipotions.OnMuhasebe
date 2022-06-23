@@ -35,6 +35,44 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  CHECKBOX PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    Alignment=Sağ Tarafta mı Sol Tarafta mı Olduğunu Gösterir.
+    CheckType= Check şeklini gösterir. switch toggle şeklinde olur.
+    LabelPosition= Yazının Hangi tarafta olduğunu belirtir.
+    <ChildContent>
+         @(_value ? TrueCaption : FalseCaption) Aktif ve Pasif halinde ne yazdığını belirtir.
+    </ChildContent>
+
+
+    ValueChecked, ValueIndeterminate, ValueUnchecked propertyleri ile enum gibi davranılabilir.
+        (3/5) 16. Video 14. DK
+
+    @ref = _dxCheckBox DxCheckBox tipinin referansıdır. Bu DxCheckBox'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan CheckBoxin değerini
+        değiştirmişse bind kullanılmazsa CheckBox dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka CheckBox changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= CheckBox parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda CheckBox'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxCheckBox<bool> _dxCheckBox;

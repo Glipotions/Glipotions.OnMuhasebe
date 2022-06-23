@@ -56,6 +56,56 @@
     </Template>
 </DxGridLayoutItem>
 
+@*  DATAGRID COMPONENT
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    ResizeMode= Boyutunun tekrar değiştirilip değiştirilemeyeceğini belirten özellik.
+
+    AllowColumnDragDrop= kolonların taşınmasını sağlar.
+    AllowSort= Sıralamaya izin verilip verilmemesini belirtir.
+    ColumnResizeMode= Kolon boyutunun ayarlanıp ayarlanamayacağını belirtir.
+    Data= Tablo Verileri
+    DataNavigationMode = Veriler sayfa sayfa olarak mı tamamen mi görünsün seçenekleri.
+    HorizontalScrollBarMode= Yatayda kaydırma modu. Ekrana sığmıyorsa göster=Auto
+    MultipleSelectedDataRows= Birden fazla satır seçebilme özelliği. bind olmasının nedeni kullanıcı
+        seçtiği satırları geri yollamasıdır. Service üzerindeki SelectedItems prop'u dolar.
+
+    PagerAllDataRowsItemVisible= grid sayfasında kaç item gözükeceğini seçecek özelliğin..
+        ..gösterilip gösterilmemesini sağlar.
+    PagerAllowedPageSizes= grid sayfasında kaç item gözükeceğini seçme özelliği
+    PagerNavigationMode= Sayfalar arasında geçiş yapmayı sağlayan özellik.
+    SelectAllMode= Tüm Satırları seçme özelliği, Sayfa veya Tüm Kayıtlar şeklinde seçilebilir.
+    SelectionMode= Kaç satır seçebileceği belirtilir.
+    ShowFilterRow= Filtre Satırını Gösterme prop'u
+
+    SingleSelectedDataRow= Tek satır seçildiği anda otomatik olarak parametreye atması için bind yapıldı.
+
+    HeaderTemplate= Başlığın Template'i belirlenir.
+    Columns= eğer seçim yapılma olsun isteniyorsa seçim kutucuğunu gösteren özellik eklenir.
+        
+    Group ve Total Summary işlemlerini yapan propertyler eklendi.
+
+
+    @ref = _DataGrid DxDataGrid tipinin referansıdır. Bu DxDataGrid'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+
+    Value= DataGrid parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda DataGrid'e focuslanmasını sağlar.
+    
+
+*@
 @code {
 
     [Parameter] public ICoreDataGridService<TDataGridItem> DataGridService { get; set; }

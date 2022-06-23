@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 
 namespace Glipotions.Blazor.Core.Components.Dev.DataViewers.Base;
-
+/// <ÖZET>
+/// Viewerlarda ortak olan propertyleri tanımladık
 public abstract class DevBaseViewer : ComponentBase
 {
     [Parameter] public int ColumnIndex { get; set; } = 0;

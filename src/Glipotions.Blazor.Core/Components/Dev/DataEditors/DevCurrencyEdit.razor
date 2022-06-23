@@ -34,6 +34,42 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+
+@*  CURRENCYEDIT PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. Sağa dayalı olmasını sağlayacak
+    NullText= Boşken Bir şey yazılmasıyla ilgili.
+    DisplayFormat=n2 formatında gösterilir.
+    Mask=#,###,###,##0.00   Bu formata maskler.
+    CurrentCulture=Hangi ülkede çalıştırılıyorsa ona göre format düzenler.
+
+
+    DxCurrencyEdit<decimal> _dxCurrencyEdit= ile içinin int olacağı belirtilir.
+
+    @ref = _dxCurrencyEdit DxCurrencyEdit tipinin referansıdır. Bu DxCurrencyEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan currencyEditin değerini
+        değiştirmişse bind kullanılmazsa currencyEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka currencyEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= currencyEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda currencyEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxMaskedInput<decimal> _dxMaskedInput;

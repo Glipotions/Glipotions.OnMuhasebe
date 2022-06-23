@@ -35,6 +35,41 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  SPIN PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    NullText= Boşken Bir şey yazılmasıyla ilgili.
+    Mask=NumericMask.WholeNumber  herhangi bir ayraç olmayacak şekilde maskler.
+    Max ve Min Value= alabileceği en yüksek ve en düşük değerler belirtilir.
+    AllowMouseWheel= mouse tekerleği ile değeri değiştirip değiştirememeyi belirtir.
+
+
+    DxSpinEdit<int> _dxSpinEdit= ile içinin int olacağı belirtilir.
+
+    @ref = _dxSpinEdit DxSpinEdit tipinin referansıdır. Bu DxSpinEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan spinEditin değerini
+        değiştirmişse bind kullanılmazsa spinEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka spinEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= spinEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda spinEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxSpinEdit<int> _dxSpinEdit;

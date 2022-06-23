@@ -35,6 +35,41 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  COMBOBOX PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    Data= Hangi verileri listeleyeceğini belirtilir. IEnumerable tipinde veriler alır.
+    TextFieldName= Combobax'a gönderilen verilerden kullanıcı hangisini görecekse belirtilir.
+    SelectedItemChanged= Seçilen itemin görünmesini sağlayan özellik.
+
+    Action=Parametre alan ancak geriye değer döndürmeyendir.
+
+    private DxComboBox<TItem, TItem> _dxComboBox; = her türlü değer gönderilebilir.
+
+
+    @typeparam TItem = En üstte tanımladık. combobox'ın içinde kullanılacak type'i almak için kullandık.
+
+    @ref = _dxComboBox DxComboBox tipinin referansıdır. Bu DxComboBox'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan ComboBoxin değerini
+        değiştirmişse bind kullanılmazsa ComboBox dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Combobox'a bind uygulanırsa mutlaka ComboBox changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi. bind value kullanıldı.
+
+
+    Value= ComboBox parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged= Otomatik olarak tetiklenir, bu yüzden ekstra bir şey yapılmadı.
+
+    OnAfterRenderAsync= ilk kez render olduğunda ComboBox'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxComboBox<TItem, TItem> _dxComboBox;

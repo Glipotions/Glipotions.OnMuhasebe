@@ -4,6 +4,14 @@ using Microsoft.AspNetCore.Components;
 
 namespace Glipotions.Blazor.Core.Services;
 
+/// <ÖZET>
+/// Data grid için yapılan Servistir. Bu Servis Farklı 3rd firmalarda kullanılabilir.
+/// 
+/// Datagridden gönderilen itemlerde işlem yapmak için generic yapıldı.
+/// TDataGridItem = Datagrid'in 1 satırı yani 1 itemi temsil eder.
+/// 
+/// DataGrid ComponentBase'den Tanımlanması her 3rd firmanın kullanmasını sağlar. bağımlılık yok
+/// 
 public interface ICoreDataGridService<TDataGridItem>
 {
     public ComponentBase DataGrid { get; set; }

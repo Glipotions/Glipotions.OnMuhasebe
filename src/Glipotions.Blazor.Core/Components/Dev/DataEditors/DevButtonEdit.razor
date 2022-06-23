@@ -45,6 +45,39 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+
+@*  BUTTONEDİT PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+
+    onkeydown= keydown eventi
+    ondblclick=double click eventi
+
+    private Dictionary<string, object> Attributes; = şeklinde Attribute alınır.
+
+    @typeparam TItem = En üstte tanımladık. ButtonEdit'ın içinde kullanılacak type'i almak için kullandık.
+
+    @ref = _dxButtonEdit DxButtonEdit tipinin referansıdır. Bu DxButtonEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan ButtonEditin değerini
+        değiştirmişse bind kullanılmazsa ButtonEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    ButtonEdit'a bind uygulanırsa mutlaka ButtonEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi. bind value kullanıldı.
+
+
+    Value= ButtonEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged= Otomatik olarak tetiklenir, bu yüzden ekstra bir şey yapılmadı.
+
+    OnAfterRenderAsync= ilk kez render olduğunda ButtonEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxTextBox _dxTextBox;
@@ -68,6 +101,13 @@
         }
     }
 
+    /// <ÖZET>
+    /// 
+    /// Eğer enable ise;
+    /// ActiveEditComponent seçilir.
+    /// ButtonClickInvokeFunction ile tetiklenen event çalışır(InvokeAsync).
+    /// 
+    /// Görev: Pop-up Menu kapandıktan sonra odağın tekrar buttonEditte olmasını sağlar.
     private async Task ClickAsync()
     {
         if (Enabled)
@@ -91,6 +131,11 @@
         }
     }
 
+    /// <ÖZET>
+    /// 
+    /// DeleteButtonKeyDownInvokeFunction Eventi Gönderilmediyse return.
+    /// Value temizlenir.
+    /// Gelen DeleteButtonKeyDownInvokeFunction Invoke Edilir(Çalıştırılır).
     private async Task DeleteAsync()
     {
         if (!DeleteButtonKeyDownInvokeFunction.HasDelegate) return;
@@ -104,6 +149,9 @@
             await _dxTextBox.FocusAsync();
     }
 
+    /// <ÖZET>
+    /// 
+    ///  Görev: Button'un Enabled Durumu false ise disabled yapar.
     protected override void OnParametersSet()
     {
         if (!Enabled)

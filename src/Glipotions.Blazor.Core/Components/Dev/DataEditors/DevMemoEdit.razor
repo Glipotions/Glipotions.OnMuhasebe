@@ -33,6 +33,38 @@
           Visible="Visible && SeparateCaptionVisible">
 </DevLabel>
 
+@*  MEMOEDIT PROPERTIES
+
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    ClearButtonDisplayMode= tıklandığında metindeki yazıyı siler.
+    NullText= Boşken Bir şey yazılmasıyla ilgili.
+    ResizeMode= Boyutunun tekrar değiştirilip değiştirilemeyeceğini belirten özellik.
+
+
+    @ref = _dxMemoEdit DxMemoEdit tipinin referansıdır. Bu DxMemoEdit'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+    bind olmadan kullanılınca tek yönlü bir bağlama olmuş olur. kullanıcı UI dan MemoEditin değerini
+        değiştirmişse bind kullanılmazsa MemoEdit dönmemiş olur, bind iki yönlü bağlamayı sağlar.
+        YANİ VERİ GİRİŞİ OLAN HER YERDE @bind KULLANILMAK ZORUNDA!!
+    Text'e bind uygulanırsa mutlaka MemoEdit changed eventi olması gerekir. Bu nedenle ValueChanged
+        eklendi.
+
+
+    Value= MemoEdit parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda MemoEdit'e focuslanmasını sağlar.
+*@
 @code {
 
     private DxMemo _dxMemo;

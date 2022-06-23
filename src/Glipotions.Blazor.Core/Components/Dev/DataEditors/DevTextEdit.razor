@@ -19,6 +19,10 @@
     </Template>
 </DxGridLayoutItem>
 
+@*  ÖZET
+    Caption'un 2 önceki Columnda olması için ColumnIndex -2 yapıldı
+    Bir Genel Text'in Visible'a bakar sonra Caption'un Visible ına bakılır.
+*@
 <DevLabel Caption="@Caption"
           ColumnIndex="ColumnIndex-2"
           CssClass="@CaptionCssClass"
@@ -60,6 +64,8 @@
         _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
         çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
         *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda text'e focuslanmasını sağlar.
 *@
 @code {
 
