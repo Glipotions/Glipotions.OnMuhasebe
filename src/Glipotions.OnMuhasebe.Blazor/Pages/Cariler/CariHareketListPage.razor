@@ -1,0 +1,66 @@
+﻿@inherits BaseListPage<SelectMakbuzHareketDto, ListCariHareketDto, CariHareketListParameterDto, MakbuzHareketDto, MakbuzHareketDto, MakbuzNoParameterDto>
+
+@inject CariHareketAppService CrudService
+@inject CariHareketService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CustomerCardTransactions"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonVisible="false"
+                                    FilterButtonVisible="true"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonVisible="false"
+                                    UpdateButtonVisible="false">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["DocumentType"]"
+                                  Field="@nameof(ListCariHareketDto.BelgeTuru)"
+                                  Width="120px"/>
+
+                <DxDataGridColumn Caption="@L["TransactionType"]"
+                                  Field="@nameof(ListCariHareketDto.HareketTuru)"
+                                  Width="120px"/>
+
+                <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListCariHareketDto.Tarih)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="80px"/>
+                
+                <DxDataGridColumn Caption="@L["DocumentNumber"]"
+                                  Field="@nameof(ListCariHareketDto.BelgeNo)"
+                                  Width="120px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListCariHareketDto.Tutar)"
+                                          Width="110px"/>
+                
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListCariHareketDto.Aciklama)"
+                                  Width="300px"/>
+            </Columns>
+        </DevDataGrid>
+    </ListPageContext>
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Service.ToolbarCheckBoxVisible = false;
+        BaseCrudService = CrudService;
+        BaseService = Service;
+    }
+
+}

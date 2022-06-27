@@ -1,0 +1,119 @@
+﻿@page "/warehousecards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Depo.Default)]*@
+@inherits BaseListPage<SelectDepoDto, ListDepoDto, DepoListParameterDto, CreateDepoDto, UpdateDepoDto, DepoCodeParameterDto>
+
+@inject DepoAppService CrudService
+@inject DepoService Service
+@inject DepoHareketService DepoHareketService
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["WarehouseCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async () => await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async () => await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async () => await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    ReserveButtonBeginGroup="true"
+                                    ReserveButtonClick="() => DepoHareketService.BeforeShowPopupListPage(Service.SelectedItem.Id)"
+                                    ReserveButtonEnabled="Service.ListDataSource.Count > 0"
+                                    ReserveButtonText="@L["CardTransactions"]"
+                                    ReserveButtonTooltip="@L["ShowTransactionsForThisCard"]"
+                                    ReserveButtonVisible="true"
+                                    UpdateButtonClick="async () => await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListDepoDto.Kod)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListDepoDto.Ad)"
+                                  Width="250px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Entered"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListDepoDto.Giren)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Out"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListDepoDto.Cikan)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Available"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListDepoDto.Mevcut)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListDepoDto.OzelKod1Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListDepoDto.OzelKod2Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListDepoDto.Aciklama)"
+                                  Width="*"/>
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <DepoEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@if (DepoHareketService.IsPopupListPage)
+{
+    Service.SelectFirstDataRow = false;
+    
+    <DevPopupListPageLayout DataGridService="Service"
+                            CancelButtonText="@L["Close"]"
+                            Caption="@($"{L["WarehouseCardTransactions"]} ( {Service.SelectedItem.Kod} / {Service.SelectedItem.Ad} )")"
+                            Closed="DepoHareketService.HideListPage"
+                            SelectButtonVisible="false"
+                            Visible="true"
+                            Width="1100px">
+        <ListPageContent>
+            <DepoHareketListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Depo.Default;
+        //CreatePolicy = OnMuhasebePermissions.Depo.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Depo.Update;
+        //DeletePolicy = OnMuhasebePermissions.Depo.Delete;
+        //ReservePolicy = OnMuhasebePermissions.Depo.Transaction;
+    }
+
+}

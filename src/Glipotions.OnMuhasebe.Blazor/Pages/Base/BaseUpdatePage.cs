@@ -15,6 +15,11 @@ public abstract class BaseUpdatePage<TGetOutputDto, TGetListOutputDto, TGetListI
     where TCreateInput : class, IEntityDto
     where TUpdateInput : class, IEntityDto  
 {
+    /// <ÖZET>
+    /// Bu Page i yapmanın nedeni;
+    ///     Yapı olarak BaseListPage e benziyor ancak çok daha az işi yaparak yükten kurtarıyor
+    ///     
+
     public BaseUpdatePage()
     {
         LocalizationResource = typeof(OnMuhasebeResource);
@@ -28,7 +33,15 @@ public abstract class BaseUpdatePage<TGetOutputDto, TGetListOutputDto, TGetListI
     #endregion
 
     #region Crud Functions
-
+    /// <ÖZET>
+    /// Geriye bir çıkış gönderir. BaseCrudService Kullanıldı.
+    /// (3/5) 26. video 31.dk
+    /// HandleErrorAsync= AbpComponentBase deki bir fonksiyon.
+    ///     CRUD işlemlerinde oluşacak hataları yakalamak için yapılmış bir fonksiyondur.    
+    /// 
+    /// return default= hata olursa null döndermiş olur.
+    /// Not: fonksiyonu direkt olarak kullanmak yerine try catch yapmamızın nedeni
+    ///     hatayı yakalayıp kullanıcıya göstermektir.
     protected async Task<TGetOutputDto> GetAsync(Guid id)
     {
         try
@@ -42,7 +55,16 @@ public abstract class BaseUpdatePage<TGetOutputDto, TGetListOutputDto, TGetListI
 
         return default;
     }
-
+    /// <ÖZET>
+    /// Yeni Kayıt Üretir.
+    ///
+    /// HandleErrorAsync= AbpComponentBase deki bir fonksiyon.
+    ///     CRUD işlemlerinde oluşacak hataları yakalamak için yapılmış bir fonksiyondur. 
+    ///     
+    /// return default= hata olursa null döndermiş olur.
+    /// 
+    /// Not: fonksiyonu direkt olarak kullanmak yerine try catch yapmamızın nedeni
+    ///     hatayı yakalayıp kullanıcıya göstermektir.
     protected async Task<TGetOutputDto> CreateAsync(TCreateInput input)
     {
         try
@@ -56,7 +78,16 @@ public abstract class BaseUpdatePage<TGetOutputDto, TGetListOutputDto, TGetListI
 
         return default;
     }
-
+    /// <ÖZET>
+    /// Kayıt'ı Güncelleme Kısmı. gönderilen id deki Kayıt'ı input'a göre günceller.
+    ///
+    /// HandleErrorAsync= AbpComponentBase deki bir fonksiyon.
+    ///     CRUD işlemlerinde oluşacak hataları yakalamak için yapılmış bir fonksiyondur. 
+    ///     
+    /// return default= hata olursa null döndermiş olur.
+    /// 
+    /// Not: fonksiyonu direkt olarak kullanmak yerine try catch yapmamızın nedeni
+    ///     hatayı yakalayıp kullanıcıya göstermektir.
     protected async Task<TGetOutputDto> UpdateAsync(Guid id, TUpdateInput input)
     {
         try

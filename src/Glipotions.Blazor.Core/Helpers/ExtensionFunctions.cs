@@ -32,7 +32,11 @@ public static class ExtensionFunctions
 
         return default;
     }
-
+    /// <ÖZET>
+    /// (3/5) 36. Video 44. Dk
+    /// property info oluşturulur.
+    /// entitiesler içinde foreach ile id değerini alıp gelen id ye eşitse geriyeo entityi döndürür.
+    /// <returns></returns>
     public static TEntity GetEntityById<TEntity>(this IList<TEntity> entities, Guid id)
     {
         var propertyInfo = typeof(TEntity).GetProperty("Id");

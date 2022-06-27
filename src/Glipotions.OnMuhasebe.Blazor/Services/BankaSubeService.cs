@@ -12,7 +12,17 @@ public class BankaSubeService : BaseService<ListBankaSubeDto, SelectBankaSubeDto
     IScopedDependency
 {
     public Guid BankaId { get; set; }
-
+    /// <ÖZET>
+    /// ToolbarCheckBoxVisible = prm.Length == 1 ise listelenme istendiği belli olur, 
+    ///     ancak 1 den fazla parametre gönderilirse seçim yapıldığı anlaşılır ve pasif kartların görünmemesi için
+    ///     checkbox visible false olur.
+    ///     
+    /// IsPopupListPage = true yapılır ve özel kod sayfasının açılmasını sağlar.
+    ///     if (OzelKodService.IsPopupListPage) =>> Editpagelerdeki bu komuttan dolayı açılır.
+    /// 
+    /// EntityId prm[0] dan alınır.
+    /// 
+    /// Atamalar yapıldıktan sonra PopupListPageFocusedRowId ile sayfa açılırken seçili özel kod açılır.
     public override void BeforeShowPopupListPage(params object[] prm)
     {
         ToolbarCheckBoxVisible = prm.Length == 1;

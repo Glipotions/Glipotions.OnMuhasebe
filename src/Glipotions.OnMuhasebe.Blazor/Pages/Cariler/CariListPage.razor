@@ -1,0 +1,136 @@
+﻿@page "/customercards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Cari.Default)]*@
+@inherits BaseListPage<SelectCariDto, ListCariDto, CariListParameterDto, CreateCariDto, UpdateCariDto, CodeParameterDto>
+
+@inject CariAppService CrudService
+@inject CariService Service
+@inject CariHareketService CariHareketService
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CustomerCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async () => await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async () => await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async () => await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    ReserveButtonBeginGroup="true"
+                                    ReserveButtonClick="() => CariHareketService.BeforeShowPopupListPage(Service.SelectedItem.Id)"
+                                    ReserveButtonEnabled="Service.ListDataSource.Count > 0"
+                                    ReserveButtonText="@L["CardTransactions"]"
+                                    ReserveButtonTooltip="@L["ShowTransactionsForThisCard"]"
+                                    ReserveButtonVisible="true"
+                                    UpdateButtonClick="async () => await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListCariDto.Kod)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListCariDto.Ad)"
+                                  Width="250px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Debit"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListCariDto.Borc)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Credit"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListCariDto.Alacak)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["DebitBalance"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListCariDto.BorcBakiye)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["CreditBalance"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListCariDto.AlacakBakiye)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["TaxAdministration"]"
+                                  Field="@nameof(ListCariDto.VergiDairesi)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["TaxNumber"]"
+                                  Field="@nameof(ListCariDto.VergiNo)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["Telephone"]"
+                                  Field="@nameof(ListCariDto.Telefon)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListCariDto.OzelKod1Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListCariDto.OzelKod2Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListCariDto.Aciklama)"
+                                  Width="*"/>
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <CariEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@if (CariHareketService.IsPopupListPage)
+{
+    Service.SelectFirstDataRow = false;
+    
+    <DevPopupListPageLayout DataGridService="Service"
+                            CancelButtonText="@L["Close"]"
+                            Caption="@($"{L["CustomerCardTransactions"]} ( {Service.SelectedItem.Kod} / {Service.SelectedItem.Ad} )")"
+                            Closed="CariHareketService.HideListPage"
+                            SelectButtonVisible="false"
+                            Visible="true"
+                            Width="1100px">
+        <ListPageContent>
+            <CariHareketListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Cari.Default;
+        //CreatePolicy = OnMuhasebePermissions.Cari.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Cari.Update;
+        //DeletePolicy = OnMuhasebePermissions.Cari.Delete;
+        //ReservePolicy = OnMuhasebePermissions.Cari.Transaction;
+    }
+
+}

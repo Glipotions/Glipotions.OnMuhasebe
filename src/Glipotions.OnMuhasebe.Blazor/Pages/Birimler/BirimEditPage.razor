@@ -1,8 +1,12 @@
-﻿@*@inherits BaseEditPage
+﻿@inherits BaseEditPage
 
 @inject BirimService Service
 @inject OzelKodService OzelKodService
 
+@*
+    DevPopupEditPageLayout = Componentler Popup Edit page sayfasının içine tanımlanır.
+    EditPageContent = Bununla Componentlerin içeriği doldurulur.
+*@
 <DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
                         EditPageService="Service"
                         Caption="@L["UnitCard"]"
@@ -94,4 +98,4 @@
             <OzelKodListPage/>
         </ListPageContent>
     </DevPopupListPageLayout>
-}*@
+}

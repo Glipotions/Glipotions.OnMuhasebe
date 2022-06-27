@@ -1,0 +1,181 @@
+﻿@inherits BaseEditPage
+
+@inject BankaHesapService Service
+@inject OzelKodService OzelKodService
+@inject BankaService BankaService
+@inject BankaSubeService BankaSubeService
+
+<DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
+                        EditPageService="Service"
+                        Caption="@L["BankAccountCard"]"
+                        Height="400px"
+                        ListPageService="Service"
+                        OnSubmit="OnSubmit"
+                        SubmitButtonText="@L["Save"]"
+                        Width="740px">
+    <EditPageContent>
+        <DevGridLayout ColumnCount="9"
+                       ColumnWidths="@ColumnWidths("90","3","195","25","90","3","195","25","20")"
+                       RowCount="8">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["Code"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterCode"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.DataSource.Kod">
+                </DevTextEdit>
+                <DevCheckEdit ColumnIndex="6"
+                              ColumnSpan="2"
+                              FalseCaption="@L["Passive"]"
+                              RowIndex="0"
+                              TrueCaption="@L["Active"]"
+                              @bind-Value="@Service.DataSource.Durum">
+                </DevCheckEdit>
+                <DevTextEdit Caption="@L["Name"]"
+                             ColumnIndex="2"
+                             ColumnSpan="6"
+                             IsFocus="true"
+                             NullText="@L["EnterName"]"
+                             RowIndex="1"
+                             @bind-Value="@Service.DataSource.Ad">
+                </DevTextEdit>
+                <DevComboBoxEnumEdit Caption="@L["AccountType"]"
+                                     ColumnIndex="2"
+                                     DataSource="@(FillEnumToComboBox<BankaHesapTuru>(L))"
+                                     RowIndex="2"
+                                     SelectedItemChanged="Service.BankaHesapTuruSelectedItemChanged"
+                                     TextFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.DisplayName)"
+                                     TItem="BankaHesapTuru"
+                                     @bind-Value="@Service.DataSource.HesapTuru"
+                                     ValueFieldName="@nameof(ComboBoxEnumItem<BankaHesapTuru>.Value)">
+                </DevComboBoxEnumEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      BankaService.BeforeShowPopupListPage(
+                                           Service.DataSource.BankaId); }"
+                               Caption="@L["Bank"]"
+                               ColumnIndex="2"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="3"
+                               Service="BankaService"
+                               Value="@Service.DataSource.BankaAdi"
+                               ValueChanged="(()=> { Service.DataSource.BankaSubeId = default;
+                                                     Service.DataSource.BankaSubeAdi = null; })">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      BankaSubeService.BeforeShowPopupListPage(
+                                           Service.DataSource.BankaId,
+                                           Service.DataSource.BankaSubeId); }"
+                               Caption="@L["BankBranch"]"
+                               ColumnIndex="6"
+                               Enabled="Service.DataSource.BankaId != Guid.Empty"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="3"
+                               Service="BankaSubeService"
+                               @bind-Value="@Service.DataSource.BankaSubeAdi">
+                </DevButtonEdit>
+                <DevTextEdit Caption="@L["AccountNumber"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterAccountNumber"]"
+                             RowIndex="4"
+                             @bind-Value="@Service.DataSource.HesapNo">
+                </DevTextEdit>
+                <DevIbanNoEdit Caption="@L["IbanNo"]"
+                               ColumnIndex="6"
+                               ColumnSpan="2"
+                               NullText="@L["EnterIbanNo"]"
+                               RowIndex="4"
+                               @bind-Value="@Service.DataSource.IbanNo">
+                </DevIbanNoEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      OzelKodService.BeforeShowPopupListPage(
+                                      OzelKodTuru.OzelKod1, KartTuru.BankaHesap,
+                                      Service.DataSource.OzelKod1Id); }"
+                               Caption="@L["CustomCode1"]"
+                               ColumnIndex="2"
+                               DeleteButtonKeyDownInvokeFunction="() => {
+                                      OzelKodService.ButtonEditDeleteKeyDown(
+                                      Service.DataSource,
+                                      nameof(Service.DataSource.OzelKod1Adi)); }"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="5"
+                               Service="OzelKodService"
+                               @bind-Value="@Service.DataSource.OzelKod1Adi">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      OzelKodService.BeforeShowPopupListPage(
+                                      OzelKodTuru.OzelKod2, KartTuru.BankaHesap,
+                                      Service.DataSource.OzelKod2Id); }"
+                               Caption="@L["CustomCode2"]"
+                               ColumnIndex="6"
+                               DeleteButtonKeyDownInvokeFunction="() => {
+                                      OzelKodService.ButtonEditDeleteKeyDown(
+                                      Service.DataSource,
+                                      nameof(Service.DataSource.OzelKod2Adi)); }"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="5"
+                               Service="OzelKodService"
+                               @bind-Value="@Service.DataSource.OzelKod2Adi">
+                </DevButtonEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="6"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="6"
+                             RowSpan="2"
+                             @bind-Value="@Service.DataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </EditPageContent>
+</DevPopupEditPageLayout>
+
+@if (BankaService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["BankCards"]"
+                        Closed="BankaService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  BankaService.SelectEntity(Service.DataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <BankaListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (BankaSubeService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaSubeService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["BankBranchCards"]"
+                        Closed="BankaSubeService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  BankaSubeService.SelectEntity(Service.DataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <BankaSubeListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (OzelKodService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="OzelKodService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["CustomCodeCards"]"
+                        Closed="OzelKodService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  OzelKodService.SelectEntity(Service.DataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <OzelKodListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}

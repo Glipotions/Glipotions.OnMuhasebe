@@ -1,0 +1,124 @@
+﻿@page "/cashcards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Kasa.Default)]*@
+@inherits BaseListPage<SelectKasaDto, ListKasaDto, KasaListParameterDto, CreateKasaDto, UpdateKasaDto, KasaCodeParameterDto>
+
+@inject KasaAppService CrudService
+@inject KasaService Service
+@inject OdemeBelgesiHareketService OdemeBelgesiHareketService
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CashCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async () => await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async () => await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async () => await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    ReserveButtonBeginGroup="true"
+                                    ReserveButtonClick="() => OdemeBelgesiHareketService.BeforeShowPopupListPage(OdemeTuru.Nakit, Service.SelectedItem.Id)"
+                                    ReserveButtonEnabled="Service.ListDataSource.Count > 0"
+                                    ReserveButtonText="@L["CardTransactions"]"
+                                    ReserveButtonTooltip="@L["ShowTransactionsForThisCard"]"
+                                    ReserveButtonVisible="true"
+                                    UpdateButtonClick="async () => await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListKasaDto.Kod)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListKasaDto.Ad)"
+                                  Width="250px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Debit"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListKasaDto.Borc)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Credit"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListKasaDto.Alacak)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["DebitBalance"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListKasaDto.BorcBakiye)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["CreditBalance"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListKasaDto.AlacakBakiye)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListKasaDto.OzelKod1Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListKasaDto.OzelKod2Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListKasaDto.Aciklama)"
+                                  Width="*"/>
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <KasaEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@if (OdemeBelgesiHareketService.IsPopupListPage)
+{
+    Service.SelectFirstDataRow = false;
+    
+    <DevPopupListPageLayout DataGridService="Service"
+                            CancelButtonText="@L["Close"]"
+                            Caption="@($"{L["CashAccountCardTransactions"]} ( {Service.SelectedItem.Kod} / {Service.SelectedItem.Ad} )")"
+                            Closed="OdemeBelgesiHareketService.HideListPage"
+                            SelectButtonVisible="false"
+                            Visible="true"
+                            Width="1100px">
+        <ListPageContent>
+            <KasaHareketListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Kasa.Default;
+        //CreatePolicy = OnMuhasebePermissions.Kasa.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Kasa.Update;
+        //DeletePolicy = OnMuhasebePermissions.Kasa.Delete;
+        //ReservePolicy = OnMuhasebePermissions.Kasa.Transaction;
+    }
+
+}

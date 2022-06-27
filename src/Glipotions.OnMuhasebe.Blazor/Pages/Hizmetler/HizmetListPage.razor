@@ -1,0 +1,131 @@
+﻿@page "/servicecards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Hizmet.Default)]*@
+@inherits BaseListPage<SelectHizmetDto, ListHizmetDto, HizmetListParameterDto, CreateHizmetDto, UpdateHizmetDto, CodeParameterDto>
+
+@inject HizmetAppService CrudService
+@inject HizmetService Service
+@inject HizmetHareketService HizmetHareketService
+@inject BirimService BirimService
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["ServiceCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async () => await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async () => await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async () => await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    ReserveButtonBeginGroup="true"
+                                    ReserveButtonClick="() => HizmetHareketService.BeforeShowPopupListPage(FaturaHareketTuru.Hizmet, Service.SelectedItem.Id)"
+                                    ReserveButtonEnabled="Service.ListDataSource.Count > 0"
+                                    ReserveButtonText="@L["CardTransactions"]"
+                                    ReserveButtonTooltip="@L["ShowTransactionsForThisCard"]"
+                                    ReserveButtonVisible="true"
+                                    UpdateButtonClick="async () => await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListHizmetDto.Kod)"
+                                  Width="150px"
+                                  FixedStyle="DataGridFixedStyle.Left"/>
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListHizmetDto.Ad)"
+                                  Width="250px"
+                                  FixedStyle="DataGridFixedStyle.Left"/>
+
+                <DxDataGridColumn Caption="@L["UnitName"]"
+                                  Field="@nameof(ListHizmetDto.BirimAdi)"
+                                  Width="165px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["UnitPrice"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListHizmetDto.BirimFiyat)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["ValueAddedTaxRate"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListHizmetDto.KdvOrani)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Entered"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListHizmetDto.Giren)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Out"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListHizmetDto.Cikan)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListHizmetDto.OzelKod1Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListHizmetDto.OzelKod2Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListHizmetDto.Aciklama)"
+                                  Width="*"/>
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <HizmetEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@if (HizmetHareketService.IsPopupListPage)
+{
+    Service.SelectFirstDataRow = false;
+    
+    <DevPopupListPageLayout DataGridService="Service"
+                            CancelButtonText="@L["Close"]"
+                            Caption="@($"{L["ServiceCardTransactions"]} ( {Service.SelectedItem.Kod} / {Service.SelectedItem.Ad} )")"
+                            Closed="HizmetHareketService.HideListPage"
+                            SelectButtonVisible="false"
+                            Visible="true"
+                            Width="1100px">
+        <ListPageContent>
+            <HizmetHareketListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Hizmet.Default;
+        //CreatePolicy = OnMuhasebePermissions.Hizmet.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Hizmet.Update;
+        //DeletePolicy = OnMuhasebePermissions.Hizmet.Delete;
+        //ReservePolicy = OnMuhasebePermissions.Hizmet.Transaction;
+    }
+
+}

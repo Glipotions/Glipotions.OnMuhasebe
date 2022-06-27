@@ -1,0 +1,48 @@
+﻿@inherits BaseEditPage
+@inject DonemService Service
+
+<DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
+                        Caption="@L["PeriodCard"]"
+                        EditPageService="Service"
+                        Height="270px"
+                        ListPageService="Service"
+                        OnSubmit="OnSubmit"
+                        SubmitButtonText="@L["Save"]"
+                        Width="670px">
+    <EditPageContent>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("80","3","170","50","80","3","170")"
+                       RowCount="4">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["Code"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterCode"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.DataSource.Kod">
+                </DevTextEdit>
+                <DevCheckEdit ColumnIndex="6"
+                              FalseCaption="@L["Passive"]"
+                              RowIndex="0"
+                              TrueCaption="@L["Active"]"
+                              @bind-Value="@Service.DataSource.Durum">
+                </DevCheckEdit>
+                <DevTextEdit Caption="@L["Name"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             IsFocus="true"
+                             NullText="@L["EnterName"]"
+                             RowIndex="1"
+                             @bind-Value="@Service.DataSource.Ad">
+                </DevTextEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="2"
+                             RowSpan="2"
+                             @bind-Value="@Service.DataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </EditPageContent>
+</DevPopupEditPageLayout>

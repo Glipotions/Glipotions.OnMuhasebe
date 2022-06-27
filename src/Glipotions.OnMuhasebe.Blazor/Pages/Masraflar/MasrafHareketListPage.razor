@@ -1,0 +1,81 @@
+﻿@inherits BaseListPage<SelectFaturaHareketDto, ListMasrafHareketDto, MasrafHareketListParameterDto, FaturaHareketDto, FaturaHareketDto, FaturaNoParameterDto>
+
+@inject MasrafHareketAppService CrudService
+@inject MasrafHareketService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["ExpenseCardTransactions"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     HorizontalScrollBarMode="ScrollBarMode.Visible">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonVisible="false"
+                                    FilterButtonVisible="true"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonVisible="false"
+                                    UpdateButtonVisible="false">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListMasrafHareketDto.Tarih)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="80px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentNumber"]"
+                                  Field="@nameof(ListMasrafHareketDto.BelgeNo)"
+                                  Width="160px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentType"]"
+                                  Field="@nameof(ListMasrafHareketDto.BelgeTuru)"
+                                  Width="100px"/>
+
+                <DxDataGridColumn Caption="@L["TransactionType"]"
+                                  Field="@nameof(ListMasrafHareketDto.HareketTuruAdi)"
+                                  Width="100px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Quantity"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafHareketDto.Miktar)"
+                                          Width="100px"/>
+
+                <DxDataGridColumn Caption="@L["Unit"]"
+                                  Field="@nameof(ListMasrafHareketDto.Birim)"
+                                  Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["UnitPrice"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafHareketDto.BirimFiyat)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafHareketDto.Tutar)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListMasrafHareketDto.Aciklama)"
+                                  Width="300px"/>
+            </Columns>
+        </DevDataGrid>
+    </ListPageContext>
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Service.ToolbarCheckBoxVisible = false;
+        BaseCrudService = CrudService;
+        BaseService = Service;
+    }
+
+}

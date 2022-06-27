@@ -90,6 +90,9 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     /// 
     /// eğer ilk kez renderlanıyorsa ilk satırı seçer.
     /// 
+    /// PopupListPageFocusedRowId != Guid.Empty ise ilk satırı seçmemesini sağlar ve
+    ///     seçili entity işaretlenir
+    /// 
     /// ilk satır seçilmişse datasource un ilk itemi seçilir ve boş değilse ve 
     ///     checkbox kolon'u gösterilmiyorsa o zaman seçilen itemi işaretle.
     ///     
@@ -123,20 +126,29 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     {
         ((DxDataGrid<TDataGridItem>)DataGrid).SetDataRowSelected(item, true);
     }
-
+    /// <ÖZET>
+    /// SelectFirstDataRow edit page olduğu için seçili row gelmesi için bu özellik false işaretlenir.
+    /// EditPageVisible sayfanın görünürlüğünü aktif edip HasChanged ile ekrana yansıtılır.
+    /// </summary>
     public void ShowEditPage()
     {
         SelectFirstDataRow = false;
         EditPageVisible = true;
         HasChanged();
     }
-
+    /// <ÖZET>
+    /// Sayfanın görünürlüğünü false yapıp HasChanged ile Ekrana Yansıtır.
     public void HideEditPage()
     {
         EditPageVisible = false;
         HasChanged();
     }
-
+    /// <ÖZET>
+    /// Popup list page'in görünümünü false yapar
+    /// Checkboxların görünümünü false yapar
+    /// Seçili itemleri boşaltıyor
+    /// ((DxTextBox)ActiveEditComponent)?.FocusAsync() ile Textbox'a focuslanmayı sağlar.
+    /// (4/5) 5. Video dk 44.
     public void HideListPage()
     {
         IsPopupListPage = false;
@@ -144,9 +156,11 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
         SelectedItems = null;
         ((DxTextBox)ActiveEditComponent)?.FocusAsync();
     }
-
+    /// <ÖZET>
+    /// (3/5) son videoda anlatıldı.
     public virtual void SelectEntity(IEntityDto targetEntity) { }
-
+    /// <ÖZET>
+    /// (3/5) son videoda anlatıldı.
     public virtual void BeforeShowPopupListPage(params object[] prm)
     {
         ToolbarCheckBoxVisible = false;
@@ -155,7 +169,8 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
         if (prm.Length > 0)
             PopupListPageFocusedRowId = prm[0] == null ? Guid.Empty : (Guid)prm[0];
     }
-
+    /// <ÖZET>
+    /// (3/5) son videoda anlatıldı.
     public virtual void ButtonEditDeleteKeyDown(IEntityDto entity, string fieldName) { }
 
     public void SetDataRowSelected(bool first)

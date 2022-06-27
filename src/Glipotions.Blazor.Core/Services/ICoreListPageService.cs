@@ -38,10 +38,17 @@ public interface ICoreListPageService
     public bool IsGrantedDelete { get; set; }
     public bool IsGrantedPrint { get; set; }
     public bool IsGrantedReserve { get; set; }
-
+    /// <ÖZET>
+    /// Edit veya insert işlemi yaparken sayfayı göstermeye yarar.
     void ShowEditPage();
+    /// <ÖZET>
+    /// sayfayı gizlemeye yarar.
     void HideEditPage();
     void HideListPage();
+    /// <ÖZET>
+    /// (3/5) 37. Videoda anlatıldı not alınmadan izlendi
     void SelectEntity(IEntityDto targetEntity);
+    /// <ÖZET>
+    /// (3/5) 37. Videoda anlatıldı not alınmadan izlendi
     void BeforeShowPopupListPage(params object[] prm);
 }

@@ -1,0 +1,80 @@
+﻿@page "/bankbranches"
+
+@*@attribute [Authorize(OnMuhasebePermissions.BankaSube.Default)]*@
+@inherits BaseListPage<SelectBankaSubeDto, ListBankaSubeDto, BankaSubeListParameterDto,
+                       CreateBankaSubeDto, UpdateBankaSubeDto, BankaSubeCodeParameterDto>
+
+@inject BankaSubeAppService CrudService
+@inject BankaSubeService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["BankBranchCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListBankaSubeDto.Kod)"
+                                  Width="150px" />
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListBankaSubeDto.Ad)"
+                                  Width="250px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListBankaSubeDto.OzelKod1Adi)"
+                                  Width="175px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListBankaSubeDto.OzelKod2Adi)"
+                                  Width="175px" />
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListBankaSubeDto.Aciklama)"
+                                  Width="*" />
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <BankaSubeEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.BankaSube.Default;
+        //CreatePolicy = OnMuhasebePermissions.BankaSube.Create;
+        //UpdatePolicy = OnMuhasebePermissions.BankaSube.Update;
+        //DeletePolicy = OnMuhasebePermissions.BankaSube.Delete;
+    }
+
+}

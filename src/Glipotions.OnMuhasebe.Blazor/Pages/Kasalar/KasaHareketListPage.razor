@@ -1,0 +1,80 @@
+﻿@inherits BaseListPage<SelectMakbuzHareketDto, ListOdemeBelgesiHareketDto, MakbuzHareketListParameterDto, MakbuzHareketDto, MakbuzHareketDto, MakbuzNoParameterDto>
+
+@inject KasaHareketAppService CrudService
+@inject OdemeBelgesiHareketService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CashAccountCardTransactions"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     HorizontalScrollBarMode="ScrollBarMode.Visible">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonVisible="false"
+                                    FilterButtonVisible="true"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonVisible="false"
+                                    UpdateButtonVisible="false">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["ReceiptType"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.MakbuzTuruAdi)"
+                                  Width="160px"/>
+
+                <DxDataGridColumn Caption="@L["ReceiptNo"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.MakbuzNo)"
+                                  TextAlignment="DataGridTextAlign.Center"
+                                  Width="140px"/>
+
+                <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListOdemeBelgesiHareketDto.Tarih)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="80px"/>
+                <DxDataGridColumn Caption="@L["PaymentType"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.OdemeTuruAdi)"
+                                  Width="120px"/>
+
+                <DxDataGridColumn Caption="@L["TrackingNo"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.TakipNo)"
+                                  TextAlignment="DataGridTextAlign.Center"
+                                  Width="160px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentNumber"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.BelgeNo)"
+                                  Width="120px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListOdemeBelgesiHareketDto.Tutar)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentState"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.BelgeDurumuAdi)"
+                                  Width="120px"/>
+                
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListOdemeBelgesiHareketDto.Aciklama)"
+                                  Width="300px"/>
+            </Columns>
+        </DevDataGrid>
+    </ListPageContext>
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Service.ToolbarCheckBoxVisible = false;
+        BaseCrudService = CrudService;
+        BaseService = Service;
+    }
+
+}

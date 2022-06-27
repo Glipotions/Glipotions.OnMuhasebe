@@ -1,0 +1,72 @@
+﻿@page "/periodcards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Donem.Default)]*@
+@inherits BaseListPage<SelectDonemDto, ListDonemDto, DonemListParameterDto,
+                       CreateDonemDto, UpdateDonemDto, CodeParameterDto>
+
+@inject DonemAppService CrudService
+@inject DonemService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["PeriodCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListDonemDto.Kod)"
+                                  Width="150px" />
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListDonemDto.Ad)"
+                                  Width="250px" />
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListDonemDto.Aciklama)"
+                                  Width="*" />
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <DonemEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Donem.Default;
+        //CreatePolicy = OnMuhasebePermissions.Donem.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Donem.Update;
+        //DeletePolicy = OnMuhasebePermissions.Donem.Delete;
+    }
+
+}

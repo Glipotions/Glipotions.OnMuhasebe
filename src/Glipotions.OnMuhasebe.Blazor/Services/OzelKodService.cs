@@ -30,7 +30,11 @@ public class OzelKodService : BaseService<ListOzelKodDto, SelectOzelKodDto>,
                 break;
         }
     }
-
+    /// <ÖZET>
+    /// (3/5) 37. Videoda anlatıldı not alınmadan izlendi
+    /// IsPopupListPage = true yapılır ve özel kod sayfasının açılmasını sağlar.
+    ///     if (OzelKodService.IsPopupListPage) =>> Editpagelerdeki bu komuttan dolayı açılır.
+    /// Atamalar yapıldıktan sonra PopupListPageFocusedRowId ile sayfa açılırken seçili özel kod açılır.
     public override void BeforeShowPopupListPage(params object[] prm)
     {
         ToolbarCheckBoxVisible = false;
@@ -40,7 +44,12 @@ public class OzelKodService : BaseService<ListOzelKodDto, SelectOzelKodDto>,
         KartTuru = (KartTuru)prm[1];
         PopupListPageFocusedRowId = prm[2] == null ? Guid.Empty : (Guid)prm[2];
     }
-
+    /// <ÖZET>
+    /// Elimizde OzelKod değişkeninde entity olduğundan emin olduğumuz için ozelKod değişkenine atadık
+    /// fieldName= ButtonEdit içeriğine ne geliyorsa o gelir örn: OzelKod1Id, OzelKod1Adi
+    /// hangi özelKod ise case ile içine girer ve OzelKodId ve OzelKodAdi içeriği boşaltılır.
+    /// <param name="entity"></param>
+    /// <param name="fieldName"></param>
     public override void ButtonEditDeleteKeyDown(IEntityDto entity, string fieldName)
     {
         var ozelKod = (IOzelKod)entity;

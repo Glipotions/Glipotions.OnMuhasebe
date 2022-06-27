@@ -32,12 +32,14 @@ public class Functions
                 DisplayName = localizer[$"Enum:{ typeof(TEnum).Name }:{ t.To<byte>() }"]
             }).ToList();
     }
-
+    /// <ÖZET>
+    /// Satır Yüksekliğini Ayarlayan Fonksiyon
     public static string[] RowHeights(params string[] rowHeights)
     {
         return rowHeights;
     }
-
+    /// <ÖZET>
+    /// Kolon Genişliğini Ayarlayan Fonksiyon
     public static string[] ColumnWidths(params string[] columnWidths)
     {
         return columnWidths;

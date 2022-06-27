@@ -47,8 +47,41 @@
 
   <ItemGroup>
     <None Include="Pages\Abp\UiMessageAlert.razor" />
+    <None Include="Pages\BankaHesaplar\BankaHesapEditPage.razor" />
+    <None Include="Pages\BankaHesaplar\BankaHesapHareketListPage.razor" />
+    <None Include="Pages\BankaHesaplar\BankaHesapListPage.razor" />
+    <None Include="Pages\Bankalar\BankaEditPage.razor" />
+    <None Include="Pages\Bankalar\BankaListPage.razor" />
+    <None Include="Pages\BankaSubeler\BankaSubeEditPage.razor" />
+    <None Include="Pages\BankaSubeler\BankaSubeListPage.razor" />
     <None Include="Pages\Birimler\BirimEditPage.razor" />
     <None Include="Pages\Birimler\BirimListPage.razor" />
+    <None Include="Pages\Cariler\CariEditPage.razor" />
+    <None Include="Pages\Cariler\CariHareketListPage.razor" />
+    <None Include="Pages\Cariler\CariListPage.razor" />
+    <None Include="Pages\Depolar\DepoEditPage.razor" />
+    <None Include="Pages\Depolar\DepoHareketListPage.razor" />
+    <None Include="Pages\Depolar\DepoListPage.razor" />
+    <None Include="Pages\Donemler\DonemEditPage.razor" />
+    <None Include="Pages\Donemler\DonemListPage.razor" />
+    <None Include="Pages\Hizmetler\HizmetEditPage.razor" />
+    <None Include="Pages\Hizmetler\HizmetHareketListPage.razor" />
+    <None Include="Pages\Hizmetler\HizmetListPage.razor" />
+    <None Include="Pages\Kasalar\KasaEditPage.razor" />
+    <None Include="Pages\Kasalar\KasaHareketListPage.razor" />
+    <None Include="Pages\Kasalar\KasaListPage.razor" />
+    <None Include="Pages\Masraflar\MasrafEditPage.razor" />
+    <None Include="Pages\Masraflar\MasrafHareketListPage.razor" />
+    <None Include="Pages\Masraflar\MasrafListPage.razor" />
+    <None Include="Pages\OzelKodlar\OzelKodEditPage.razor" />
+    <None Include="Pages\OzelKodlar\OzelKodListPage.razor" />
+    <None Include="Pages\Parametreler\FirmaParametreEditPage.razor" />
+    <None Include="Pages\Parametreler\SubeDonemSecimEditPage.razor" />
+    <None Include="Pages\Stoklar\StokEditPage.razor" />
+    <None Include="Pages\Stoklar\StokHareketListPage.razor" />
+    <None Include="Pages\Stoklar\StokListPage.razor" />
+    <None Include="Pages\Subeler\SubeEditPage.razor" />
+    <None Include="Pages\Subeler\SubeListPage.razor" />
   </ItemGroup>
 
   <ItemGroup>

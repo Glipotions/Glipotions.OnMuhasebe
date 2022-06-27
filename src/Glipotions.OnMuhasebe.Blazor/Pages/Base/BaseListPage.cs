@@ -207,7 +207,6 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     ///     componentlerin CommonServiceden HasChanged kullananların değiştirilmesini sağlar.
     /// 
     /// ListPage çalıştırıldığı anda Burası çalışır ilk çalışan yerdir.
-
     protected override async Task OnParametersSetAsync()
     {
         //if (DefaultPolicy != null) BaseService.IsGrantedDefault =
@@ -287,7 +286,14 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
 
          }, L["DeleteConfirmMessageTitle"]);
     }
-
+    /// <ÖZET>
+    /// (3/5) 36. Video 6.DK
+    /// Insert işlemi yapmadan hemen önce yapılacak işlemler.
+    /// DataSource => TGetOutputDto yani ListDto
+    /// kod ve durum doldurulur
+    /// kod ve durum eğer boş değilse içleri boş olan DataSource.Kod ve DataSource.Durum doldurulur.
+    /// 
+    /// <returns></returns>
     protected virtual async Task BeforeInsertAsync()
     {
         BaseService.DataSource = new TGetOutputDto();
@@ -304,14 +310,18 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
 
         BaseService.ShowEditPage();
     }
-
+    /// <ÖZET>
+    /// (3/5) 36. Video 16.DK
+    /// ListDataSource.Count eğer 0 a eşitse hiçbir işlem yapmamayı sağlar.
+    /// </summary>
+    /// <returns></returns>
     protected virtual async Task BeforeUpdateAsync()
     {
-        if (!BaseService.IsGrantedUpdate)
-        {
-            BaseService.SelectFirstDataRow = false;
-            return;
-        }
+        //if (!BaseService.IsGrantedUpdate)
+        //{
+        //    BaseService.SelectFirstDataRow = false;
+        //    return;
+        //}
 
         if (BaseService.ListDataSource.Count == 0) return;
 
@@ -320,44 +330,63 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
         BaseService.EditPageVisible = true;
         await InvokeAsync(BaseService.HasChanged);
     }
+    /// <ÖZET>
+    /// Hem Update Hem Create Islemlerinin Yapıldığı Fonksiyon
+    /// 
+    /// CREATE
+    /// BaseService.DataSource.Id == Guid.Empty ise CREATE işlemi yapılıyor demektir.
+    /// Yeni bir createInput oluşturulur. SelectEntityDto yu CreateEntityDto ya Mapleme işlemi yapılır.
+    /// CreateAsync result'a tanımlanır.
+    /// 
+    /// UPDATE
+    /// BaseService.DataSource.Id == Guid.Empty değil ise UPDATE işlemi yapılıyor demektir.
+    /// Yeni bir updateInput oluşturulur. SelectEntityDto yu CreateEntityDto ya Mapleme işlemi yapılır.
+    /// UpdateAsync result'a tanımlanır.
+    /// 
+    /// Hangi rowundaki entity update ediliyorsa onun indexini bulmak için savedEntityIndex yapıldı
+    /// HideEditPage ile sayfayı gizler.
+    /// Eğer Create işlemiyse Datasource nin id si oluşturulur. update ise zaten vardır.
+    /// savedEntityIndex > -1 ise yani update işlemi ise seçili satırı bulup onu işaretleme işlemi yapılır.
+    ///     else içine girerse create işlemidir ve id ye göre geriye entity döndürür.
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async Task OnSubmit()
+    {
+        TGetOutputDto result;
 
-    //protected virtual async Task OnSubmit()
-    //{
-    //    TGetOutputDto result;
+        if (BaseService.DataSource.Id == Guid.Empty)
+        {
+            var createInput = ObjectMapper.Map<TGetOutputDto, TCreateInput>(
+                BaseService.DataSource);
 
-    //    if (BaseService.DataSource.Id == Guid.Empty)
-    //    {
-    //        var createInput = ObjectMapper.Map<TGetOutputDto, TCreateInput>(
-    //            BaseService.DataSource);
+            result = await CreateAsync(createInput);
+        }
+        else
+        {
+            var updateInput = ObjectMapper.Map<TGetOutputDto, TUpdateInput>(
+                BaseService.DataSource);
 
-    //        result = await CreateAsync(createInput);
-    //    }
-    //    else
-    //    {
-    //        var updateInput = ObjectMapper.Map<TGetOutputDto, TUpdateInput>(
-    //            BaseService.DataSource);
+            result = await UpdateAsync(BaseService.DataSource.Id, updateInput);
+        }
 
-    //        result = await UpdateAsync(BaseService.DataSource.Id, updateInput);
-    //    }
+        if (result == null) return;
 
-    //    if (result == null) return;
+        var savedEntityIndex = BaseService.ListDataSource.FindIndex(
+            x => x.Id == BaseService.DataSource.Id);
 
-    //    var savedEntityIndex = BaseService.ListDataSource.FindIndex(
-    //        x => x.Id == BaseService.DataSource.Id);
+        await GetListDataSourceAsync();
+        BaseService.HideEditPage();
 
-    //    await GetListDataSourceAsync();
-    //    BaseService.HideEditPage();
+        if (BaseService.DataSource.Id == Guid.Empty)
+            BaseService.DataSource.Id = result.Id;
 
-    //    if (BaseService.DataSource.Id == Guid.Empty)
-    //        BaseService.DataSource.Id = result.Id;
-
-    //    if (savedEntityIndex > -1)
-    //        BaseService.SelectedItem = BaseService.ListDataSource.
-    //            SetSelectedItem(savedEntityIndex);
-    //    else
-    //        BaseService.SelectedItem = BaseService.ListDataSource.
-    //            GetEntityById(BaseService.DataSource.Id);
-    //}
+        if (savedEntityIndex > -1)
+            BaseService.SelectedItem = BaseService.ListDataSource.
+                SetSelectedItem(savedEntityIndex);
+        else
+            BaseService.SelectedItem = BaseService.ListDataSource.
+                GetEntityById(BaseService.DataSource.Id);
+    }
 
     //protected virtual async Task PrintAsync()
     //{

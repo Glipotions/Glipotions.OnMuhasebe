@@ -41,6 +41,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
              .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaDto, Banka>();
         CreateMap<UpdateBankaDto, Banka>();
+        CreateMap<SelectBankaDto, CreateBankaDto>();
+        CreateMap<SelectBankaDto, UpdateBankaDto>();
 
         // BankaSube
         CreateMap<BankaSube, SelectBankaSubeDto>()
@@ -53,6 +55,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaSubeDto, BankaSube>();
         CreateMap<UpdateBankaSubeDto, BankaSube>();
+        CreateMap<SelectBankaSubeDto, CreateBankaSubeDto>();
+        CreateMap<SelectBankaSubeDto, UpdateBankaSubeDto>();
 
         // BankaHesap
         CreateMap<BankaHesap, SelectBankaHesapDto>()
@@ -68,6 +72,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBankaHesapDto, BankaHesap>();
         CreateMap<UpdateBankaHesapDto, BankaHesap>();
+        CreateMap<SelectBankaHesapDto, CreateBankaHesapDto>();
+        CreateMap<SelectBankaHesapDto, UpdateBankaHesapDto>();
 
         // Birim
         CreateMap<Birim, SelectBirimDto>()
@@ -78,6 +84,9 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateBirimDto, Birim>();
         CreateMap<UpdateBirimDto, Birim>();
+        CreateMap<SelectBirimDto, CreateBirimDto>();
+        CreateMap<SelectBirimDto, UpdateBirimDto>();
+
 
         // Cari
         CreateMap<Cari, SelectCariDto>()
@@ -88,8 +97,8 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
             .ForMember(x => x.OzelKod2Adi, y => y.MapFrom(z => z.OzelKod2.Ad));
         CreateMap<CreateCariDto, Cari>();
         CreateMap<UpdateCariDto, Cari>();
-        //CreateMap<SelectCariDto, CreateCariDto>();
-        //CreateMap<SelectCariDto, UpdateCariDto>();
+        CreateMap<SelectCariDto, CreateCariDto>();
+        CreateMap<SelectCariDto, UpdateCariDto>();
 
         // Depo
         CreateMap<Depo, SelectDepoDto>()
@@ -104,12 +113,16 @@ public class OnMuhasebeApplicationAutoMapperProfile : Profile
                 .Where(x => x.Fatura.FaturaTuru == FaturaTuru.Satis).Sum(x => x.Miktar)));
         CreateMap<CreateDepoDto, Depo>();
         CreateMap<UpdateDepoDto, Depo>();
+        CreateMap<SelectDepoDto, CreateDepoDto>();
+        CreateMap<SelectDepoDto, UpdateDepoDto>();
 
         // Donem
         CreateMap<Donem, SelectDonemDto>();
         CreateMap<Donem, ListDonemDto>();
         CreateMap<CreateDonemDto, Donem>();
         CreateMap<UpdateDonemDto, Donem>();
+        CreateMap<SelectDonemDto, CreateDonemDto>();
+        CreateMap<SelectDonemDto, UpdateDonemDto>();
 
         // Fatura
 

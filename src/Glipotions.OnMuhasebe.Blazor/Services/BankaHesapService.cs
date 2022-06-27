@@ -18,6 +18,8 @@ public class BankaHesapService : BaseService<ListBankaHesapDto, SelectBankaHesap
 {
     public BankaHesapTuru? HesapTuru { get; set; }
 
+    /// <ÖZET>
+    /// datasource hesap türünü Combobox hesap türüne eşitler
     public void BankaHesapTuruSelectedItemChanged(ComboBoxEnumItem<BankaHesapTuru> 
         selectedItem)
     {

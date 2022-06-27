@@ -1,0 +1,72 @@
+﻿@page "/customcodes"
+
+@*@attribute [Authorize(OnMuhasebePermissions.OzelKod.Default)]*@
+@inherits BaseListPage<SelectOzelKodDto, ListOzelKodDto, OzelKodListParameterDto,
+                       CreateOzelKodDto, UpdateOzelKodDto, OzelKodCodeParameterDto>
+
+@inject OzelKodAppService CrudService
+@inject OzelKodService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CustomCodeCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListOzelKodDto.Kod)"
+                                  Width="150px" />
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListOzelKodDto.Ad)"
+                                  Width="250px" />
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListOzelKodDto.Aciklama)"
+                                  Width="*" />
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <OzelKodEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.OzelKod.Default;
+        //CreatePolicy = OnMuhasebePermissions.OzelKod.Create;
+        //UpdatePolicy = OnMuhasebePermissions.OzelKod.Update;
+        //DeletePolicy = OnMuhasebePermissions.OzelKod.Delete;
+    }
+
+}

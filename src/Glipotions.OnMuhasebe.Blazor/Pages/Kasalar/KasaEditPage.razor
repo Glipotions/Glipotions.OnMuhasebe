@@ -1,0 +1,97 @@
+﻿@inherits BaseEditPage
+
+@inject KasaService Service
+@inject OzelKodService OzelKodService
+
+<DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
+                        EditPageService="Service"
+                        Caption="@L["CashCard"]"
+                        Height="300px"
+                        ListPageService="Service"
+                        OnSubmit="OnSubmit"
+                        SubmitButtonText="@L["Save"]"
+                        Width="670px">
+    <EditPageContent>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("80","3","170","50","80","3","170")"
+                       RowCount="4">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["Code"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterCode"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.DataSource.Kod">
+                </DevTextEdit>
+                <DevCheckEdit ColumnIndex="6"
+                              FalseCaption="@L["Passive"]"
+                              RowIndex="0"
+                              TrueCaption="@L["Active"]"
+                              @bind-Value="@Service.DataSource.Durum">
+                </DevCheckEdit>
+                <DevTextEdit Caption="@L["Name"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             IsFocus="true"
+                             NullText="@L["EnterName"]"
+                             RowIndex="1"
+                             @bind-Value="@Service.DataSource.Ad">
+                </DevTextEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      OzelKodService.BeforeShowPopupListPage(
+                                      OzelKodTuru.OzelKod1, KartTuru.Kasa,
+                                      Service.DataSource.OzelKod1Id); }"
+                               Caption="@L["CustomCode1"]"
+                               ColumnIndex="2"
+                               DeleteButtonKeyDownInvokeFunction="() => {
+                                      OzelKodService.ButtonEditDeleteKeyDown(
+                                      Service.DataSource,
+                                      nameof(Service.DataSource.OzelKod1Adi)); }"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="2"
+                               Service="OzelKodService"
+                               @bind-Value="@Service.DataSource.OzelKod1Adi">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      OzelKodService.BeforeShowPopupListPage(
+                                      OzelKodTuru.OzelKod2, KartTuru.Kasa,
+                                      Service.DataSource.OzelKod2Id); }"
+                               Caption="@L["CustomCode2"]"
+                               ColumnIndex="6"
+                               DeleteButtonKeyDownInvokeFunction="() => {
+                                      OzelKodService.ButtonEditDeleteKeyDown(
+                                      Service.DataSource,
+                                      nameof(Service.DataSource.OzelKod2Adi)); }"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="2"
+                               Service="OzelKodService"
+                               @bind-Value="@Service.DataSource.OzelKod2Adi">
+                </DevButtonEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="3"
+                             RowSpan="2"
+                             @bind-Value="@Service.DataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </EditPageContent>
+</DevPopupEditPageLayout>
+
+@if (OzelKodService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="OzelKodService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["CustomCodeCards"]"
+                        Closed="OzelKodService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  OzelKodService.SelectEntity(Service.DataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <OzelKodListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}

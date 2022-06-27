@@ -1,0 +1,131 @@
+﻿@page "/expensecards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Masraf.Default)]*@
+@inherits BaseListPage<SelectMasrafDto, ListMasrafDto, MasrafListParameterDto, CreateMasrafDto, UpdateMasrafDto, CodeParameterDto>
+
+@inject MasrafAppService CrudService
+@inject MasrafService Service
+@inject MasrafHareketService MasrafHareketService
+@inject BirimService BirimService
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["ExpenseCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async () => await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async () => await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async () => await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    ReserveButtonBeginGroup="true"
+                                    ReserveButtonClick="() => MasrafHareketService.BeforeShowPopupListPage(FaturaHareketTuru.Masraf, Service.SelectedItem.Id)"
+                                    ReserveButtonEnabled="Service.ListDataSource.Count > 0"
+                                    ReserveButtonText="@L["CardTransactions"]"
+                                    ReserveButtonTooltip="@L["ShowTransactionsForThisCard"]"
+                                    ReserveButtonVisible="true"
+                                    UpdateButtonClick="async () => await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["Code"]"
+                                  Field="@nameof(ListMasrafDto.Kod)"
+                                  Width="150px"
+                                  FixedStyle="DataGridFixedStyle.Left"/>
+
+                <DxDataGridColumn Caption="@L["Name"]"
+                                  Field="@nameof(ListMasrafDto.Ad)"
+                                  Width="250px"
+                                  FixedStyle="DataGridFixedStyle.Left"/>
+
+                <DxDataGridColumn Caption="@L["UnitName"]"
+                                  Field="@nameof(ListMasrafDto.BirimAdi)"
+                                  Width="165px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["UnitPrice"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafDto.BirimFiyat)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["ValueAddedTaxRate"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafDto.KdvOrani)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Entered"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafDto.Giren)"
+                                          Width="110px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Out"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMasrafDto.Cikan)"
+                                          Width="110px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListMasrafDto.OzelKod1Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListMasrafDto.OzelKod2Adi)"
+                                  Width="175px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListMasrafDto.Aciklama)"
+                                  Width="*"/>
+            </Columns>
+
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <MasrafEditPage OnSubmit="OnSubmit"/>
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@if (MasrafHareketService.IsPopupListPage)
+{
+    Service.SelectFirstDataRow = false;
+    
+    <DevPopupListPageLayout DataGridService="Service"
+                            CancelButtonText="@L["Close"]"
+                            Caption="@($"{L["ExpenseCardTransactions"]} ( {Service.SelectedItem.Kod} / {Service.SelectedItem.Ad} )")"
+                            Closed="MasrafHareketService.HideListPage"
+                            SelectButtonVisible="false"
+                            Visible="true"
+                            Width="1100px">
+        <ListPageContent>
+            <MasrafHareketListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Masraf.Default;
+        //CreatePolicy = OnMuhasebePermissions.Masraf.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Masraf.Update;
+        //DeletePolicy = OnMuhasebePermissions.Masraf.Delete;
+        //ReservePolicy = OnMuhasebePermissions.Masraf.Transaction;
+    }
+
+}
