@@ -1,4 +1,4 @@
-﻿@*@inherits DevBaseViewer
+﻿@inherits DevBaseViewer
 @typeparam TDataGridItem
 
 <DxGridLayoutItem Column="ColumnIndex"
@@ -60,7 +60,51 @@
         </DxDataGrid>
     </Template>
 </DxGridLayoutItem>
+@*  DATAGRID COMPONENT
 
+    Caption= Label da yazılan değer.
+    ColumnIndex ve RowIndex= Konum Seçme,
+    ColumnSpan ve RowSpan= Birleştirme sayısı örn: 2 kolon birleştirilir.
+    CssClass = css te yapılan değişiklikler uygulanır. css izolasyon kullanılamıyor.
+    ResizeMode= Boyutunun tekrar değiştirilip değiştirilemeyeceğini belirten özellik.
+
+    AllowColumnDragDrop= kolonların taşınmasını sağlar.
+    AllowSort= Sıralamaya izin verilip verilmemesini belirtir.
+    ColumnResizeMode= Kolon boyutunun ayarlanıp ayarlanamayacağını belirtir.
+    Data= Tablo Verileri
+    DataNavigationMode = Veriler sayfa sayfa olarak mı tamamen mi görünsün seçenekleri: Hareket olduğu için ShowAll yapıldı.
+    HorizontalScrollBarMode= Yatayda kaydırma modu. Ekrana sığmıyorsa göster=Auto
+    MultipleSelectedDataRows= Birden fazla satır seçebilme özelliği. bind olmasının nedeni kullanıcı
+        seçtiği satırları geri yollamasıdır. Service üzerindeki SelectedItems prop'u dolar.
+
+    SelectionMode= Kaç satır seçebileceği belirtilir.
+
+    SingleSelectedDataRow=.
+
+    HeaderTemplate= Hareketler için delete, new, update vb butonları eklenir.
+
+    Columns= eğer seçim yapılma olsun isteniyorsa seçim kutucuğunu gösteren özellik eklenir.
+        
+    Group ve Total Summary işlemlerini yapan propertyler eklendi.
+
+
+    @ref = _DataGrid DxDataGrid tipinin referansıdır. Bu DxDataGrid'ı Kullanıcının dilediği gibi
+        kullanabilmesini sağlar.
+
+
+    Value= DataGrid parametresi, get geriye oluşturduğumuz _value değerini döndürür
+        set yereldeki _value değeri value değerine eşitse değişiklik yapmadan return edilir.
+        eğer farklıysa value değerini _value ye eşitler.
+
+    ValueChanged Tetiklenebilir bir Eventtir, InvokeAsync çalıştır demektir.
+        _value ile value değeri birbirine eşit olmadığında yani _value değeri değiştiğinde
+        çalıştırılacak event olmuş olur. Yani bir değişiklik olduğunda değişikliği yakalar
+        *** ÖNEMLİ ***
+
+    OnAfterRenderAsync= ilk kez render olduğunda DataGrid'e focuslanmasını sağlar.
+    
+
+*@
 @code {
 
     [Parameter] public ICoreHareketService<TDataGridItem> Service { get; set; }
@@ -120,15 +164,21 @@
     [Parameter] public bool ToolbarUpdateButtonEnabled { get; set; }
     [Parameter] public bool ToolbarUpdateButtonVisible { get; set; } = true;
 
+    /// <ÖZET>
+    /// seçilen veri satırında herhangi bir değişiklik varsa onu service.SelectedItem'e atarak
+    ///     veri güncellenir.
+    /// HasChanged ile ekrana yansıtılır.
     private void SingleSelectedDataRowChanged(TDataGridItem item)
     {
         Service.SelectedItem = item;
         Service.HasChanged();
     }
 
+    /// <ÖZET>
+    /// focuslanma fonksiyonu
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender && Service.ListDataSource.Count > 0)
             Service.SetDataRowSelected(true);
     }
-}*@
+}

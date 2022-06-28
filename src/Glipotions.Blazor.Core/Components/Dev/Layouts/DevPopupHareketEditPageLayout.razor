@@ -1,4 +1,4 @@
-﻿@*@typeparam TDataSource
+﻿@typeparam TDataSource
 
 <EditForm Model="Service.TempDataSource"
           Context="EditFormContext">
@@ -46,7 +46,26 @@
         </FooterContentTemplate>
     </DxPopup>
 </EditForm>
+@*  POPUP HAREKET EDITPAGE PROPERTIES    
+    ((4/5) 28. Video)
 
+    ApplyBackgroundShading= Popup ekrana geldiğinde arkaplanı koyulaştırır.
+    Closed = Kapatıldığında yapılan işlem
+    Closing = Kapatılırken yapılan işlem
+    CloseOnEscape = ESC tuşu ile kapatma
+    CloseOnOutsideClick = Ekranın popup olmayan kısmına basıldığında kapatılıp kapatılmaması
+    Scrollable = Kaydırma çubukları gelsin mi
+    ShowCloseButton = Kapatma butonu gösterilsin mi gösterilmesin mi
+    Showing = Popup gösterilmeye başladığı anda yapılan işlem
+    Shown = Popup Gösterildiği zaman yapılan işlem
+
+    BodyContentTemplate = popup içinde esas yapılan işlemler
+
+    FooterContentTemplate = Popup formun altında Kaydet ve İptal adında 2 Buton
+    context.CloseCallBack ile kapatmayı sağlar.
+
+    *** POPUP EDITPAGE KOPYALANDI SADECE ICoreHareketService EKLENDİ VE DATASOURCE DEĞİŞTİRİLDİ
+*@
 @code {
 
     [Parameter] public ICoreHareketService<TDataSource> Service { get; set; }
@@ -88,4 +107,4 @@
                        = ButtonRenderStyleMode.Outline;
 
     [Parameter] public string CancelButtonText { get; set; }
-}*@
+}

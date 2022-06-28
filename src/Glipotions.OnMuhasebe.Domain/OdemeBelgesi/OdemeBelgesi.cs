@@ -1,5 +1,6 @@
 ﻿namespace Glipotions.OnMuhasebe.OdemeBelgeleri;
-
+/// <ÖZET>
+/// Database de oluşturulmayacak
 public class OdemeBelgesi : Entity<Guid>
 {
     public Guid MakbuzId { get; set; }

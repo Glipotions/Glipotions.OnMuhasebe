@@ -1124,10 +1124,10 @@ public static class OnMuhasebeDbContextModelBuilderExtensions
         });
     }
 
-    //public static void ConfigureStoredProcedure(this ModelBuilder builder)
-    //{        
-    //    builder.Entity<OdemeBelgesi>();
-    //    builder.Entity<GirenCikanBakiye>().HasNoKey();
-    //    builder.Entity<OdemeBelgeleriDagilim>().HasNoKey();
-    //}
+    public static void ConfigureStoredProcedure(this ModelBuilder builder)
+    {
+        builder.Entity<OdemeBelgesi>();
+        builder.Entity<GirenCikanBakiye>().HasNoKey();
+        builder.Entity<OdemeBelgeleriDagilim>().HasNoKey();
+    }
 }

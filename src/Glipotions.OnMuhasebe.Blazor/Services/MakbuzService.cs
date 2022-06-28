@@ -12,7 +12,10 @@ public class MakbuzService : BaseService<ListMakbuzDto, SelectMakbuzDto>,
     IScopedDependency
 {
     public MakbuzTuru MakbuzTuru { get; set; }
-
+    /// <ÖZET>
+    /// Hareketler Tablosunun dolmasını sağlayan fonksiyon.
+    /// ListDataSource ü DataSource.MakbuzHareketler ile doldur eğer boş ise yeni oluştur.
+    /// .GetTotal() ile veriler yüklendikten sonra alttoplamların alınmasını sağlar.
     public override void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged)
     {
         if (hareketService is MakbuzHareketService makbuzHareketService)

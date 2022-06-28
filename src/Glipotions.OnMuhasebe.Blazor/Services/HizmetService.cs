@@ -9,6 +9,8 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 public class HizmetService : BaseService<ListHizmetDto, SelectHizmetDto>, 
     IScopedDependency
 {
+    /// <ÖZET>
+    /// Hizmet Seçildiğinde FaturaHareketlerinde Hizmete bağlı propertyler doldurulur.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         if (targetEntity is SelectFaturaHareketDto hareket)

@@ -8,6 +8,9 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 
 public class StokService : BaseService<ListStokDto, SelectStokDto>, IScopedDependency
 {
+    /// <ÖZET>
+    /// Stok Seçildiğinde StokId, StokKodu, StokAdi, BirimAdi, BirimFiyat, KdvOrani
+    /// propertyleri doldurulur.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         if (targetEntity is SelectFaturaHareketDto hareket)

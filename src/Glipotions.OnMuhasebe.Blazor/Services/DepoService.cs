@@ -9,6 +9,10 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 
 public class DepoService : BaseService<ListDepoDto, SelectDepoDto>, IScopedDependency
 {
+    /// <ÖZET>
+    /// Depo Seçildiğinde 
+    ///     Eğer FaturaHareketleriyse FaturaHareketlerinde Depo bağlı propertyler doldurulur.
+    ///     Eğer FirmaParametre ise  FirmaParametrelerinde Depo bağlı propertyler doldurulur.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

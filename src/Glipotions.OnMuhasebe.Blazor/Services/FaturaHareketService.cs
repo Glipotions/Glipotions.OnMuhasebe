@@ -15,6 +15,10 @@ public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>,
     public AppService AppService { get; set; }//property Injection
     public FaturaService FaturaService { get; set; }//property Injection
 
+    /// <ÖZET>
+    /// Hareket Eklemeden Önce yapılması gereken işlemler
+    /// DefaultDepo seçiliyse onu doldurur. Hareket türünü seçer
+    /// Sayfanın görünürlüğünü aktif ederek işlemi bitirir.
     public override void BeforeInsert()
     {
         DataSource = new SelectFaturaHareketDto
@@ -26,7 +30,8 @@ public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>,
 
         EditPageVisible = true;
     }
-
+    /// <ÖZET>
+    /// Hareketlerde Tutarların Toplamını hesaplayan Fonksiyon.
     public override void GetTotal()
     {
         FaturaService.DataSource.BrutTutar = ListDataSource.Sum(x => x.BrutTutar);
@@ -36,7 +41,11 @@ public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>,
         FaturaService.DataSource.NetTutar = ListDataSource.Sum(x => x.NetTutar);
         FaturaService.DataSource.HareketSayisi = ListDataSource.Count;
     }
-
+    /// <ÖZET>
+    /// ilk olarak Validation işlemleri yapılır (TempDataSource a göre)
+    /// Geçerli ise TempDataSource ü DataSource a atar
+    /// DataSource.HareketTuruAdi doldurulması gerekiyor çünkü tempDataSource de boştur.
+    /// Eğer Geçersiz ise Hata mesajı verir.
     public override void OnSubmit()
     {
         var validator = new SelectFaturaHareketDtoValidator(L);
@@ -53,7 +62,12 @@ public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>,
         else
             MessageService.Error(result.Errors.CreateValidationErrorMessage(L));
     }
-
+    /// <ÖZET>
+    /// (4/5) 29. video 8.dk
+    /// Comboboxta Seçilen harekete göre değer ataması.
+    /// Hareket Türü değiştirildiğinde default değerlerine atanır.(null veya 0)
+    /// 
+    /// Hareket Türü Stok ise Depo ataması yapılır. değilse depo da defaultlanır.
     public void FaturaHareketTuruSelectedItemChanged(
         ComboBoxEnumItem<FaturaHareketTuru> selectedItem, Action hasChanged)
     {
@@ -83,7 +97,13 @@ public class FaturaHareketService : BaseHareketService<SelectFaturaHareketDto>,
             TempDataSource.DepoAdi = null;
         }
     }
-
+    /// <ÖZET>
+    /// (4/5) 29. video 32. dk
+    /// Veriler değiştiği anda tutarları hesaplamayı sağlayan fonksiyon.
+    /// Property adına göre değişen value atanır ve hesaplamalar yapılır
+    /// örn propertName miktar yeni value değeri 
+    ///     TempDataSource.GetType().GetProperty(propertyName).SetValue(TempDataSource, value);
+    ///     ile atanır ve doğru değerlerle hesaplamalar yapılmış olur.
     public override void Hesapla(object value, string propertyName)
     {
         TempDataSource.GetType().GetProperty(propertyName)

@@ -39,6 +39,31 @@
                    Visible="DeleteButtonVisible" />
 </DxToolbar>
 
+@*  DEV HAREKET TOOLBAR PROPERTIES
+
+    ItemRenderStyleMode= Butonların üzerine gelindiğinde buton renginin değişmesini sağlayan prop.
+    ItemSizeMode= item boyutu.
+
+    ToolTip= Butonun üzerine gelindiğinde ipucu veren özellik. (Ör: Yeni Kart Açar)
+
+    ShowHideGroupPanel= Grup paneli gösterip gizleyen buton. 
+    BeginGroup=true yani dışardan kullanıcı değiştiremez.
+
+    HasChanged= Yapılan değişiklikleri Ekrana yansıtılması için kullanılır. ***ÖNEMLİ***
+    StateHasChanged yerine CommonService.HasChanged() kullanılması (3/5) 22. Video dk 60
+        StateHasChanged kullanılırsa ekrana yansımıyor çünkü listpage dışında bir şeyi değiştiriyor
+        Servisten kullanınca ekrana yansır çünkü servisten kullanıyor.
+
+
+    EventCallBack= Örneğin NewButtonClick Invoke Edildiğinde StateHasChanged ini otomatik olarak
+        çalıştırma görevi var.
+
+    IStringLocalizer= Localizer Servise
+
+    Bazı hareketlerde normal new butonu ile eklenir bazıları ise dropdown menu ile eklenir o yüzden ikisi de eklendi
+
+*@
+
 @code {
 
     [Parameter] public ToolbarRenderStyleMode ItemRenderStyleMode { get; set; }

@@ -25,7 +25,9 @@ public class BankaHesapService : BaseService<ListBankaHesapDto, SelectBankaHesap
     {
         DataSource.HesapTuru = selectedItem.Value;
     }
-    
+    /// <ÖZET>
+    /// Makbuz da işlem yapılıyorsa BankaHesapId ve Adi
+    /// MakbuzHarekette işlem yapılıyorsa BankaHesapId ve Adı buttonEditte seçildiğinde oto gelmesi sağlanır.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

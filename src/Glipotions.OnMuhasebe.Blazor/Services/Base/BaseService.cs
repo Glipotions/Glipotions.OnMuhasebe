@@ -172,7 +172,9 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     /// <ÖZET>
     /// (3/5) son videoda anlatıldı.
     public virtual void ButtonEditDeleteKeyDown(IEntityDto entity, string fieldName) { }
-
+    /// <ÖZET>
+    /// 
+    /// Eğer gelen parametrenin değeri true ise ilk satıra false ise son satıra focuslanır.
     public void SetDataRowSelected(bool first)
     {
         ((DxDataGrid<TDataGridItem>)DataGrid).SetDataRowSelected(

@@ -10,6 +10,10 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 public class FaturaService : BaseService<ListFaturaDto, SelectFaturaDto>,
     IScopedDependency
 {
+    /// <ÖZET>
+    /// Hareketler Tablosunun dolmasını sağlayan fonksiyon.
+    /// ListDataSource ü DataSource.FaturaHareketler ile doldur eğer boş ise yeni oluştur.
+    /// .GetTotal() ile veriler yüklendikten sonra alttoplamların alınmasını sağlar.
     public override void FillTable<TItem>(ICoreHareketService<TItem> hareketService,
         Action hasChanged)
     {

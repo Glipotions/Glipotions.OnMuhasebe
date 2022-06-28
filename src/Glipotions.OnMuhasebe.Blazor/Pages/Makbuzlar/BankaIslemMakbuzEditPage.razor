@@ -1,0 +1,263 @@
+﻿@inherits BaseEditPage
+
+@inject MakbuzService Service
+@inject MakbuzHareketService MakbuzHareketService
+@inject OdemeBelgesiService OdemeBelgesiService
+@inject BankaHesapService BankaHesapService
+@inject OzelKodService OzelKodService
+
+<DevPopupEditPageLayout CancelButtonText="@L["Cancel"]"
+                        EditPageService="Service"
+                        Caption="@L["BankTransactionReceiptCard"]"
+                        Height="825px"
+                        ListPageService="Service"
+                        OnSubmit="OnSubmit"
+                        SubmitButtonText="@L["Save"]"
+                        Width="870px">
+<EditPageContent>
+    <DevGridLayout ColumnCount="11"
+                   ColumnWidths="@ColumnWidths("90", "3", "170", "20", "60", "3", "125", "20", "100", "80", "80")"
+                   RowCount="6"
+                   RowHeights="@RowHeights("28", "28", "28", "28", "*", "50")">
+        <GridLayoutItems>
+            <DevTextEdit Caption="@L["ReceiptNumber"]"
+                         ColumnIndex="2"
+                         NullText="@L["EnterReceiptNumber"]"
+                         RowIndex="0"
+                         @bind-Value="@Service.DataSource.MakbuzNo">
+            </DevTextEdit>
+            <DevDateEdit Caption="@L["Date"]"
+                         ColumnIndex="6"
+                         NullText="@L["EnterDate"]"
+                         RowIndex="0"
+                         @bind-Value="@Service.DataSource.Tarih">
+            </DevDateEdit>
+            <DevCheckEdit ColumnIndex="10"
+                          FalseCaption="@L["Passive"]"
+                          RowIndex="0"
+                          TrueCaption="@L["Active"]"
+                          @bind-Value="@Service.DataSource.Durum">
+            </DevCheckEdit>
+            <DevButtonEdit ButtonClickInvokeFunction="() => { BankaHesapService.HesapTuru=BankaHesapTuru.VadesizMevduatHesabi; BankaHesapService.BeforeShowPopupListPage(Service.DataSource.BankaHesapId); }"
+                           Caption="@L["BankAccount"]"
+                           ColumnIndex="2"
+                           ColumnSpan="9"
+                           IsFocus="true"
+                           NullText="@L["SelectCard"]"
+                           RowIndex="1"
+                           Service="BankaHesapService"
+                           @bind-Value="@Service.DataSource.BankaHesapAdi">
+            </DevButtonEdit>
+            <DevButtonEdit ButtonClickInvokeFunction="() => { OzelKodService.BeforeShowPopupListPage(OzelKodTuru.OzelKod1, KartTuru.Makbuz, Service.DataSource.OzelKod1Id); }"
+                           Caption="@L["CustomCode1"]"
+                           ColumnIndex="2"
+                           DeleteButtonKeyDownInvokeFunction="() => { OzelKodService.ButtonEditDeleteKeyDown(Service.DataSource, nameof(Service.DataSource.OzelKod1Adi)); }"
+                           NullText="@L["SelectCard"]"
+                           RowIndex="2"
+                           Service="OzelKodService"
+                           @bind-Value="@Service.DataSource.OzelKod1Adi">
+            </DevButtonEdit>
+            <DevButtonEdit ButtonClickInvokeFunction="() => { OzelKodService.BeforeShowPopupListPage(OzelKodTuru.OzelKod2, KartTuru.Makbuz, Service.DataSource.OzelKod2Id); }"
+                           Caption="@L["CustomCode2"]"
+                           ColumnIndex="2"
+                           DeleteButtonKeyDownInvokeFunction="() => { OzelKodService.ButtonEditDeleteKeyDown(Service.DataSource, nameof(Service.DataSource.OzelKod2Adi)); }"
+                           NullText="@L["SelectCard"]"
+                           RowIndex="3"
+                           Service="OzelKodService"
+                           @bind-Value="@Service.DataSource.OzelKod2Adi">
+            </DevButtonEdit>
+            <DevMemoEdit Caption="@L["Description"]"
+                         ColumnIndex="6"
+                         ColumnSpan="5"
+                         NullText="@L["EnterDescription"]"
+                         RowIndex="2"
+                         RowSpan="2"
+                         @bind-Value="@Service.DataSource.Aciklama">
+            </DevMemoEdit>
+            <DevHareketDataGrid ColumnIndex="0"
+                                ColumnSpan="11"
+                                DataSource="MakbuzHareketService.ListDataSource.ToList()"
+                                L="L"
+                                RowIndex="4"
+                                Service="MakbuzHareketService"
+                                ToolbarCaption="@L["ReceiptRows"]"
+                                ToolbarDeleteButtonClick="MakbuzHareketService.DeleteAsync"
+                                ToolbarDeleteButtonEnabled="MakbuzHareketService.ListDataSource.Count > 0"
+                                ToolbarNewButtonClick="@(() => OdemeBelgesiService.CiroEdilebilecekBelgeler($"{(byte) OdemeTuru.Cek}, {(byte) OdemeTuru.Senet}, {(byte) OdemeTuru.Pos}"))"
+                                ToolbarUpdateButtonVisible="false">
+                <Columns>
+                    <DxDataGridColumn Caption="@L["PaymentType"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.OdemeTuruAdi)"
+                                      FixedStyle="DataGridFixedStyle.Left"
+                                      Width="100px"/>
+                    <DxDataGridColumn Caption="@L["TarckingNo"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.TakipNo)"
+                                      Width="150px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek || MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Senet"/>
+                    <DxDataGridDateEditColumn Caption="@L["ExpiryDate"]"
+                                              DisplayFormat="@L["DateFormat"]"
+                                              Field="@nameof(SelectMakbuzHareketDto.Vade)"
+                                              TextAlignment="DataGridTextAlign.Center"
+                                              Width="100px"
+                                              Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek || MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Senet"/>
+                    <DxDataGridColumn Caption="@L["CashAccount"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.KasaAdi)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Nakit"/>
+                    <DxDataGridColumn Caption="@L["BankAccount"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.BankaHesapAdi)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Banka || MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Pos"/>
+                    <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                              DisplayFormat="n2"
+                                              Field="@nameof(SelectMakbuzHareketDto.Tutar)"
+                                              Width="115px"/>
+                    <DxDataGridColumn Caption="@L["Bank"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.CekBankaAdi)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek"/>
+                    <DxDataGridColumn Caption="@L["BankBranch"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.CekBankaSubeAdi)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek"/>
+                    <DxDataGridColumn Caption="@L["AccountNumber"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.CekHesapNo)"
+                                      Width="150px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek"/>
+                    <DxDataGridColumn Caption="@L["DocumentNumber"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.BelgeNo)"
+                                      Width="150px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek"/>
+                    <DxDataGridColumn Caption="@L["PrincipalDebtor"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.AsilBorclu)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek || MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Senet"/>
+                    <DxDataGridColumn Caption="@L["Endorser"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.Ciranta)"
+                                      Width="200px"
+                                      Visible="MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Cek || MakbuzHareketService.SelectedItem?.OdemeTuru == OdemeTuru.Senet"/>
+                    <DxDataGridColumn Caption="@L["DocumentState"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.BelgeDurumuAdi)"
+                                      Width="200px"/>
+                    <DxDataGridColumn Caption="@L["Description"]"
+                                      Field="@nameof(SelectMakbuzHareketDto.Aciklama)"
+                                      Width="250px"/>
+                </Columns>
+                <TotalSummary>
+                    <DxDataGridSummaryItem DisplayFormat="@L["Totals"]"
+                                           Field="@nameof(SelectMakbuzHareketDto.OdemeTuruAdi)"
+                                           SummaryType="SummaryItemType.Count"
+                                           Alignment="DataGridTextAlign.Center"/>
+                    <DxDataGridSummaryItem DisplayFormat="n2"
+                                           Field="@nameof(SelectMakbuzHareketDto.Tutar)"
+                                           SummaryType="SummaryItemType.Sum"/>
+                </TotalSummary>
+            </DevHareketDataGrid>
+            <DxGridLayoutItem Column="0"
+                              ColumnSpan="11"
+                              Row="5">
+                <Template>
+                    <DevGridLayout ColumnCount="11"
+                                   ColumnWidths="@ColumnWidths("95", "3", "139", "5", "98", "3", "139", "5", "110", "3", "139")"
+                                   RowCount="4"
+                                   RowHeights="@RowHeights("28", "10", "28","28")">
+                        <GridLayoutItems>
+                            <DxGridLayoutItem Column="0"
+                                              ColumnSpan="11"
+                                              Row="0">
+                                <Template>
+                                    <DevHareketPageHeader Caption="@L["ReceiptSubtotals"]"/>
+                                </Template>
+                            </DxGridLayoutItem>
+
+                            <DevCurrencyEdit Caption="@L["CheckTotal"]"
+                                             ColumnIndex="2"
+                                             Enabled="false"
+                                             RowIndex="2"
+                                             @bind-Value="Service.DataSource.CekToplam"/>
+                            <DevCurrencyEdit Caption="@L["BillOfExchangeTotal"]"
+                                             ColumnIndex="6"
+                                             Enabled="false"
+                                             RowIndex="2"
+                                             @bind-Value="Service.DataSource.SenetToplam"/>
+                            <DevCurrencyEdit Caption="@L["PosTotal"]"
+                                                                         ColumnIndex="10"
+                                                                         Enabled="false"
+                                                                         RowIndex="2"
+                                                                         @bind-Value="Service.DataSource.PosToplam"/>
+                            <DevCurrencyEdit Caption="@L["GrantTotal"]"
+                                             ColumnIndex="10"
+                                             Enabled="false"
+                                             RowIndex="3"
+                                             Value="Service.DataSource.GenelToplam"/>
+                        </GridLayoutItems>
+                    </DevGridLayout>
+                </Template>
+            </DxGridLayoutItem>
+        </GridLayoutItems>
+    </DevGridLayout>
+</EditPageContent>
+</DevPopupEditPageLayout>
+
+@if (MakbuzHareketService.EditPageVisible)
+{
+    <MakbuzHareketEditPage/>
+}
+
+@if (BankaHesapService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaHesapService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["BankAccountCards"]"
+                            Closed="BankaHesapService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { BankaHesapService.SelectEntity(Service.DataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <BankaHesapListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (OzelKodService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="OzelKodService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["CustomCodeCards"]"
+                            Closed="OzelKodService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { OzelKodService.SelectEntity(Service.DataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <OzelKodListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (OdemeBelgesiService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="OdemeBelgesiService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["MeansOfPayment"]"
+                            Closed="OdemeBelgesiService.HideListPage"
+                            SelectButtonInvokeFunction="OdemeBelgesiService.AddSelectedItems"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <OdemeBelgeleriListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+
+    protected override void OnParametersSet()
+    {
+        Service.MakbuzTuru = MakbuzTuru.BankaIslem;
+        Service.FillTable(MakbuzHareketService, StateHasChanged);
+    }
+
+}

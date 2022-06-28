@@ -1,0 +1,380 @@
+﻿@inherits BaseEditPage
+
+@inject MakbuzHareketService Service
+@inject MakbuzService MakbuzService
+@inject BankaService BankaService
+@inject BankaSubeService BankaSubeService
+@inject KasaService KasaService
+@inject BankaHesapService BankaHesapService
+
+<DevPopupHareketEditPageLayout CancelButtonText="@L["Cancel"]"
+                               Caption="@L["ReceiptRow"]"
+                               Closed="Service.HideEditPage"
+                               MaxHeight="600px"
+                               OnSubmit="Service.OnSubmit"
+                               Service="Service"
+                               SubmitButtonText="@L["Save"]"
+                               Width="565px">
+<EditPageContent>
+<DevGridLayout ColumnCount="11"
+               RowCount="2"
+               RowHeights="@RowHeights("28", "*")">
+<GridLayoutItems>
+<DxGridLayoutItem Column="0"
+                  Row="0">
+    <Template>
+        <DevGridLayout ColumnCount="3"
+                       ColumnWidths="@ColumnWidths("90", "3", "120")">
+            <GridLayoutItems>
+                <DevComboBoxEnumEdit Caption="@L["PaymentType"]"
+                                     ColumnIndex="2"
+                                     DataSource="@(FillEnumToComboBox<OdemeTuru>(L))"
+                                     RowIndex="0"
+                                     SelectedItemChanged="((e) => Service.MakbuzHareketTuruSelectedItemChanged(e, StateHasChanged))"
+                                     TextFieldName="@nameof(ComboBoxEnumItem<OdemeTuru>.DisplayName)"
+                                     TItem="OdemeTuru"
+                                     @bind-Value="@Service.TempDataSource.OdemeTuru"
+                                     ValueFieldName="@nameof(ComboBoxEnumItem<OdemeTuru>.Value)">
+                </DevComboBoxEnumEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+<DxGridLayoutItem Column="0"
+                  Row="1"
+                  Visible="Service.TempDataSource.OdemeTuru == OdemeTuru.Cek">
+    <Template>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("90", "3", "120", "25", "90", "3", "120")"
+                       RowCount="11">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["TrackingNo"]"
+                             ColumnIndex="2"
+                             ColumnSpan="3"
+                             Enabled="false"
+                             NullText="@L["EnterTrackingNo"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.TempDataSource.TakipNo">
+                </DevTextEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => { BankaService.BeforeShowPopupListPage(Service.TempDataSource.CekBankaId); }"
+                               Caption="@L["Bank"]"
+                               ColumnIndex="2"
+                               ColumnSpan="3"
+                               IsFocus="true"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="1"
+                               Service="BankaService"
+                               Value="@Service.TempDataSource.CekBankaAdi"
+                               ValueChanged="@(() =>{Service.TempDataSource.CekBankaSubeId = null; Service.TempDataSource.CekBankaSubeAdi = null;})">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => { BankaSubeService.BeforeShowPopupListPage(Service.TempDataSource.CekBankaId, Service.TempDataSource.CekBankaSubeId); }"
+                               Caption="@L["BankBranch"]"
+                               ColumnIndex="2"
+                               ColumnSpan="3"
+                               Enabled="Service.TempDataSource.CekBankaId != null"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="2"
+                               Service="BankaSubeService"
+                               @bind-Value="@Service.TempDataSource.CekBankaSubeAdi">
+                </DevButtonEdit>
+                <DevTextEdit Caption="@L["AccountNumber"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterAccountNumber"]"
+                             RowIndex="3"
+                             @bind-Value="@Service.TempDataSource.CekHesapNo">
+                </DevTextEdit>
+                <DevTextEdit Caption="@L["DocumentNumber"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterDocumentNumber"]"
+                             RowIndex="4"
+                             @bind-Value="@Service.TempDataSource.BelgeNo">
+                </DevTextEdit>
+                <DevDateEdit Caption="@L["ExpiryDate"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterDate"]"
+                             RowIndex="5"
+                             @bind-Value="@Service.TempDataSource.Vade">
+                </DevDateEdit>
+                <DevTextEdit Caption="@L["PrincipalDebtor"]"
+                             ColumnIndex="2"
+                             ColumnSpan="3"
+                             NullText="@L["EnterPrincipalDebtor"]"
+                             RowIndex="6"
+                             @bind-Value="@Service.TempDataSource.AsilBorclu">
+                </DevTextEdit>
+                <DevTextEdit Caption="@L["Endorser"]"
+                             ColumnIndex="2"
+                             ColumnSpan="3"
+                             NullText="@L["EnterEndorser"]"
+                             RowIndex="7"
+                             @bind-Value="@Service.TempDataSource.Ciranta">
+                </DevTextEdit>
+                <DevCurrencyEdit Caption="@L["Amount"]"
+                                 ColumnIndex="2"
+                                 RowIndex="8"
+                                 @bind-Value="@Service.TempDataSource.Tutar">
+                </DevCurrencyEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="9"
+                             RowSpan="2"
+                             @bind-Value="@Service.TempDataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+<DxGridLayoutItem Column="0"
+                  Row="1"
+                  Visible="Service.TempDataSource.OdemeTuru == OdemeTuru.Senet">
+    <Template>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("90", "3", "120", "25", "90", "3", "120")"
+                       RowCount="7">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["TrackingNo"]"
+                             ColumnIndex="2"
+                             ColumnSpan="3"
+                             Enabled="false"
+                             NullText="@L["EnterTrackingNo"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.TempDataSource.TakipNo">
+                </DevTextEdit>
+                <DevDateEdit Caption="@L["ExpiryDate"]"
+                             ColumnIndex="2"
+                             NullText="@L["EnterDate"]"
+                             RowIndex="1"
+                             @bind-Value="@Service.TempDataSource.Vade">
+                </DevDateEdit>
+            <DevTextEdit Caption="@L["PrincipalDebtor"]"
+                         ColumnIndex="2"
+                         ColumnSpan="3"
+                         IsFocus="true"
+                         NullText="@L["EnterPrincipalDebtor"]"
+                         RowIndex="2"
+                         @bind-Value="@Service.TempDataSource.AsilBorclu">
+            </DevTextEdit>
+            <DevTextEdit Caption="@L["Endorser"]"
+                         ColumnIndex="2"
+                         ColumnSpan="3"
+                         NullText="@L["EnterEndorser"]"
+                         RowIndex="3"
+                         @bind-Value="@Service.TempDataSource.Ciranta">
+            </DevTextEdit>
+            <DevCurrencyEdit Caption="@L["Amount"]"
+                             ColumnIndex="2"
+                             RowIndex="4"
+                             @bind-Value="@Service.TempDataSource.Tutar">
+            </DevCurrencyEdit>
+            <DevMemoEdit Caption="@L["Description"]"
+                         ColumnIndex="2"
+                         ColumnSpan="5"
+                         NullText="@L["EnterDescription"]"
+                         RowIndex="5"
+                         RowSpan="2"
+                         @bind-Value="@Service.TempDataSource.Aciklama">
+            </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+<DxGridLayoutItem Column="0"
+                  Row="1"
+                  Visible="Service.TempDataSource.OdemeTuru == OdemeTuru.Nakit">
+    <Template>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("90", "3", "120", "25", "90", "3", "120")"
+                       RowCount="4">
+            <GridLayoutItems>
+                <DevButtonEdit ButtonClickInvokeFunction="() => { KasaService.BeforeShowPopupListPage(Service.TempDataSource.KasaId); }"
+                               Caption="@L["Cash"]"
+                               ColumnIndex="2"
+                               ColumnSpan="3"
+                               IsFocus="true"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="0"
+                               Service="KasaService"
+                               @bind-Value="@Service.TempDataSource.KasaAdi">
+                </DevButtonEdit>
+                <DevCurrencyEdit Caption="@L["Amount"]"
+                                 ColumnIndex="2"
+                                 RowIndex="1"
+                                 @bind-Value="@Service.TempDataSource.Tutar">
+                </DevCurrencyEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="2"
+                             RowSpan="2"
+                             @bind-Value="@Service.TempDataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+<DxGridLayoutItem Column="0"
+                  Row="1"
+                  Visible="Service.TempDataSource.OdemeTuru == OdemeTuru.Banka">
+    <Template>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("90", "3", "120", "25", "90", "3", "120")"
+                       RowCount="4">
+            <GridLayoutItems>
+                <DevButtonEdit ButtonClickInvokeFunction="() => { BankaHesapService.HesapTuru = BankaHesapTuru.VadesizMevduatHesabi; BankaHesapService.BeforeShowPopupListPage(Service.TempDataSource.BankaHesapId); }"
+                               Caption="@L["BankAccount"]"
+                               ColumnIndex="2"
+                               ColumnSpan="3"
+                               IsFocus="true"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="0"
+                               Service="BankaHesapService"
+                               @bind-Value="@Service.TempDataSource.BankaHesapAdi">
+                </DevButtonEdit>
+                <DevCurrencyEdit Caption="@L["Amount"]"
+                                 ColumnIndex="2"
+                                 RowIndex="1"
+                                 @bind-Value="@Service.TempDataSource.Tutar">
+                </DevCurrencyEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="2"
+                             RowSpan="2"
+                             @bind-Value="@Service.TempDataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+<DxGridLayoutItem Column="0"
+                  Row="1"
+                  Visible="Service.TempDataSource.OdemeTuru == OdemeTuru.Pos">
+    <Template>
+        <DevGridLayout ColumnCount="7"
+                       ColumnWidths="@ColumnWidths("90", "3", "120", "25", "90", "3", "120")"
+                       RowCount="5">
+            <GridLayoutItems>
+                <DevTextEdit Caption="@L["TrackingNo"]"
+                             ColumnIndex="2"
+                             ColumnSpan="3"
+                             Enabled="false"
+                             NullText="@L["EnterTrackingNo"]"
+                             RowIndex="0"
+                             @bind-Value="@Service.TempDataSource.TakipNo">
+                </DevTextEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => { BankaHesapService.HesapTuru = BankaHesapTuru.PosBlokeHesabi; BankaHesapService.BeforeShowPopupListPage(Service.TempDataSource.BankaHesapId); }"
+                               Caption="@L["BankAccount"]"
+                               ColumnIndex="2"
+                               ColumnSpan="3"
+                               IsFocus="true"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="1"
+                               Service="BankaHesapService"
+                               @bind-Value="@Service.TempDataSource.BankaHesapAdi">
+                </DevButtonEdit>
+                <DevCurrencyEdit Caption="@L["Amount"]"
+                                 ColumnIndex="2"
+                                 RowIndex="2"
+                                 @bind-Value="@Service.TempDataSource.Tutar">
+                </DevCurrencyEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="3"
+                             RowSpan="2"
+                             @bind-Value="@Service.TempDataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </Template>
+</DxGridLayoutItem>
+</GridLayoutItems>
+</DevGridLayout>
+</EditPageContent>
+</DevPopupHareketEditPageLayout>
+
+
+@if (BankaService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["BankCards"]"
+                            Closed="BankaService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { BankaService.SelectEntity(Service.TempDataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <BankaListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (BankaSubeService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaSubeService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@($"{L["BankBranchCards"]} ( {Service.TempDataSource.CekBankaAdi} )")"
+                            Closed="BankaSubeService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { BankaSubeService.SelectEntity(Service.TempDataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <BankaSubeListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (KasaService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="KasaService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["CashCards"]"
+                            Closed="KasaService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { KasaService.SelectEntity(Service.TempDataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <KasaListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (BankaHesapService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="BankaHesapService"
+                            CancelButtonText="@L["Cancel"]"
+                            Caption="@L["BankAccountCards"]"
+                            Closed="BankaHesapService.HideListPage"
+                            SelectButtonInvokeFunction="(() => { BankaHesapService.SelectEntity(Service.TempDataSource); })"
+                            SelectButtonText="@L["Select"]"
+                            Visible="true"
+                            Width="1000px">
+        <ListPageContent>
+            <BankaHesapListPage/>
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+    /// <ÖZET>
+    /// Başlarken TempDataSource a değer ataması yapılması gerekir
+    /// Bu yüzden yeni bir Mapleme işlemi yapılır.
+    /// (4/5) 30. video 11. dk
+    /// 
+    /// TempDataSource oluşturmamızın nedeni DataSource üzerinde işlem yapılırsa işlemden vazgeçildiğinde geri alınamaz
+    /// ancak geçici bir datasource yapılırsa geri alınma işlemi yapılabilir. Yani Onayla dedikten sonra validation işlemlerinden
+    /// geçiyorsa geçici datasource ana datasource a atanır. 
+    protected override void OnInitialized()
+    {
+        Service.TempDataSource = ObjectMapper.Map<SelectMakbuzHareketDto, SelectMakbuzHareketDto>(Service.DataSource);
+    }
+
+}

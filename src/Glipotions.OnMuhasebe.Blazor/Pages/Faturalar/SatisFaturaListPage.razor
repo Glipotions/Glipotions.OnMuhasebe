@@ -1,0 +1,160 @@
+﻿@page "/salesinvoicecards"
+
+@*@attribute [Authorize(OnMuhasebePermissions.Fatura.Default)]*@
+@inherits BaseListPage<SelectFaturaDto, ListFaturaDto, FaturaListParameterDto,
+                       CreateFaturaDto, UpdateFaturaDto, FaturaNoParameterDto>
+
+@inject FaturaAppService CrudService
+@inject FaturaService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["SalesInvoiceCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["InvoiceNumber"]"
+                                  Field="@nameof(ListFaturaDto.FaturaNo)"
+                                  Width="150px" />
+
+                <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListFaturaDto.Tarih)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="80px" />
+
+                <DxDataGridColumn Caption="@L["CustomerName"]"
+                                  Field="@nameof(ListFaturaDto.CariAdi)"
+                                  Width="300px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["NumberOfTransactions"]"
+                                          DisplayFormat="n0"
+                                          Field="@nameof(ListFaturaDto.HareketSayisi)"
+                                          Width="102px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["GrossAmount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListFaturaDto.BrutTutar)"
+                                          Width="115px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["DiscountAmount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListFaturaDto.IndirimTutar)"
+                                          Width="115px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["ExcludesValueAddedTaxAmount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListFaturaDto.KdvHaricTutar)"
+                                          Width="115px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["ValueAddedTaxAmount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListFaturaDto.KdvTutar)"
+                                          Width="115px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["TotalAmount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListFaturaDto.NetTutar)"
+                                          Width="115px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListFaturaDto.OzelKod1Adi)"
+                                  Width="150px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListFaturaDto.OzelKod2Adi)"
+                                  Width="150px" />
+            </Columns>
+            <TotalSummary>
+                <DxDataGridSummaryItem DisplayFormat="@L["Totals"]"
+                                       Field="@nameof(ListFaturaDto.CariAdi)"
+                                       SummaryType="SummaryItemType.Count" />
+                <DxDataGridSummaryItem DisplayFormat="n0"
+                                       Field="@nameof(ListFaturaDto.HareketSayisi)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListFaturaDto.BrutTutar)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListFaturaDto.IndirimTutar)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListFaturaDto.KdvHaricTutar)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListFaturaDto.KdvTutar)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListFaturaDto.NetTutar)"
+                                       SummaryType="SummaryItemType.Sum" />
+            </TotalSummary>
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <SatisFaturaEditPage OnSubmit="OnSubmit" />
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@*@if (Service.ShowReportSelectBox)
+{
+    Service.ReportFolder = nameof(Reports.Faturalar);
+
+    <DevReportSelectionBox Closed="()=> Service.ShowReportSelectBox = false"
+                       L="L"
+                       ListPageService="Service"
+                       Width="560px">
+    </DevReportSelectionBox>
+}
+
+@if (Service.SelectedReportName != null)
+{
+    var dataSource = ObjectMapper.Map<SelectFaturaDto, FaturaReportDto>(Service.DataSource);
+    var report = (Reports.Faturalar.Fatura)GetReport(Assembly.GetExecutingAssembly(), Service);
+    //report.SetLocalizer(L);
+
+    <DevReportViewer CancelButtonText="@L["Close"]"
+                 Caption="@($"{L["ReportPreview"]} ( {L["TemplateName"]} : {Service.SelectedReportName} )")"
+                 Closed="()=> Service.SelectedReportName = null"
+                 DataSource="dataSource"
+                 Report="report">
+    </DevReportViewer>
+}*@
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Fatura.Default;
+        //CreatePolicy = OnMuhasebePermissions.Fatura.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Fatura.Update;
+        //DeletePolicy = OnMuhasebePermissions.Fatura.Delete;
+        //PrintPolicy = OnMuhasebePermissions.Fatura.Print;
+    }
+
+}

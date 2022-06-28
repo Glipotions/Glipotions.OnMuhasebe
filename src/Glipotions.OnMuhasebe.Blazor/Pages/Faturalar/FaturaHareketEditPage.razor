@@ -1,0 +1,270 @@
+﻿@inherits BaseEditPage
+
+@inject FaturaHareketService Service
+@inject FaturaService FaturaService
+@inject StokService StokService
+@inject MasrafService MasrafService
+@inject HizmetService HizmetService
+@inject DepoService DepoService
+
+<DevPopupHareketEditPageLayout CancelButtonText="@L["Cancel"]"
+                               Caption="@L["InvoiceRow"]"
+                               Closed="Service.HideEditPage"
+                               Height="400px"
+                               OnSubmit="Service.OnSubmit"
+                               Service="Service"
+                               SubmitButtonText="@L["Save"]"
+                               Width="860px">
+    <EditPageContent>
+        <DevGridLayout ColumnCount="11"
+                       ColumnWidths="@ColumnWidths("85","3","120","25","90","3","120",
+                                                   "25","100","3","120")"
+                       RowCount="7">
+            <GridLayoutItems>
+                <DevComboBoxEnumEdit Caption="@L["RowType"]"
+                                     ColumnIndex="2"
+                                     DataSource="@(FillEnumToComboBox<FaturaHareketTuru>(L))"
+                                     RowIndex="0"
+                                     SelectedItemChanged="((e)=>Service.FaturaHareketTuruSelectedItemChanged
+                                                                      (e, StateHasChanged))"
+                                     TextFieldName="@nameof(ComboBoxEnumItem<FaturaHareketTuru>.DisplayName)"
+                                     TItem="FaturaHareketTuru"
+                                     @bind-Value="@Service.TempDataSource.HareketTuru"
+                                     ValueFieldName="@nameof(ComboBoxEnumItem<FaturaHareketTuru>.Value)">
+                </DevComboBoxEnumEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      DepoService.BeforeShowPopupListPage(
+                                           Service.TempDataSource.DepoId); }"
+                               Caption="@L["Warehouse"]"
+                               ColumnIndex="6"
+                               ColumnSpan="3"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="0"
+                               Service="DepoService"
+                               @bind-Value="@Service.TempDataSource.DepoAdi"
+                               Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Stok">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      StokService.BeforeShowPopupListPage(
+                                           Service.TempDataSource.StokId); }"
+                               Caption="@L["StockCode"]"
+                               ColumnIndex="2"
+                               ColumnSpan="4"
+                               IsFocus="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Stok"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="1"
+                               Service="StokService"
+                               Value="@Service.TempDataSource.StokKodu"
+                               ValueChanged="()=>Service.TempDataSource.HareketKodu = Service.TempDataSource.StokKodu"
+                               Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Stok">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      HizmetService.BeforeShowPopupListPage(
+                                           Service.TempDataSource.HizmetId); }"
+                               Caption="@L["ServiceCode"]"
+                               ColumnIndex="2"
+                               ColumnSpan="4"
+                               IsFocus="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Hizmet"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="1"
+                               Service="HizmetService"
+                               Value="@Service.TempDataSource.HizmetKodu"
+                               ValueChanged="()=>Service.TempDataSource.HareketKodu = Service.TempDataSource.HizmetKodu"
+                               Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Hizmet">
+                </DevButtonEdit>
+                <DevButtonEdit ButtonClickInvokeFunction="() => {
+                                      MasrafService.BeforeShowPopupListPage(
+                                           Service.TempDataSource.MasrafId); }"
+                               Caption="@L["ExpenseCode"]"
+                               ColumnIndex="2"
+                               ColumnSpan="4"
+                               IsFocus="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Masraf"
+                               NullText="@L["SelectCard"]"
+                               RowIndex="1"
+                               Service="MasrafService"
+                               Value="@Service.TempDataSource.MasrafKodu"
+                               ValueChanged="()=>Service.TempDataSource.HareketKodu = Service.TempDataSource.MasrafKodu"
+                               Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Masraf">
+                </DevButtonEdit>
+                <DevTextEdit Caption="@L["StockName"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             Enabled="false"
+                             RowIndex="2"
+                             Value="@Service.TempDataSource.StokAdi"
+                             ValueChanged="()=>Service.TempDataSource.HareketAdi = Service.TempDataSource.StokAdi"
+                             Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Stok">
+                </DevTextEdit>
+                <DevTextEdit Caption="@L["ServiceName"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             Enabled="false"
+                             RowIndex="2"
+                             Value="@Service.TempDataSource.HizmetAdi"
+                             ValueChanged="()=>Service.TempDataSource.HareketAdi = Service.TempDataSource.HizmetAdi"
+                             Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Hizmet">
+                </DevTextEdit>
+                <DevTextEdit Caption="@L["ExpenseName"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             Enabled="false"
+                             RowIndex="2"
+                             Value="@Service.TempDataSource.MasrafAdi"
+                             ValueChanged="()=>Service.TempDataSource.HareketAdi = Service.TempDataSource.MasrafAdi"
+                             Visible="Service.TempDataSource.HareketTuru == FaturaHareketTuru.Masraf">
+                </DevTextEdit>
+                <DevTextEdit Caption="@L["Unit"]"
+                             ColumnIndex="10"
+                             Enabled="false"
+                             RowIndex="2"
+                             @bind-Value="@Service.TempDataSource.BirimAdi">
+                </DevTextEdit>
+                <DevCurrencyEdit Caption="@L["Quantity"]"
+                                 ColumnIndex="2"
+                                 RowIndex="3"
+                                 Value="@Service.TempDataSource.Miktar"
+                                 ValueChanged="(e)=> Service.Hesapla(e,
+                                               nameof(Service.TempDataSource.Miktar))">
+                </DevCurrencyEdit>
+                <DevCurrencyEdit Caption="@L["UnitPrice"]"
+                                 ColumnIndex="6"
+                                 RowIndex="3"
+                                 Value="@Service.TempDataSource.BirimFiyat"
+                                 ValueChanged="(e)=> Service.Hesapla(e,
+                                               nameof(Service.TempDataSource.BirimFiyat))">
+                </DevCurrencyEdit>
+                <DevSpinEdit Caption="@L["ValueAddedTaxRate"]"
+                             ColumnIndex="2"
+                             RowIndex="4"
+                             Value="@Service.TempDataSource.KdvOrani"
+                             ValueChanged="(e)=> Service.Hesapla(e,
+                                               nameof(Service.TempDataSource.KdvOrani))">
+                </DevSpinEdit>
+                <DevCurrencyEdit Caption="@L["GrossAmount"]"
+                                 ColumnIndex="10"
+                                 Enabled="false"
+                                 RowIndex="3"
+                                 @bind-Value="@Service.TempDataSource.BrutTutar">
+                </DevCurrencyEdit>
+                <DevCurrencyEdit Caption="@L["DiscountAmount"]"
+                                 ColumnIndex="6"
+                                 RowIndex="4"
+                                 Value="@Service.TempDataSource.IndirimTutar"
+                                 ValueChanged="(e)=> Service.Hesapla(e,
+                                               nameof(Service.TempDataSource.IndirimTutar))">
+                </DevCurrencyEdit>
+                <DevCurrencyEdit Caption="@L["ExcludesValueAddedTaxAmount"]"
+                                 ColumnIndex="10"
+                                 Enabled="false"
+                                 RowIndex="4"
+                                 @bind-Value="@Service.TempDataSource.KdvHaricTutar">
+                </DevCurrencyEdit>
+                <DevCurrencyEdit Caption="@L["ValueAddedTaxAmount"]"
+                                 ColumnIndex="10"
+                                 Enabled="false"
+                                 RowIndex="5"
+                                 @bind-Value="@Service.TempDataSource.KdvTutar">
+                </DevCurrencyEdit>
+                <DevCurrencyEdit Caption="@L["TotalAmount"]"
+                                 ColumnIndex="10"
+                                 Enabled="false"
+                                 RowIndex="6"
+                                 @bind-Value="@Service.TempDataSource.NetTutar">
+                </DevCurrencyEdit>
+                <DevMemoEdit Caption="@L["Description"]"
+                             ColumnIndex="2"
+                             ColumnSpan="5"
+                             NullText="@L["EnterDescription"]"
+                             RowIndex="5"
+                             RowSpan="2"
+                             @bind-Value="@Service.TempDataSource.Aciklama">
+                </DevMemoEdit>
+            </GridLayoutItems>
+        </DevGridLayout>
+    </EditPageContent>
+</DevPopupHareketEditPageLayout>
+
+@if (StokService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="StokService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["StockCards"]"
+                        Closed="StokService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  StokService.SelectEntity(Service.TempDataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <StokListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (HizmetService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="HizmetService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["ServiceCards"]"
+                        Closed="HizmetService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  HizmetService.SelectEntity(Service.TempDataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <HizmetListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (MasrafService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="MasrafService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["ExpenseCards"]"
+                        Closed="MasrafService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  MasrafService.SelectEntity(Service.TempDataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <MasrafListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@if (DepoService.IsPopupListPage)
+{
+    <DevPopupListPageLayout DataGridService="DepoService"
+                        CancelButtonText="@L["Cancel"]"
+                        Caption="@L["WarehouseCards"]"
+                        Closed="DepoService.HideListPage"
+                        SelectButtonInvokeFunction="(()=>{
+                                  DepoService.SelectEntity(Service.TempDataSource); })"
+                        SelectButtonText="@L["Select"]"
+                        Visible="true"
+                        Width="1000px">
+        <ListPageContent>
+            <DepoListPage />
+        </ListPageContent>
+    </DevPopupListPageLayout>
+}
+
+@code {
+    /// <ÖZET>
+    /// Başlarken TempDataSource a değer ataması yapılması gerekir
+    /// Bu yüzden yeni bir Mapleme işlemi yapılır.
+    /// (4/5) 30. video 11. dk
+    /// 
+    /// TempDataSource oluşturmamızın nedeni DataSource üzerinde işlem yapılırsa işlemden vazgeçildiğinde geri alınamaz
+    /// ancak geçici bir datasource yapılırsa geri alınma işlemi yapılabilir. Yani Onayla dedikten sonra validation işlemlerinden
+    /// geçiyorsa geçici datasource ana datasource a atanır. 
+    protected override void OnInitialized()
+    {
+        Service.TempDataSource = ObjectMapper.Map<SelectFaturaHareketDto,
+        SelectFaturaHareketDto>(Service.DataSource);
+    }
+
+}

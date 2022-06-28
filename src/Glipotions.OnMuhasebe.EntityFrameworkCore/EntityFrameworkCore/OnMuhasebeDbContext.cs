@@ -116,7 +116,7 @@ public class OnMuhasebeDbContext :
         //    //...
         //});
 
-        //builder.ConfigureStoredProcedure();
+        builder.ConfigureStoredProcedure();
         builder.ConfigureBanka();
         builder.ConfigureBankaSube();
         builder.ConfigureBankaHesap();

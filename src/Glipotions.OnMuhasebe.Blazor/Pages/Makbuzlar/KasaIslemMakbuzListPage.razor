@@ -1,0 +1,117 @@
+﻿@page "/cashtransactionreceiptcards"
+
+@inherits BaseListPage<SelectMakbuzDto, ListMakbuzDto, MakbuzListParameterDto, CreateMakbuzDto, UpdateMakbuzDto, MakbuzNoParameterDto>
+
+@inject MakbuzAppService CrudService
+@inject MakbuzService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["CashTransactionReceiptCards"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     DoubleClick="async ()=> await BeforeUpdateAsync()">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonClick="async ()=> await DeleteAsync()"
+                                    DeleteButtonEnabled="Service.ListDataSource.Count > 0"
+                                    DeleteButtonVisible="true"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async ()=> await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonClick="async ()=> await BeforeInsertAsync()"
+                                    NewButtonVisible="true"
+                                    UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
+                                    UpdateButtonEnabled="Service.ListDataSource.Count > 0"
+                                    UpdateButtonVisible="true">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["ReceiptNumber"]"
+                                  Field="@nameof(ListMakbuzDto.MakbuzNo)"
+                                  Width="150px" />
+
+                <DxDataGridDateEditColumn Caption="@L["Date"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListMakbuzDto.Tarih)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="80px" />
+
+                <DxDataGridColumn Caption="@L["CashAccount"]"
+                                  Field="@nameof(ListMakbuzDto.KasaAdi)"
+                                  Width="300px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["NumberOfTransactions"]"
+                                          DisplayFormat="n0"
+                                          Field="@nameof(ListMakbuzDto.HareketSayisi)"
+                                          Width="102px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["CheckTotal"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMakbuzDto.CekToplam)"
+                                          Width="110px" />
+
+                <DxDataGridSpinEditColumn Caption="@L["BillOfExchangeTotal"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMakbuzDto.SenetToplam)"
+                                          Width="110px" />
+                
+                <DxDataGridSpinEditColumn Caption="@L["GrandTotal"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListMakbuzDto.GenelToplam)"
+                                          Width="120px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode1"]"
+                                  Field="@nameof(ListMakbuzDto.OzelKod1Adi)"
+                                  Width="145px" />
+
+                <DxDataGridColumn Caption="@L["CustomCode2"]"
+                                  Field="@nameof(ListMakbuzDto.OzelKod2Adi)"
+                                  Width="145px" />
+            </Columns>
+            <TotalSummary>
+                <DxDataGridSummaryItem DisplayFormat="@L["Totals"]"
+                                       Field="@nameof(ListMakbuzDto.KasaAdi)"
+                                       SummaryType="SummaryItemType.Count" />
+                <DxDataGridSummaryItem DisplayFormat="n0"
+                                       Field="@nameof(ListMakbuzDto.HareketSayisi)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListMakbuzDto.CekToplam)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListMakbuzDto.SenetToplam)"
+                                       SummaryType="SummaryItemType.Sum" />
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListMakbuzDto.GenelToplam)"
+                                       SummaryType="SummaryItemType.Sum" />
+            </TotalSummary>
+        </DevDataGrid>
+    </ListPageContext>
+
+    <EditPageContent>
+        <KasaIslemMakbuzEditPage OnSubmit="OnSubmit" />
+    </EditPageContent>
+
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Service.MakbuzTuru = MakbuzTuru.KasaIslem;
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.Makbuz.Default;
+        //CreatePolicy = OnMuhasebePermissions.Makbuz.Create;
+        //UpdatePolicy = OnMuhasebePermissions.Makbuz.Update;
+        //DeletePolicy = OnMuhasebePermissions.Makbuz.Delete;
+    }
+
+}

@@ -9,6 +9,9 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 
 public class BankaService : BaseService<ListBankaDto, SelectBankaDto>, IScopedDependency
 {
+    /// <ÖZET>
+    /// BankaHesapta işlem yapılıyorsa BankaId ve Adi
+    /// MakbuzHarekette işlem yapılıyorsa CekBankaId ve Adı buttonEditte seçildiğinde oto gelmesi sağlanır.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

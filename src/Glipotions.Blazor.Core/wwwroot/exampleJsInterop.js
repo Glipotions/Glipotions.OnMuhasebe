@@ -1,5 +1,5 @@
 {
-  "exclude": [
+  "exclude" [
     "**/bin",
     "**/bower_components",
     "**/jspm_packages",

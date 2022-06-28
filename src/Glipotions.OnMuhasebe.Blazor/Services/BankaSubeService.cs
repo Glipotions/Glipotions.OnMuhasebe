@@ -31,7 +31,9 @@ public class BankaSubeService : BaseService<ListBankaSubeDto, SelectBankaSubeDto
         PopupListPageFocusedRowId = prm.Length > 1 && prm[1] != null ? (Guid)prm[1] : 
             Guid.Empty;
     }
-
+    /// <ÖZET>
+    /// BankaHesapta işlem yapılıyorsa BankaSubeId ve Adi
+    /// MakbuzHarekette işlem yapılıyorsa CekBankaSubeId ve Adı buttonEditte seçildiğinde oto gelmesi sağlanır.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

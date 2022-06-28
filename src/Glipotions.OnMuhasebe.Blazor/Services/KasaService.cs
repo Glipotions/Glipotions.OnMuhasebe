@@ -9,6 +9,9 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 
 public class KasaService : BaseService<ListKasaDto, SelectKasaDto>, IScopedDependency
 {
+    /// <ÖZET>
+    /// Makbuz da işlem yapılıyorsa KasaId ve Adi
+    /// MakbuzHarekette işlem yapılıyorsa KasaId ve Adı buttonEditte seçildiğinde oto gelmesi sağlanır.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

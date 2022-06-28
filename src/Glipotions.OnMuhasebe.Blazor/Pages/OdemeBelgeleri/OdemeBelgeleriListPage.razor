@@ -1,0 +1,116 @@
+﻿@page "/meansofpayment"
+
+@*@attribute [Authorize(OnMuhasebePermissions.OdemeBelgesi.Default)]*@
+@inherits BaseListPage<SelectMakbuzHareketDto, ListOdemeBelgesiDto, OdemeBelgesiListParameterDto, MakbuzHareketDto, MakbuzHareketDto, MakbuzNoParameterDto>
+
+@inject OdemeBelgesiAppService CrudService
+@inject OdemeBelgesiService Service
+
+<DevListPageLayout DataGridService="Service"
+                   ListPageService="Service"
+                   Caption="@L["MeansOfPayment"]"
+                   RowHeights="@RowHeights("*")">
+    <ListPageContext>
+        <DevDataGrid DataGridService="Service"
+                     GridSelectionColumnVisible="Service.IsPopupListPage"
+                     SelectionMode="Service.IsPopupListPage ? DevExpress.Blazor.DataGridSelectionMode.MultipleSelectedDataRows : DevExpress.Blazor.DataGridSelectionMode.SingleSelectedDataRow">
+            <HeaderTemplate>
+                <DevListPageToolbar CommonService="Service"
+                                    DataGridService="Service"
+                                    ListPageService="Service"
+                                    DeleteButtonVisible="false"
+                                    FilterButtonVisible="true"
+                                    GetListDataSource="async () => await GetListDataSourceAsync()"
+                                    GroupButtonVisible="true"
+                                    L="L"
+                                    NewButtonVisible="false"
+                                    UpdateButtonVisible="false">
+                </DevListPageToolbar>
+            </HeaderTemplate>
+
+            <Columns>
+                <DxDataGridColumn Caption="@L["PaymentType"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.OdemeTuruAdi)"
+                                  Width="100px"/>
+
+                <DxDataGridColumn Caption="@L["TrackingNo"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.TakipNo)"
+                                  Width="150px"/>
+
+                <DxDataGridDateEditColumn Caption="@L["ExpiryDate"]"
+                                          DisplayFormat="@L["DateFormat"]"
+                                          Field="@nameof(ListOdemeBelgesiDto.Vade)"
+                                          TextAlignment="DataGridTextAlign.Center"
+                                          Width="100px"/>
+
+                <DxDataGridSpinEditColumn Caption="@L["Amount"]"
+                                          DisplayFormat="n2"
+                                          Field="@nameof(ListOdemeBelgesiDto.Tutar)"
+                                          Width="115px"/>
+
+                <DxDataGridColumn Caption="@L["PrincipalDebtor"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.AsilBorclu)"
+                                  Width="200px"/>
+
+                <DxDataGridColumn Caption="@L["Endorser"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.Ciranta)"
+                                  Width="200px"/>
+
+                <DxDataGridColumn Caption="@L["Bank"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.CekBankaAdi)"
+                                  Width="200px"/>
+
+                <DxDataGridColumn Caption="@L["BankBranch"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.CekBankaSubeAdi)"
+                                  Width="200px"/>
+
+                <DxDataGridColumn Caption="@L["AccountNumber"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.CekHesapNo)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentNumber"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.BelgeNo)"
+                                  Width="150px"/>
+
+                <DxDataGridColumn Caption="@L["BankAccount"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.BankaHesapAdi)"
+                                  Width="200px"/>
+
+                <DxDataGridCheckBoxColumn Caption="@L["OurOwn"]"
+                                          CheckType="CheckType.Checkbox"
+                                          Field="@nameof(ListOdemeBelgesiDto.KendiBelgemiz)"
+                                          Visible="Service.MakbuzService.MakbuzTuru != MakbuzTuru.Odeme"
+                                          Width="100px"/>
+
+                <DxDataGridColumn Caption="@L["DocumentState"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.BelgeDurumuAdi)"
+                                  Width="120px"/>
+
+                <DxDataGridColumn Caption="@L["Description"]"
+                                  Field="@nameof(ListOdemeBelgesiDto.Aciklama)"
+                                  Width="250px"/>
+            </Columns>
+            <TotalSummary>
+                <DxDataGridSummaryItem DisplayFormat="@L["Totals"]"
+                                       Field="@nameof(ListOdemeBelgesiDto.TakipNo)"
+                                       SummaryType="SummaryItemType.Count"/>
+
+                <DxDataGridSummaryItem DisplayFormat="n2"
+                                       Field="@nameof(ListOdemeBelgesiDto.Tutar)"
+                                       SummaryType="SummaryItemType.Sum"/>
+            </TotalSummary>
+        </DevDataGrid>
+    </ListPageContext>
+</DevListPageLayout>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        BaseCrudService = CrudService;
+        BaseService = Service;
+
+        //DefaultPolicy = OnMuhasebePermissions.OdemeBelgesi.Default;
+    }
+
+}

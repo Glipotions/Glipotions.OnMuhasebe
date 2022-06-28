@@ -14,7 +14,9 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
 {
     public AppService AppService { get; set; } //Property injection
     public MakbuzService MakbuzService { get; set; } //Property injection
-
+    /// <ÖZET>
+    /// Güncellemeden önce şarta göre SelectedItem ı DataSource ataması yapılır.
+    /// </summary>
     public override void BeforeUpdate()
     {
         if (MakbuzService.MakbuzTuru == MakbuzTuru.Tahsilat ||
@@ -25,7 +27,8 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
             EditPageVisible = true;
         }
     }
-
+    /// <ÖZET>
+    /// ekleme sayfası açılmadan önce bazı propertyleri default olarak dolu olmasını sağlayan fonksiyon
     public override void BeforeInsert()
     {
         DataSource = new SelectMakbuzHareketDto
@@ -35,7 +38,9 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
 
         EditPageVisible = true;
     }
-
+    /// <ÖZET>
+    /// Comboboxta Seçilen harekete göre değer ataması.
+    /// Hareket Türü değiştirildiğinde default değerlerine atanır.(null veya 0)
     public void MakbuzHareketTuruSelectedItemChanged(ComboBoxEnumItem<OdemeTuru> selectedItem, Action hasChanged)
     {
         TempDataSource.OdemeTuru = selectedItem.Value;
@@ -54,7 +59,13 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
         TempDataSource.BankaHesapId = null;
         TempDataSource.BankaHesapAdi = null;
     }
-
+    /// <ÖZET>
+    /// ilk olarak Validation işlemleri yapılır (TempDataSource a göre)
+    /// Geçerli ise TempDataSource ü DataSource a atar
+    /// DataSource.OdemeTuruAdi doldurulması gerekiyor çünkü tempDataSource de boştur.
+    /// Aynı şekilde BelgeDurumu, BelgeDurumuAdi, KendiBelgemiz alanları da doldurulur.
+    /// InsertUpdate ile Id ataması yapılır.
+    /// Eğer Geçersiz ise Hata mesajı verir.
     public override void OnSubmit()
     {
         var validator = new SelectMakbuzHareketDtoValidator(L);
@@ -88,7 +99,8 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
         else
             MessageService.Error(result.Errors.CreateValidationErrorMessage(L));
     }
-
+    /// <ÖZET>
+    /// Hareketlerde Tutarların Toplamını hesaplayan Fonksiyon.
     public override void GetTotal()
     {
         MakbuzService.DataSource.CekToplam = ListDataSource.Where(x => x.OdemeTuru == OdemeTuru.Cek)

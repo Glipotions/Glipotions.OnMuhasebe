@@ -7,6 +7,10 @@ namespace Glipotions.OnMuhasebe.Blazor.Helpers;
 
 public static class ExtensionFunctions
 {
+    /// <ÖZET>
+    /// (4/5) 28. video 25. Dk
+    /// Validation işleminde hata olması sonucu verilecek mesaj için yapılan fonksiyondur.
+    /// for döngüsünde her hata eklenir ve hataları yazdırır.
     public static string CreateValidationErrorMessage(
         this IList<ValidationFailure> errors, IStringLocalizer localizer)
     {

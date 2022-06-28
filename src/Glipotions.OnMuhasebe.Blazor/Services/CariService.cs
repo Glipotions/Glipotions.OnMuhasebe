@@ -9,6 +9,9 @@ namespace Glipotions.OnMuhasebe.Blazor.Services;
 
 public class CariService : BaseService<ListCariDto, SelectCariDto>, IScopedDependency
 {
+    /// <ÖZET>
+    /// Makbuz da işlem yapılıyorsa CariId ve Adi
+    /// Fatura işlem yapılıyorsa CariId ve Adı buttonEditte seçildiğinde oto gelmesi sağlanır.
     public override void SelectEntity(IEntityDto targetEntity)
     {
         switch (targetEntity)

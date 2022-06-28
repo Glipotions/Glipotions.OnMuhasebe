@@ -26,6 +26,9 @@ public interface ICoreDataGridService<TDataGridItem>
     public bool IsLoaded { get; set; }
     public bool ShowSelectionCheckBox { get; set; }
     public Guid PopupListPageFocusedRowId { get; set; }
+    /// <ÖZET>
+    /// (4/5) 37. video 37.dk
+    /// Ödeme belgelerinde takip nolara göre liste
     public IList<string> ExcludeListItems { get; set; }
     /// <ÖZET>
     /// Listeyi görüntüleme prop'u, eğer ilk kez renderlıyorsa ilk satırı seçmesi sağlanır.
@@ -33,7 +36,11 @@ public interface ICoreDataGridService<TDataGridItem>
     /// <ÖZET>
     /// Gönderilen itemin bulunduğu satırı seçer.
     void SetDataRowSelected(TDataGridItem item);
+    /// <ÖZET>
+    /// Eğer gelen parametrenin değeri true ise ilk satıra false ise son satıra focuslanır.
     void SetDataRowSelected(bool first);
-    //void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged);
+    /// <ÖZET>
+    /// Hareket Tablosunu doldurmak için üretilen fonksiyon
+    void FillTable<TItem>(ICoreHareketService<TItem> hareketService, Action hasChanged);
     void AddSelectedItems();
 }
