@@ -1,0 +1,813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.2.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.2, Version=21.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Fatura" PageWidth="850" PageHeight="1100" Version="21.2" DataSource="#Ref-0">
+  <Extensions>
+    <Item1 Ref="2" Key="VSReportExtInfo" Value=".vsrepx" />
+  </Extensions>
+  <Bands>
+    <Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin">
+      <StylePriority Ref="4" UseBackColor="false" />
+    </Item1>
+    <Item2 Ref="5" ControlType="BottomMarginBand" Name="BottomMargin" />
+    <Item3 Ref="6" ControlType="DetailBand" Name="Detail" KeepTogether="true">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRLabel" Name="label1" Multiline="true" TextAlignment="MiddleCenter" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="8" EventName="BeforePrint" PropertyName="Text" Expression="[FaturaNo]" />
+          </ExpressionBindings>
+          <StylePriority Ref="9" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="10" ControlType="XRBarCode" Name="barCode2" AutoModule="true" Alignment="MiddleJustify" ShowText="false" Padding="0,0,0,0,100">
+          <Symbology Ref="11" Name="Code128" />
+          <ExpressionBindings>
+            <Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[FaturaNo]" />
+          </ExpressionBindings>
+          <StylePriority Ref="13" UsePadding="false" />
+        </Item2>
+        <Item3 Ref="14" ControlType="XRTable" Name="table3" Padding="2,2,0,0,100">
+          <Rows>
+            <Item1 Ref="15" ControlType="XRTableRow" Name="tableRow13">
+              <Cells>
+                <Item1 Ref="16" ControlType="XRTableCell" Name="tableCell10" Multiline="true" TextAlignment="MiddleLeft" Padding="15,2,0,0,100">
+                  <StylePriority Ref="17" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+            <Item2 Ref="18" ControlType="XRTableRow" Name="tableRow8">
+              <Cells>
+                <Item1 Ref="19" ControlType="XRTableCell" Name="tableCell15" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                  <StylePriority Ref="20" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="21" ControlType="XRTableCell" Name="tableCell16" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="22" EventName="BeforePrint" PropertyName="Text" Expression="[CariAdi]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="23" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item2>
+            <Item3 Ref="24" ControlType="XRTableRow" Name="tableRow9">
+              <Cells>
+                <Item1 Ref="25" ControlType="XRTableCell" Name="tableCell17" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                  <StylePriority Ref="26" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="27" ControlType="XRTableCell" Name="tableCell18" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="FormatString('{0} / {1}', [VergiDairesi], [VergiNo])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="29" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item3>
+            <Item4 Ref="30" ControlType="XRTableRow" Name="tableRow10">
+              <Cells>
+                <Item1 Ref="31" ControlType="XRTableCell" Name="tableCell19" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                  <StylePriority Ref="32" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="33" ControlType="XRTableCell" Name="tableCell20" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[Adres]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="35" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item4>
+            <Item5 Ref="36" ControlType="XRTableRow" Name="tableRow11">
+              <Cells>
+                <Item1 Ref="37" ControlType="XRTableCell" Name="tableCell21" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                  <StylePriority Ref="38" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="39" ControlType="XRTableCell" Name="tableCell22" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="[Telefon]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="41" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item5>
+          </Rows>
+          <StylePriority Ref="42" UseFont="false" />
+        </Item3>
+      </Controls>
+    </Item3>
+    <Item4 Ref="43" ControlType="ReportHeaderBand" Name="ReportHeader">
+      <Controls>
+        <Item1 Ref="44" ControlType="XRPanel" Name="panel1" BorderColor="Black">
+          <Controls>
+            <Item1 Ref="45" ControlType="XRPictureBox" Name="pictureBox1" Padding="16,0,5,0,100" ImageSource="svg,77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCiAgPGc+DQogICAgPHBhdGggZD0iTTg5Mi4xLDE2OC40SDEwNC43TDEwLDQxNi4zYzAsNzQuMiw3MS4zLDEzNS44LDE0Ny4xLDEzNS44YzgyLjgsMCwxNzcuMy02MCwxNzcuMy0xMzUuOGMwLDc0LjIsODkuOCwxMzUuOCwxNjUuNiwxMzUuOGM3NS44LDAsMTU4LjItNjAsMTU4LjItMTM1LjhjMCw3NC4yLDgxLDEzNS44LDE4OCwxMzUuOGM3NS44LDAsMTQzLjgtNjAsMTQzLjgtMTM1LjhMODkyLjEsMTY4LjRMODkyLjEsMTY4LjR6IE04MzEsNTk0Ljd2MzE1LjhIMTgzLjdWNTk0LjdoLTMxLjZoLTQ3LjR2MzMxLjZjMCwyOC40LDMxLjYsNjMuMiw2MCw2My4yaDY4My42YzI4LjQsMCw2MC0zNC43LDYwLTYzLjJWNTk0LjdoLTYzLjJIODMxTDgzMSw1OTQuN3ogTTg5Mi4xLDE2Ni44TDg5Mi4xLDE2Ni44bDMuMiwxLjZMODkyLjEsMTY2LjhMODkyLjEsMTY2Ljh6IE0xNjcuOSwxMDUuMmg2NzguOGMyNi44LDAsNDcuNC0yMC41LDQ3LjQtNDcuNGMwLTI2LjgtMjAuNS00Ny40LTQ3LjQtNDcuNEgxNjcuOWMtMjYuOCwwLTQ3LjQsMjAuNS00Ny40LDQ3LjRDMTIwLjUsODQuNywxNDEuMSwxMDUuMiwxNjcuOSwxMDUuMkwxNjcuOSwxMDUuMnoiIC8+DQogIDwvZz4NCjwvc3ZnPg==" Sizing="StretchImage">
+              <StylePriority Ref="46" UsePadding="false" />
+            </Item1>
+            <Item2 Ref="47" ControlType="XRTable" Name="table2" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="48" ControlType="XRTableRow" Name="tableRow3">
+                  <Cells>
+                    <Item1 Ref="49" ControlType="XRTableCell" Name="SaticiFirma" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="50" UseFont="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+                <Item2 Ref="51" ControlType="XRTableRow" Name="tableRow4">
+                  <Cells>
+                    <Item1 Ref="52" ControlType="XRTableCell" Name="SaticiFirmaAdres" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="53" UseFont="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="54" ControlType="XRTableRow" Name="tableRow6">
+                  <Cells>
+                    <Item1 Ref="55" ControlType="XRTableCell" Name="SaticiFirmaTelefon" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="56" UseFont="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item3>
+                <Item4 Ref="57" ControlType="XRTableRow" Name="tableRow7">
+                  <Cells>
+                    <Item1 Ref="58" ControlType="XRTableCell" Name="SaticiFirmaEmail" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="59" UseFont="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item4>
+                <Item5 Ref="60" ControlType="XRTableRow" Name="tableRow5">
+                  <Cells>
+                    <Item1 Ref="61" ControlType="XRTableCell" Name="SaticiFirmaWeb" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="62" UseFont="false" UseTextAlignment="false" />
+                    </Item1>
+                  </Cells>
+                </Item5>
+              </Rows>
+            </Item2>
+            <Item3 Ref="63" ControlType="XRTable" Name="table1" Padding="0,0,0,0,100">
+              <Rows>
+                <Item1 Ref="64" ControlType="XRTableRow" Name="tableRow1">
+                  <Cells>
+                    <Item1 Ref="65" ControlType="XRTableCell" Name="FaturaNoLabel" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187">
+                      <StylePriority Ref="66" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="67" ControlType="XRTableCell" Name="FaturaNoText" CanGrow="false" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,60,67,82">
+                      <ExpressionBindings>
+                        <Item1 Ref="68" EventName="BeforePrint" PropertyName="Text" Expression="[FaturaNo]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="69" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item1>
+                <Item2 Ref="70" ControlType="XRTableRow" Name="tableRow2">
+                  <Cells>
+                    <Item1 Ref="71" ControlType="XRTableCell" Name="FaturaTarihiLabel" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187">
+                      <StylePriority Ref="72" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="73" ControlType="XRTableCell" Name="FaturaTarihiText" CanGrow="false" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,60,67,82">
+                      <ExpressionBindings>
+                        <Item1 Ref="74" EventName="BeforePrint" PropertyName="Text" Expression="[Tarih]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="75" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="76" ControlType="XRTableRow" Name="tableRow12">
+                  <Cells>
+                    <Item1 Ref="77" ControlType="XRTableCell" Name="SayfaLabel" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187">
+                      <StylePriority Ref="78" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="79" ControlType="XRTableCell" Name="tableCell24" Multiline="true" TextAlignment="MiddleRight">
+                      <Controls>
+                        <Item1 Ref="80" ControlType="XRPageInfo" Name="SayfaText" ForeColor="255,60,67,82" Padding="2,2,0,0,100">
+                          <StylePriority Ref="81" UseFont="false" UseForeColor="false" />
+                        </Item1>
+                      </Controls>
+                      <StylePriority Ref="82" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item3>
+              </Rows>
+              <StylePriority Ref="83" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="84" ControlType="XRLabel" Name="BelgeTuru" CanGrow="false" AnchorVertical="Bottom" AnchorHorizontal="Right" TextAlignment="MiddleJustify" WordWrap="false" Padding="0,0,0,0,100">
+              <StylePriority Ref="85" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="86" ControlType="XRPictureBox" Name="pictureBox2" ImageSource="img,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" Sizing="StretchImage" />
+          </Controls>
+          <StylePriority Ref="87" UseBackColor="false" UseBorderColor="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="88" ControlType="DetailReportBand" Name="DetailReport" Level="0" DataMember="FaturaHareketler" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="89" ControlType="DetailBand" Name="Detail1">
+          <MultiColumn Ref="90" Layout="AcrossThenDown" />
+          <Controls>
+            <Item1 Ref="91" ControlType="XRTable" Name="xrTable1" Padding="5,5,5,5,100" BorderColor="255,229,231,235" Borders="Bottom" BorderWidth="1">
+              <Rows>
+                <Item1 Ref="92" ControlType="XRTableRow" Name="xrTableRow1" Padding="5,5,5,5,100">
+                  <Cells>
+                    <Item1 Ref="93" ControlType="XRTableCell" Name="xrTableCell11" CanGrow="false" TextAlignment="MiddleLeft" ForeColor="255,67,73,86" Padding="0,5,5,5,100">
+                      <Summary Ref="94" Running="Group" IgnoreNullValues="true" />
+                      <ExpressionBindings>
+                        <Item1 Ref="95" EventName="BeforePrint" PropertyName="Text" Expression="sumRecordNumber([Id])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="96" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="97" ControlType="XRTableCell" Name="xrTableCell1" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="98" EventName="BeforePrint" PropertyName="Text" Expression="[HareketAdi]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="99" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="100" ControlType="XRTableCell" Name="tableCell12" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="101" EventName="BeforePrint" PropertyName="Text" Expression="[BirimAdi]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="102" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="103" ControlType="XRTableCell" Name="xrTableCell2" CanGrow="false" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="104" EventName="BeforePrint" PropertyName="Text" Expression="[BirimFiyat]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="105" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item4>
+                    <Item5 Ref="106" ControlType="XRTableCell" Name="xrTableCell3" CanGrow="false" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="107" EventName="BeforePrint" PropertyName="Text" Expression="[Miktar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="108" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item5>
+                    <Item6 Ref="109" ControlType="XRTableCell" Name="tableCell14" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="110" EventName="BeforePrint" PropertyName="Text" Expression="[BrutTutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="111" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item6>
+                    <Item7 Ref="112" ControlType="XRTableCell" Name="xrTableCell4" CanGrow="false" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="113" EventName="BeforePrint" PropertyName="Text" Expression="[IndirimTutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="114" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item7>
+                    <Item8 Ref="115" ControlType="XRTableCell" Name="xrTableCell5" CanGrow="false" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="116" EventName="BeforePrint" PropertyName="Text" Expression="[KdvHaricTutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="117" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item8>
+                    <Item9 Ref="118" ControlType="XRTableCell" Name="tableCell36" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="119" EventName="BeforePrint" PropertyName="Text" Expression="FormatString('%{0}', [KdvOrani])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="120" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item9>
+                    <Item10 Ref="121" ControlType="XRTableCell" Name="tableCell38" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="122" EventName="BeforePrint" PropertyName="Text" Expression="[KdvTutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="123" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item10>
+                    <Item11 Ref="124" ControlType="XRTableCell" Name="tableCell53" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,67,73,86" Padding="5,2,5,5,100">
+                      <ExpressionBindings>
+                        <Item1 Ref="125" EventName="BeforePrint" PropertyName="Text" Expression="[NetTutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="126" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item11>
+                  </Cells>
+                  <StylePriority Ref="127" UsePadding="false" />
+                </Item1>
+              </Rows>
+              <StylePriority Ref="128" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+            </Item1>
+          </Controls>
+        </Item1>
+        <Item2 Ref="129" ControlType="GroupHeaderBand" Name="GroupHeader1" GroupUnion="WithFirstDetail">
+          <Controls>
+            <Item1 Ref="130" ControlType="XRTable" Name="xrTable2" ForeColor="255,92,100,118" Padding="5,5,5,5,100" Borders="Top, Bottom" BorderWidth="2">
+              <Rows>
+                <Item1 Ref="131" ControlType="XRTableRow" Name="xrTableRow2" Padding="5,5,3,5,100">
+                  <Cells>
+                    <Item1 Ref="132" ControlType="XRTableCell" Name="xrTableCell12" TextAlignment="MiddleLeft" Padding="0,5,3,5,100">
+                      <StylePriority Ref="133" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="134" ControlType="XRTableCell" Name="xrTableCell6" TextAlignment="MiddleLeft" Padding="7,5,3,5,100">
+                      <StylePriority Ref="135" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="136" ControlType="XRTableCell" Name="tableCell11" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="137" UseFont="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="138" ControlType="XRTableCell" Name="xrTableCell7" TextAlignment="MiddleRight">
+                      <StylePriority Ref="139" UseFont="false" UseTextAlignment="false" />
+                    </Item4>
+                    <Item5 Ref="140" ControlType="XRTableCell" Name="xrTableCell8" TextAlignment="MiddleRight" Padding="5,8,3,5,100">
+                      <StylePriority Ref="141" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item5>
+                    <Item6 Ref="142" ControlType="XRTableCell" Name="tableCell13" Multiline="true" TextAlignment="MiddleRight" Padding="5,7,3,5,100">
+                      <StylePriority Ref="143" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item6>
+                    <Item7 Ref="144" ControlType="XRTableCell" Name="xrTableCell9" TextAlignment="MiddleRight" Padding="5,7,3,5,100">
+                      <StylePriority Ref="145" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item7>
+                    <Item8 Ref="146" ControlType="XRTableCell" Name="xrTableCell10" TextAlignment="MiddleRight" Padding="5,0,5,5,100">
+                      <StylePriority Ref="147" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item8>
+                    <Item9 Ref="148" ControlType="XRTableCell" Name="tableCell34" Multiline="true" TextAlignment="MiddleRight" Padding="5,0,5,5,100">
+                      <StylePriority Ref="149" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item9>
+                    <Item10 Ref="150" ControlType="XRTableCell" Name="tableCell35" Multiline="true" TextAlignment="MiddleRight" Padding="5,0,5,5,100">
+                      <StylePriority Ref="151" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item10>
+                    <Item11 Ref="152" ControlType="XRTableCell" Name="tableCell33" Multiline="true" TextAlignment="MiddleRight" Padding="5,0,5,5,100">
+                      <StylePriority Ref="153" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item11>
+                  </Cells>
+                  <StylePriority Ref="154" UsePadding="false" />
+                </Item1>
+              </Rows>
+              <StylePriority Ref="155" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+        <Item3 Ref="156" ControlType="GroupFooterBand" Name="GroupFooter1">
+          <Controls>
+            <Item1 Ref="157" ControlType="XRTable" Name="table4" Padding="2,2,0,0,100" Borders="Top, Bottom" BorderWidth="2">
+              <Rows>
+                <Item1 Ref="158" ControlType="XRTableRow" Name="tableRow14" Borders="Bottom">
+                  <Cells>
+                    <Item1 Ref="159" ControlType="XRTableCell" Name="tableCell27" Multiline="true" TextAlignment="MiddleRight">
+                      <StylePriority Ref="160" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="161" ControlType="XRTableCell" Name="tableCell25" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Padding="5,2,5,5,100">
+                      <Summary Ref="162" Running="Page" />
+                      <ExpressionBindings>
+                        <Item1 Ref="163" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([BrutTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="164" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="165" ControlType="XRTableCell" Name="tableCell26" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,167,174,187" Padding="5,2,5,5,100">
+                      <Summary Ref="166" Running="Page" />
+                      <ExpressionBindings>
+                        <Item1 Ref="167" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([IndirimTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="168" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="169" ControlType="XRTableCell" Name="tableCell31" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Padding="5,2,5,5,100">
+                      <Summary Ref="170" Running="Page" />
+                      <ExpressionBindings>
+                        <Item1 Ref="171" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([KdvHaricTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="172" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item4>
+                    <Item5 Ref="173" ControlType="XRTableCell" Name="tableCell54" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118">
+                      <StylePriority Ref="174" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item5>
+                    <Item6 Ref="175" ControlType="XRTableCell" Name="tableCell55" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Padding="5,2,5,5,100">
+                      <Summary Ref="176" Running="Page" />
+                      <ExpressionBindings>
+                        <Item1 Ref="177" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([KdvTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="178" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item6>
+                    <Item7 Ref="179" ControlType="XRTableCell" Name="tableCell56" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Padding="5,2,5,5,100">
+                      <Summary Ref="180" Running="Page" />
+                      <ExpressionBindings>
+                        <Item1 Ref="181" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NetTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="182" UseFont="false" UseForeColor="false" UsePadding="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item7>
+                  </Cells>
+                  <StylePriority Ref="183" UseBorders="false" UseBorderWidth="false" />
+                </Item1>
+              </Rows>
+              <StylePriority Ref="184" UseBorders="false" UseBorderWidth="false" />
+            </Item1>
+          </Controls>
+        </Item3>
+        <Item4 Ref="185" ControlType="ReportFooterBand" Name="ReportFooter" PrintAtBottom="true" KeepTogether="true">
+          <Controls>
+            <Item1 Ref="186" ControlType="XRTable" Name="table8" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="187" ControlType="XRTableRow" Name="tableRow27" TextAlignment="MiddleLeft">
+                  <Cells>
+                    <Item1 Ref="188" ControlType="XRTableCell" Name="tableCell44" Multiline="true" ForeColor="255,67,73,86" Padding="15,2,0,0,100">
+                      <StylePriority Ref="189" UseFont="false" UseForeColor="false" UsePadding="false" />
+                    </Item1>
+                  </Cells>
+                  <StylePriority Ref="190" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="191" ControlType="XRTableRow" Name="tableRow28">
+                  <Cells>
+                    <Item1 Ref="192" ControlType="XRTableCell" Name="tableCell45" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                      <StylePriority Ref="193" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="194" ControlType="XRTableCell" Name="tableCell46" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="195" UseFont="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item2>
+                <Item3 Ref="196" ControlType="XRTableRow" Name="tableRow29">
+                  <Cells>
+                    <Item1 Ref="197" ControlType="XRTableCell" Name="tableCell47" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                      <StylePriority Ref="198" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="199" ControlType="XRTableCell" Name="tableCell48" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="200" UseFont="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item3>
+                <Item4 Ref="201" ControlType="XRTableRow" Name="tableRow30">
+                  <Cells>
+                    <Item1 Ref="202" ControlType="XRTableCell" Name="tableCell49" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,0,100">
+                      <StylePriority Ref="203" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="204" ControlType="XRTableCell" Name="tableCell50" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft">
+                      <StylePriority Ref="205" UseFont="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item4>
+                <Item5 Ref="206" ControlType="XRTableRow" Name="tableRow31">
+                  <Cells>
+                    <Item1 Ref="207" ControlType="XRTableCell" Name="tableCell51" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" Padding="15,2,0,2,100">
+                      <StylePriority Ref="208" UseFont="false" UseForeColor="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="209" ControlType="XRTableCell" Name="tableCell52" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Padding="2,2,0,2,100">
+                      <StylePriority Ref="210" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                </Item5>
+              </Rows>
+              <StylePriority Ref="211" UseFont="false" />
+            </Item1>
+            <Item2 Ref="212" ControlType="XRTable" Name="table7" Padding="2,2,0,0,100">
+              <Rows>
+                <Item1 Ref="213" ControlType="XRTableRow" Name="tableRow24" Borders="Bottom">
+                  <Cells>
+                    <Item1 Ref="214" ControlType="XRTableCell" Name="tableCell37" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,60,67,82" BorderColor="255,229,231,235">
+                      <StylePriority Ref="215" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="216" ControlType="XRTableCell" Name="tableCell39" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" BorderColor="255,229,231,235">
+                      <Summary Ref="217" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="218" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([BrutTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="219" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                  <StylePriority Ref="220" UseBorders="false" UseBorderWidth="false" />
+                </Item1>
+                <Item2 Ref="221" ControlType="XRTableRow" Name="tableRow16" Borders="Bottom">
+                  <Cells>
+                    <Item1 Ref="222" ControlType="XRTableCell" Name="tableCell30" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,167,174,187" BorderColor="255,229,231,235">
+                      <StylePriority Ref="223" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="224" ControlType="XRTableCell" Name="tableCell32" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,167,174,187" BorderColor="255,229,231,235">
+                      <Summary Ref="225" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="226" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([IndirimTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="227" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                  <StylePriority Ref="228" UseBorders="false" UseBorderWidth="false" />
+                </Item2>
+                <Item3 Ref="229" ControlType="XRTableRow" Name="tableRow15" Borders="Bottom">
+                  <Cells>
+                    <Item1 Ref="230" ControlType="XRTableCell" Name="tableCell28" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,60,67,82" BorderColor="255,229,231,235">
+                      <StylePriority Ref="231" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="232" ControlType="XRTableCell" Name="tableCell29" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" BorderColor="255,229,231,235">
+                      <Summary Ref="233" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="234" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([KdvHaricTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="235" UseFont="false" UseForeColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                  <StylePriority Ref="236" UseBorders="false" UseBorderWidth="false" />
+                </Item3>
+                <Item4 Ref="237" ControlType="XRTableRow" Name="tableRow25" BorderWidth="2">
+                  <Cells>
+                    <Item1 Ref="238" ControlType="XRTableCell" Name="tableCell40" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,60,67,82" Borders="Bottom">
+                      <StylePriority Ref="239" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="240" ControlType="XRTableCell" Name="tableCell41" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Borders="Bottom">
+                      <Summary Ref="241" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="242" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([KdvTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="243" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                  <StylePriority Ref="244" UseBorderWidth="false" />
+                </Item4>
+                <Item5 Ref="245" ControlType="XRTableRow" Name="tableRow26" BorderWidth="2">
+                  <Cells>
+                    <Item1 Ref="246" ControlType="XRTableCell" Name="tableCell42" Multiline="true" TextAlignment="MiddleLeft" ForeColor="255,60,67,82" Borders="Bottom">
+                      <StylePriority Ref="247" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="248" ControlType="XRTableCell" Name="tableCell43" Multiline="true" TextAlignment="MiddleRight" ForeColor="255,92,100,118" Borders="Bottom">
+                      <Summary Ref="249" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="250" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NetTutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="251" UseFont="false" UseForeColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item2>
+                  </Cells>
+                  <StylePriority Ref="252" UseBorderWidth="false" />
+                </Item5>
+              </Rows>
+              <StylePriority Ref="253" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item4>
+      </Bands>
+    </Item5>
+  </Bands>
+  <LocalizationItems>
+    <Item1 Ref="254" Component="#Ref-10" Culture="Default" Path="LocationFloat" Data="596.364441,64.37756" />
+    <Item2 Ref="255" Component="#Ref-10" Culture="Default" Path="SizeF" Data="224.1247,41.59355" />
+    <Item3 Ref="256" Component="#Ref-84" Culture="Default" Path="Font" Data="Arial, 37.71pt, style=Bold" />
+    <Item4 Ref="257" Component="#Ref-84" Culture="Default" Path="LocationFloat" Data="605.350647,75" />
+    <Item5 Ref="258" Component="#Ref-84" Culture="Default" Path="SizeF" Data="216.138611,41.5935745" />
+    <Item6 Ref="259" Component="#Ref-84" Culture="Default" Path="Text" Data="FATURA" />
+    <Item7 Ref="260" Component="#Ref-84" Culture="en" Path="Text" Data="INVOICE" />
+    <Item8 Ref="261" Component="#Ref-5" Culture="Default" Path="HeightF" Data="59" />
+    <Item9 Ref="262" Component="#Ref-6" Culture="Default" Path="HeightF" Data="168" />
+    <Item10 Ref="263" Component="#Ref-89" Culture="Default" Path="HeightF" Data="27.7777767" />
+    <Item11 Ref="264" Component="#Ref-1" Culture="Default" Path="Font" Data="Arial, 9.75pt" />
+    <Item12 Ref="265" Component="#Ref-1" Culture="Default" Path="Margins" Data="0, 0, 0, 59" />
+    <Item13 Ref="266" Component="#Ref-65" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item14 Ref="267" Component="#Ref-65" Culture="Default" Path="Text" Data="Fatura No:" />
+    <Item15 Ref="268" Component="#Ref-65" Culture="en" Path="Text" Data="Invoice No:" />
+    <Item16 Ref="269" Component="#Ref-65" Culture="Default" Path="Weight" Data="0.741498275443788" />
+    <Item17 Ref="270" Component="#Ref-67" Culture="Default" Path="Font" Data="Arial, 9.75pt, style=Bold" />
+    <Item18 Ref="271" Component="#Ref-67" Culture="Default" Path="Weight" Data="1.2027292002040708" />
+    <Item19 Ref="272" Component="#Ref-71" Culture="Default" Path="Text" Data="Fatura Tarihi:" />
+    <Item20 Ref="273" Component="#Ref-71" Culture="en" Path="Text" Data="Invoice Date:" />
+    <Item21 Ref="274" Component="#Ref-71" Culture="Default" Path="Weight" Data="0.74149715488516743" />
+    <Item22 Ref="275" Component="#Ref-73" Culture="Default" Path="Font" Data="Arial, 9.75pt, style=Bold" />
+    <Item23 Ref="276" Component="#Ref-73" Culture="Default" Path="TextFormatString" Data="{0:dd/MM/yyyy}" />
+    <Item24 Ref="277" Component="#Ref-73" Culture="Default" Path="Weight" Data="1.2027303207626912" />
+    <Item25 Ref="278" Component="#Ref-156" Culture="Default" Path="HeightF" Data="25.4772873" />
+    <Item26 Ref="279" Component="#Ref-129" Culture="Default" Path="HeightF" Data="32.29167" />
+    <Item27 Ref="280" Component="#Ref-7" Culture="Default" Path="Font" Data="Arial, 9.75pt" />
+    <Item28 Ref="281" Component="#Ref-7" Culture="Default" Path="LocationFloat" Data="596.363953,105.971115" />
+    <Item29 Ref="282" Component="#Ref-7" Culture="Default" Path="SizeF" Data="224.125061,23" />
+    <Item30 Ref="283" Component="#Ref-44" Culture="Default" Path="LocationFloat" Data="0,0" />
+    <Item31 Ref="284" Component="#Ref-44" Culture="Default" Path="SizeF" Data="850,207.2917" />
+    <Item32 Ref="285" Component="#Ref-45" Culture="Default" Path="LocationFloat" Data="17.99999,75" />
+    <Item33 Ref="286" Component="#Ref-45" Culture="Default" Path="SizeF" Data="148.3669,103.9839" />
+    <Item34 Ref="287" Component="#Ref-86" Culture="Default" Path="LocationFloat" Data="452.545,75" />
+    <Item35 Ref="288" Component="#Ref-86" Culture="Default" Path="SizeF" Data="91.9025,103.9839" />
+    <Item36 Ref="289" Component="#Ref-185" Culture="Default" Path="HeightF" Data="180" />
+    <Item37 Ref="290" Component="#Ref-43" Culture="Default" Path="HeightF" Data="207.2917" />
+    <Item38 Ref="291" Component="#Ref-49" Culture="Default" Path="Font" Data="Arial, 9pt, style=Bold" />
+    <Item39 Ref="292" Component="#Ref-49" Culture="Default" Path="Text" Data="Can Elektronik Paz. Tic. San. A.Ş." />
+    <Item40 Ref="293" Component="#Ref-49" Culture="Default" Path="Weight" Data="1.0198401485769693" />
+    <Item41 Ref="294" Component="#Ref-52" Culture="Default" Path="Text" Data="Deneme Cad. Deneme Sok. No:99" />
+    <Item42 Ref="295" Component="#Ref-52" Culture="Default" Path="Weight" Data="1.0198401485769693" />
+    <Item43 Ref="296" Component="#Ref-58" Culture="Default" Path="Text" Data="admin@deneme.com" />
+    <Item44 Ref="297" Component="#Ref-58" Culture="Default" Path="Weight" Data="1.0198401485769693" />
+    <Item45 Ref="298" Component="#Ref-55" Culture="Default" Path="Text" Data="(212) 999 99 99" />
+    <Item46 Ref="299" Component="#Ref-55" Culture="Default" Path="Weight" Data="1.0198401485769693" />
+    <Item47 Ref="300" Component="#Ref-61" Culture="Default" Path="Text" Data="www.deneme.com" />
+    <Item48 Ref="301" Component="#Ref-61" Culture="Default" Path="Weight" Data="1.0198401485769693" />
+    <Item49 Ref="302" Component="#Ref-77" Culture="Default" Path="Text" Data="Sayfa:" />
+    <Item50 Ref="303" Component="#Ref-77" Culture="en" Path="Text" Data="Page:" />
+    <Item51 Ref="304" Component="#Ref-77" Culture="Default" Path="Weight" Data="0.74149715488516743" />
+    <Item52 Ref="305" Component="#Ref-80" Culture="Default" Path="Font" Data="Arial, 9.75pt, style=Bold" />
+    <Item53 Ref="306" Component="#Ref-80" Culture="Default" Path="LocationFloat" Data="0,1.52587891E-05" />
+    <Item54 Ref="307" Component="#Ref-80" Culture="Default" Path="SizeF" Data="131.021729,20.833313" />
+    <Item55 Ref="308" Component="#Ref-80" Culture="Default" Path="TextFormatString" Data="{0} / {1}" />
+    <Item56 Ref="309" Component="#Ref-80" Culture="en" Path="TextFormatString" Data="" />
+    <Item57 Ref="310" Component="#Ref-63" Culture="Default" Path="LocationFloat" Data="608.6908,116.593567" />
+    <Item58 Ref="311" Component="#Ref-63" Culture="Default" Path="SizeF" Data="211.79834,62.5" />
+    <Item59 Ref="312" Component="#Ref-47" Culture="Default" Path="LocationFloat" Data="166.3669,75" />
+    <Item60 Ref="313" Component="#Ref-47" Culture="Default" Path="SizeF" Data="252.809647,103.9839" />
+    <Item61 Ref="314" Component="#Ref-14" Culture="Default" Path="LocationFloat" Data="18.99999,23.3599987" />
+    <Item62 Ref="315" Component="#Ref-14" Culture="Default" Path="SizeF" Data="573.024231,124.2047" />
+    <Item63 Ref="316" Component="#Ref-157" Culture="Default" Path="LocationFloat" Data="18.00003,0" />
+    <Item64 Ref="317" Component="#Ref-157" Culture="Default" Path="SizeF" Data="801.4892,25.4772873" />
+    <Item65 Ref="318" Component="#Ref-212" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item66 Ref="319" Component="#Ref-212" Culture="Default" Path="LocationFloat" Data="580.7395,30.5595856" />
+    <Item67 Ref="320" Component="#Ref-212" Culture="Default" Path="SizeF" Data="239.749756,149.440414" />
+    <Item68 Ref="321" Component="#Ref-186" Culture="Default" Path="LocationFloat" Data="19,30.5595856" />
+    <Item69 Ref="322" Component="#Ref-186" Culture="Default" Path="SizeF" Data="390.0049,125.6415" />
+    <Item70 Ref="323" Component="#Ref-16" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item71 Ref="324" Component="#Ref-16" Culture="Default" Path="Text" Data="Sayın :" />
+    <Item72 Ref="325" Component="#Ref-16" Culture="en" Path="Text" Data="Dear :" />
+    <Item73 Ref="326" Component="#Ref-16" Culture="Default" Path="Weight" Data="1.2248607866829957" />
+    <Item74 Ref="327" Component="#Ref-136" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item75 Ref="328" Component="#Ref-136" Culture="Default" Path="Text" Data="Birim" />
+    <Item76 Ref="329" Component="#Ref-136" Culture="en" Path="Text" Data="Unit" />
+    <Item77 Ref="330" Component="#Ref-136" Culture="Default" Path="Weight" Data="0.57490220591686947" />
+    <Item78 Ref="331" Component="#Ref-100" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item79 Ref="332" Component="#Ref-100" Culture="Default" Path="Weight" Data="0.50957934724247744" />
+    <Item80 Ref="333" Component="#Ref-142" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item81 Ref="334" Component="#Ref-142" Culture="Default" Path="Text" Data="Brüt Tutar" />
+    <Item82 Ref="335" Component="#Ref-142" Culture="en" Path="Text" Data="Gross Amount" />
+    <Item83 Ref="336" Component="#Ref-142" Culture="Default" Path="Weight" Data="0.621783011067951" />
+    <Item84 Ref="337" Component="#Ref-109" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item85 Ref="338" Component="#Ref-109" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item86 Ref="339" Component="#Ref-109" Culture="Default" Path="Weight" Data="0.55113319425353" />
+    <Item87 Ref="340" Component="#Ref-19" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item88 Ref="341" Component="#Ref-19" Culture="Default" Path="Text" Data="Ünvan:" />
+    <Item89 Ref="342" Component="#Ref-19" Culture="en" Path="Text" Data="Title:" />
+    <Item90 Ref="343" Component="#Ref-19" Culture="Default" Path="Weight" Data="0.36327635402344238" />
+    <Item91 Ref="344" Component="#Ref-21" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item92 Ref="345" Component="#Ref-21" Culture="Default" Path="Weight" Data="0.8615844326595532" />
+    <Item93 Ref="346" Component="#Ref-25" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item94 Ref="347" Component="#Ref-25" Culture="Default" Path="Text" Data="Vergi Dairesi / Numarası:" />
+    <Item95 Ref="348" Component="#Ref-25" Culture="en" Path="Text" Data="Tax Administration / Number:" />
+    <Item96 Ref="349" Component="#Ref-25" Culture="Default" Path="Weight" Data="0.36327635402344238" />
+    <Item97 Ref="350" Component="#Ref-27" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item98 Ref="351" Component="#Ref-27" Culture="Default" Path="Weight" Data="0.8615844326595532" />
+    <Item99 Ref="352" Component="#Ref-31" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item100 Ref="353" Component="#Ref-31" Culture="Default" Path="Text" Data="Adres:" />
+    <Item101 Ref="354" Component="#Ref-31" Culture="en" Path="Text" Data="Adress:" />
+    <Item102 Ref="355" Component="#Ref-31" Culture="Default" Path="Weight" Data="0.36327635402344238" />
+    <Item103 Ref="356" Component="#Ref-33" Culture="Default" Path="Weight" Data="0.8615844326595532" />
+    <Item104 Ref="357" Component="#Ref-37" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item105 Ref="358" Component="#Ref-37" Culture="Default" Path="Text" Data="Telefon:&#x9;" />
+    <Item106 Ref="359" Component="#Ref-37" Culture="en" Path="Text" Data="Teleohone:" />
+    <Item107 Ref="360" Component="#Ref-37" Culture="Default" Path="Weight" Data="0.36327635402344238" />
+    <Item108 Ref="361" Component="#Ref-39" Culture="Default" Path="Weight" Data="0.8615844326595532" />
+    <Item109 Ref="362" Component="#Ref-79" Culture="Default" Path="Weight" Data="1.2027303207626912" />
+    <Item110 Ref="363" Component="#Ref-161" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item111 Ref="364" Component="#Ref-161" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item112 Ref="365" Component="#Ref-161" Culture="Default" Path="Weight" Data="0.99054421914829272" />
+    <Item113 Ref="366" Component="#Ref-165" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item114 Ref="367" Component="#Ref-165" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item115 Ref="368" Component="#Ref-165" Culture="Default" Path="Weight" Data="0.99054378891550621" />
+    <Item116 Ref="369" Component="#Ref-159" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold" />
+    <Item117 Ref="370" Component="#Ref-159" Culture="Default" Path="Text" Data="Sayfa Toplamları :" />
+    <Item118 Ref="371" Component="#Ref-159" Culture="en" Path="Text" Data="Page Totals :" />
+    <Item119 Ref="372" Component="#Ref-159" Culture="Default" Path="Weight" Data="5.2852340244647849" />
+    <Item120 Ref="373" Component="#Ref-230" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item121 Ref="374" Component="#Ref-230" Culture="Default" Path="Text" Data="Kdv Hariç Tutar:" />
+    <Item122 Ref="375" Component="#Ref-230" Culture="en" Path="Text" Data="VAT Excludes:" />
+    <Item123 Ref="376" Component="#Ref-230" Culture="Default" Path="Weight" Data="1.483448832411532" />
+    <Item124 Ref="377" Component="#Ref-232" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item125 Ref="378" Component="#Ref-232" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item126 Ref="379" Component="#Ref-232" Culture="Default" Path="Weight" Data="1.0484453710917272" />
+    <Item127 Ref="380" Component="#Ref-222" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item128 Ref="381" Component="#Ref-222" Culture="Default" Path="Text" Data="İndirim Tutar:" />
+    <Item129 Ref="382" Component="#Ref-222" Culture="en" Path="Text" Data="Discount Amount:" />
+    <Item130 Ref="383" Component="#Ref-222" Culture="Default" Path="Weight" Data="1.483448832411532" />
+    <Item131 Ref="384" Component="#Ref-169" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item132 Ref="385" Component="#Ref-169" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item133 Ref="386" Component="#Ref-169" Culture="Default" Path="Weight" Data="0.990544959323452" />
+    <Item134 Ref="387" Component="#Ref-224" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item135 Ref="388" Component="#Ref-224" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item136 Ref="389" Component="#Ref-224" Culture="Default" Path="Weight" Data="1.0484453710917272" />
+    <Item137 Ref="390" Component="#Ref-152" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item138 Ref="391" Component="#Ref-152" Culture="Default" Path="Text" Data="Toplam Tutar" />
+    <Item139 Ref="392" Component="#Ref-152" Culture="en" Path="Text" Data="Total Amount" />
+    <Item140 Ref="393" Component="#Ref-152" Culture="Default" Path="Weight" Data="0.64140441211989" />
+    <Item141 Ref="394" Component="#Ref-148" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item142 Ref="395" Component="#Ref-148" Culture="Default" Path="Text" Data="Kdv Oranı" />
+    <Item143 Ref="396" Component="#Ref-148" Culture="en" Path="Text" Data="VAT Rate" />
+    <Item144 Ref="397" Component="#Ref-148" Culture="Default" Path="Weight" Data="0.28488013942922119" />
+    <Item145 Ref="398" Component="#Ref-150" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item146 Ref="399" Component="#Ref-150" Culture="Default" Path="Text" Data="Kdv Tutarı" />
+    <Item147 Ref="400" Component="#Ref-150" Culture="en" Path="Text" Data="VAT Amount" />
+    <Item148 Ref="401" Component="#Ref-150" Culture="Default" Path="Weight" Data="0.53542360583648785" />
+    <Item149 Ref="402" Component="#Ref-118" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item150 Ref="403" Component="#Ref-118" Culture="Default" Path="Weight" Data="0.25251076845709819" />
+    <Item151 Ref="404" Component="#Ref-214" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item152 Ref="405" Component="#Ref-214" Culture="Default" Path="Text" Data="Brüt Tutar:" />
+    <Item153 Ref="406" Component="#Ref-214" Culture="en" Path="Text" Data="Gross Amount:" />
+    <Item154 Ref="407" Component="#Ref-214" Culture="Default" Path="Weight" Data="1.483448832411532" />
+    <Item155 Ref="408" Component="#Ref-121" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item156 Ref="409" Component="#Ref-121" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item157 Ref="410" Component="#Ref-121" Culture="Default" Path="Weight" Data="0.47458634335398275" />
+    <Item158 Ref="411" Component="#Ref-216" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item159 Ref="412" Component="#Ref-216" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item160 Ref="413" Component="#Ref-216" Culture="Default" Path="Weight" Data="1.0484453710917272" />
+    <Item161 Ref="414" Component="#Ref-238" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item162 Ref="415" Component="#Ref-238" Culture="Default" Path="Text" Data="Kdv Tutarı:" />
+    <Item163 Ref="416" Component="#Ref-238" Culture="en" Path="Text" Data="VAT Rate:" />
+    <Item164 Ref="417" Component="#Ref-238" Culture="Default" Path="Weight" Data="1.483448832411532" />
+    <Item165 Ref="418" Component="#Ref-240" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item166 Ref="419" Component="#Ref-240" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item167 Ref="420" Component="#Ref-240" Culture="Default" Path="Weight" Data="1.0484453710917272" />
+    <Item168 Ref="421" Component="#Ref-246" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item169 Ref="422" Component="#Ref-246" Culture="Default" Path="Text" Data="Genel Toplam:" />
+    <Item170 Ref="423" Component="#Ref-246" Culture="en" Path="Text" Data="Grand Total:" />
+    <Item171 Ref="424" Component="#Ref-246" Culture="Default" Path="Weight" Data="1.483448832411532" />
+    <Item172 Ref="425" Component="#Ref-248" Culture="Default" Path="Font" Data="Arial, 9.5pt, style=Bold, charSet=162" />
+    <Item173 Ref="426" Component="#Ref-248" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item174 Ref="427" Component="#Ref-248" Culture="Default" Path="Weight" Data="1.0484453710917272" />
+    <Item175 Ref="428" Component="#Ref-188" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item176 Ref="429" Component="#Ref-188" Culture="Default" Path="Text" Data="Ödeme Bilgileri:" />
+    <Item177 Ref="430" Component="#Ref-188" Culture="en" Path="Text" Data="Payment Information:" />
+    <Item178 Ref="431" Component="#Ref-188" Culture="Default" Path="Weight" Data="1.6460270829746926" />
+    <Item179 Ref="432" Component="#Ref-192" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item180 Ref="433" Component="#Ref-192" Culture="Default" Path="Text" Data="Banka:" />
+    <Item181 Ref="434" Component="#Ref-192" Culture="en" Path="Text" Data="Bank:" />
+    <Item182 Ref="435" Component="#Ref-192" Culture="Default" Path="Weight" Data="0.61406608502229" />
+    <Item183 Ref="436" Component="#Ref-194" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item184 Ref="437" Component="#Ref-194" Culture="Default" Path="Text" Data="Deneme Bankası A.Ş." />
+    <Item185 Ref="438" Component="#Ref-194" Culture="Default" Path="Weight" Data="1.0319609979524025" />
+    <Item186 Ref="439" Component="#Ref-197" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item187 Ref="440" Component="#Ref-197" Culture="Default" Path="Text" Data="Banka Şubesi:" />
+    <Item188 Ref="441" Component="#Ref-197" Culture="en" Path="Text" Data="Bank Branch:" />
+    <Item189 Ref="442" Component="#Ref-197" Culture="Default" Path="Weight" Data="0.61406608502229" />
+    <Item190 Ref="443" Component="#Ref-199" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item191 Ref="444" Component="#Ref-199" Culture="Default" Path="Text" Data="Bakırköy Şubesi" />
+    <Item192 Ref="445" Component="#Ref-199" Culture="Default" Path="Weight" Data="1.0319609979524025" />
+    <Item193 Ref="446" Component="#Ref-202" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item194 Ref="447" Component="#Ref-202" Culture="Default" Path="Text" Data="Hesap No:" />
+    <Item195 Ref="448" Component="#Ref-202" Culture="en" Path="Text" Data="Account Number:" />
+    <Item196 Ref="449" Component="#Ref-202" Culture="Default" Path="Weight" Data="0.61406608502229" />
+    <Item197 Ref="450" Component="#Ref-204" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item198 Ref="451" Component="#Ref-204" Culture="Default" Path="Text" Data="2957588825" />
+    <Item199 Ref="452" Component="#Ref-204" Culture="Default" Path="Weight" Data="1.0319609979524025" />
+    <Item200 Ref="453" Component="#Ref-207" Culture="Default" Path="Font" Data="Arial, 9.25pt, style=Bold" />
+    <Item201 Ref="454" Component="#Ref-207" Culture="Default" Path="Text" Data="Iban No" />
+    <Item202 Ref="455" Component="#Ref-207" Culture="Default" Path="Weight" Data="0.61406608502229" />
+    <Item203 Ref="456" Component="#Ref-209" Culture="Default" Path="Font" Data="Arial, 9.25pt" />
+    <Item204 Ref="457" Component="#Ref-209" Culture="Default" Path="Text" Data="TR25 3455 2248 3255 7822 22 " />
+    <Item205 Ref="458" Component="#Ref-209" Culture="en" Path="Text" Data="TR25 3455 2248 3255 7822 22" />
+    <Item206 Ref="459" Component="#Ref-209" Culture="Default" Path="Weight" Data="1.0319609979524025" />
+    <Item207 Ref="460" Component="#Ref-124" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item208 Ref="461" Component="#Ref-124" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item209 Ref="462" Component="#Ref-124" Culture="Default" Path="Weight" Data="0.5685251914680467" />
+    <Item210 Ref="463" Component="#Ref-173" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item211 Ref="464" Component="#Ref-173" Culture="Default" Path="Weight" Data="0.453833337968782" />
+    <Item212 Ref="465" Component="#Ref-175" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item213 Ref="466" Component="#Ref-175" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item214 Ref="467" Component="#Ref-175" Culture="Default" Path="Weight" Data="0.85296751716192354" />
+    <Item215 Ref="468" Component="#Ref-179" Culture="Default" Path="Font" Data="Arial, 7pt, style=Bold, charSet=162" />
+    <Item216 Ref="469" Component="#Ref-179" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item217 Ref="470" Component="#Ref-179" Culture="Default" Path="Weight" Data="1.0218050027493202" />
+    <Item218 Ref="471" Component="#Ref-64" Culture="Default" Path="Weight" Data="0.48114824807738193" />
+    <Item219 Ref="472" Component="#Ref-30" Culture="Default" Path="Weight" Data="1" />
+    <Item220 Ref="473" Component="#Ref-36" Culture="Default" Path="Weight" Data="1" />
+    <Item221 Ref="474" Component="#Ref-76" Culture="Default" Path="Weight" Data="0.48114824807738188" />
+    <Item222 Ref="475" Component="#Ref-15" Culture="Default" Path="Weight" Data="1.97230270460737" />
+    <Item223 Ref="476" Component="#Ref-158" Culture="Default" Path="Weight" Data="0.31844500653974622" />
+    <Item224 Ref="477" Component="#Ref-229" Culture="Default" Path="Weight" Data="0.19999999744734565" />
+    <Item225 Ref="478" Component="#Ref-221" Culture="Default" Path="Weight" Data="0.19999999744734565" />
+    <Item226 Ref="479" Component="#Ref-70" Culture="Default" Path="Weight" Data="0.48114824807738188" />
+    <Item227 Ref="480" Component="#Ref-213" Culture="Default" Path="Weight" Data="0.19999999744734565" />
+    <Item228 Ref="481" Component="#Ref-237" Culture="Default" Path="Weight" Data="0.19999999744734565" />
+    <Item229 Ref="482" Component="#Ref-245" Culture="Default" Path="Weight" Data="0.19999999744734565" />
+    <Item230 Ref="483" Component="#Ref-187" Culture="Default" Path="Weight" Data="0.31800607361714833" />
+    <Item231 Ref="484" Component="#Ref-191" Culture="Default" Path="Weight" Data="0.17049848950242136" />
+    <Item232 Ref="485" Component="#Ref-196" Culture="Default" Path="Weight" Data="0.17049848950242136" />
+    <Item233 Ref="486" Component="#Ref-48" Culture="Default" Path="Weight" Data="1" />
+    <Item234 Ref="487" Component="#Ref-201" Culture="Default" Path="Weight" Data="0.17049848950242136" />
+    <Item235 Ref="488" Component="#Ref-206" Culture="Default" Path="Weight" Data="0.17049848950242136" />
+    <Item236 Ref="489" Component="#Ref-51" Culture="Default" Path="Weight" Data="1" />
+    <Item237 Ref="490" Component="#Ref-60" Culture="Default" Path="Weight" Data="1" />
+    <Item238 Ref="491" Component="#Ref-54" Culture="Default" Path="Weight" Data="1" />
+    <Item239 Ref="492" Component="#Ref-57" Culture="Default" Path="Weight" Data="1" />
+    <Item240 Ref="493" Component="#Ref-18" Culture="Default" Path="Weight" Data="1" />
+    <Item241 Ref="494" Component="#Ref-24" Culture="Default" Path="Weight" Data="1" />
+    <Item242 Ref="495" Component="#Ref-3" Culture="Default" Path="HeightF" Data="0" />
+    <Item243 Ref="496" Component="#Ref-91" Culture="Default" Path="LocationFloat" Data="19.0001221,0" />
+    <Item244 Ref="497" Component="#Ref-91" Culture="Default" Path="SizeF" Data="801.489,27.7777767" />
+    <Item245 Ref="498" Component="#Ref-130" Culture="Default" Path="Font" Data="Times New Roman, 8pt" />
+    <Item246 Ref="499" Component="#Ref-130" Culture="Default" Path="LocationFloat" Data="18.00003,0" />
+    <Item247 Ref="500" Component="#Ref-130" Culture="Default" Path="SizeF" Data="803.489136,32.29167" />
+    <Item248 Ref="501" Component="#Ref-97" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item249 Ref="502" Component="#Ref-97" Culture="Default" Path="Weight" Data="1.3948598352582733" />
+    <Item250 Ref="503" Component="#Ref-146" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item251 Ref="504" Component="#Ref-146" Culture="Default" Path="Text" Data="Kdv Hariç Tutar" />
+    <Item252 Ref="505" Component="#Ref-146" Culture="en" Path="Text" Data="VAT Excludes" />
+    <Item253 Ref="506" Component="#Ref-146" Culture="Default" Path="Weight" Data="0.621782989763276" />
+    <Item254 Ref="507" Component="#Ref-93" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item255 Ref="508" Component="#Ref-93" Culture="Default" Path="TextFormatString" Data="{0:00}" />
+    <Item256 Ref="509" Component="#Ref-93" Culture="Default" Path="Weight" Data="0.19775222004160847" />
+    <Item257 Ref="510" Component="#Ref-132" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item258 Ref="511" Component="#Ref-132" Culture="Default" Path="Text" Data="Sıra No" />
+    <Item259 Ref="512" Component="#Ref-132" Culture="Default" Path="Weight" Data="0.22310203016283991" />
+    <Item260 Ref="513" Component="#Ref-103" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item261 Ref="514" Component="#Ref-103" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item262 Ref="515" Component="#Ref-103" Culture="Default" Path="Weight" Data="0.47292816825188977" />
+    <Item263 Ref="516" Component="#Ref-106" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item264 Ref="517" Component="#Ref-106" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item265 Ref="518" Component="#Ref-106" Culture="Default" Path="Weight" Data="0.36555474719286607" />
+    <Item266 Ref="519" Component="#Ref-112" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item267 Ref="520" Component="#Ref-112" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item268 Ref="521" Component="#Ref-112" Culture="Default" Path="Weight" Data="0.55113321776872182" />
+    <Item269 Ref="522" Component="#Ref-115" Culture="Default" Path="Font" Data="Arial, 7pt" />
+    <Item270 Ref="523" Component="#Ref-115" Culture="Default" Path="TextFormatString" Data="{0:n2}" />
+    <Item271 Ref="524" Component="#Ref-115" Culture="Default" Path="Weight" Data="0.55113321537204818" />
+    <Item272 Ref="525" Component="#Ref-134" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item273 Ref="526" Component="#Ref-134" Culture="Default" Path="Text" Data="Stok / Hizmet / Masraf" />
+    <Item274 Ref="527" Component="#Ref-134" Culture="en" Path="Text" Data="Stock / Service / Expense" />
+    <Item275 Ref="528" Component="#Ref-134" Culture="Default" Path="Weight" Data="1.5736675492649352" />
+    <Item276 Ref="529" Component="#Ref-138" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item277 Ref="530" Component="#Ref-138" Culture="Default" Path="Text" Data="Birim Fiyat" />
+    <Item278 Ref="531" Component="#Ref-138" Culture="en" Path="Text" Data="Unit Price" />
+    <Item279 Ref="532" Component="#Ref-138" Culture="Default" Path="Weight" Data="0.53355209924344549" />
+    <Item280 Ref="533" Component="#Ref-140" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item281 Ref="534" Component="#Ref-140" Culture="Default" Path="Text" Data="Miktar" />
+    <Item282 Ref="535" Component="#Ref-140" Culture="en" Path="Text" Data="Amount" />
+    <Item283 Ref="536" Component="#Ref-140" Culture="Default" Path="Weight" Data="0.41241548829597086" />
+    <Item284 Ref="537" Component="#Ref-144" Culture="Default" Path="Font" Data="Arial, 6.75pt, style=Bold, charSet=162" />
+    <Item285 Ref="538" Component="#Ref-144" Culture="Default" Path="Text" Data="İndirim Tutar" />
+    <Item286 Ref="539" Component="#Ref-144" Culture="en" Path="Text" Data="Discount Amount" />
+    <Item287 Ref="540" Component="#Ref-144" Culture="Default" Path="Weight" Data="0.62178296357854346" />
+    <Item288 Ref="541" Component="#Ref-92" Culture="Default" Path="Weight" Data="13.895833333333334" />
+    <Item289 Ref="542" Component="#Ref-131" Culture="Default" Path="Weight" Data="11.236641221374045" />
+  </LocalizationItems>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v21.2" Name="ObjectDataSource" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0iT2JqZWN0RGF0YVNvdXJjZSIgLz4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

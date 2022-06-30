@@ -80,14 +80,17 @@ public class Functions
 
         return Id();
     }
+    /// <ÖZET>
+    /// (5/5) 18. Video
+    /// Report Getirme
+    /// <returns></returns>
+    public static XtraReport GetReport(Assembly assembly, ICoreListPageService service)
+    {
+        var assemblyName = assembly.FullName.Split(',')[0];
+        var reportFolder = service.ReportFolder == null ? service.BaseReportFolder :
+            $"{service.BaseReportFolder}.{service.ReportFolder.Replace('\\', '.')}";
 
-    //public static XtraReport GetReport(Assembly assembly, ICoreListPageService service)
-    //{
-    //    var assemblyName = assembly.FullName.Split(',')[0];
-    //    var reportFolder = service.ReportFolder == null ? service.BaseReportFolder :
-    //        $"{service.BaseReportFolder}.{service.ReportFolder.Replace('\\', '.')}";
-
-    //    return (XtraReport)assembly.CreateInstance($"{assemblyName}.{reportFolder}." +
-    //        $"{service.SelectedReportName}".Replace(' ', '_'));
-    //}
+        return (XtraReport)assembly.CreateInstance($"{assemblyName}.{reportFolder}." +
+            $"{service.SelectedReportName}".Replace(' ', '_'));
+    }
 }

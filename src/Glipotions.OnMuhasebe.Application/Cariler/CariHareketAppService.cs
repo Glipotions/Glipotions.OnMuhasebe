@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.Faturalar;
-using Glipotions.OnMuhasebe.MakbuzHareketler;
-using Glipotions.OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-
-namespace Glipotions.OnMuhasebe.Cariler;
+﻿namespace Glipotions.OnMuhasebe.Cariler;
 
 public class CariHareketAppService : OnMuhasebeAppService, ICariHareketAppService
 {
@@ -21,7 +11,10 @@ public class CariHareketAppService : OnMuhasebeAppService, ICariHareketAppServic
         _makbuzHareketRepository = makbuzHareketRepository;
         _faturaHareketRepository = faturaHareketRepository;
     }
-
+    /// <ÖZET>
+    /// (5/5) 10. video
+    /// cariler hem makbuz hareketlerde hem fatura hareketlerde harketi var
+    /// <returns></returns>
     public virtual async Task<PagedResultDto<ListCariHareketDto>> GetListAsync(CariHareketListParameterDto input)
     {
         var makbuzHareketler = await _makbuzHareketRepository.GetPagedListAsync(input.SkipCount,
@@ -63,7 +56,7 @@ public class CariHareketAppService : OnMuhasebeAppService, ICariHareketAppServic
             x.BelgeTuru = L["Invoice"];
             x.HareketTuru = L[$"Enum:FaturaTuru:{(byte)x.FaturaTuru}"];
         });
-
+        /// Makbuz ve Fatura Hareketleri Birleştirme
         var items = mappedFaturaHareketDtos.Concat(mappedMakbuzHareketDtos).OrderBy(x => x.Tarih).ToList();
         return new PagedResultDto<ListCariHareketDto>(totalMakbuzHareketCount + totalFaturaHareketCount, items);
     }

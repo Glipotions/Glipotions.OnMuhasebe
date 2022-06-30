@@ -387,15 +387,21 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
             BaseService.SelectedItem = BaseService.ListDataSource.
                 GetEntityById(BaseService.DataSource.Id);
     }
+    /// <ÖZET>
+    /// (5/5) 18. video dk 3
+    /// 
+    /// SelectFirstDataRow ile ilk satırı da seçtiği için false yapıldı
+    /// BaseService.SelectedItem.Id ile entity seçilip içi doldurulmuş olur.
+    /// ShowReportSelectBox Rapor seçimi için açılacak olan popup açılması için true yapılır.
+    ///     ListPagelerde kontrol sağlanır. örn SatisFaturaListPage
+    protected virtual async Task PrintAsync()
+    {
+        if (BaseService.ListDataSource.Count == 0) return;
 
-    //protected virtual async Task PrintAsync()
-    //{
-    //    if (BaseService.ListDataSource.Count == 0) return;
+        BaseService.SelectFirstDataRow = false;
+        BaseService.DataSource = await GetAsync(BaseService.SelectedItem.Id);
 
-    //    BaseService.SelectFirstDataRow = false;
-    //    BaseService.DataSource = await GetAsync(BaseService.SelectedItem.Id);
-
-    //    BaseService.ShowReportSelectBox = true;
-    //    await InvokeAsync(BaseService.HasChanged);
-    //}
+        BaseService.ShowReportSelectBox = true;
+        await InvokeAsync(BaseService.HasChanged);
+    }
 }

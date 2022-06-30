@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.2.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.2, Version=21.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Tahsilat_Makbuzu" Margins="52, 50, 48, 51" PageWidth="850" PageHeight="1100" Version="21.2" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Extensions>
+    <Item1 Ref="2" Key="VSReportExtInfo" Value=".vsrepx" />
+  </Extensions>
+  <Bands>
+    <Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="48" />
+    <Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="51" />
+    <Item3 Ref="5" ControlType="DetailBand" Name="Detail" HeightF="0" />
+    <Item4 Ref="6" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="88">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRTable" Name="xrTable1" SizeF="748.0001,80.62498" LocationFloat="0,0" Font="Calibri Light, 8pt">
+          <Rows>
+            <Item1 Ref="8" ControlType="XRTableRow" Name="xrTableRow1" Weight="1.2916667175292968" Font="Calibri Light, 12pt" BackColor="Gainsboro" Borders="Left, Top, Bottom">
+              <Cells>
+                <Item1 Ref="9" ControlType="XRTableCell" Name="xrTableCell8" Weight="6.69791488647461" Text="Tahsilat Makbuzu" TextAlignment="MiddleCenter" Font="Calibri Light, 16pt, style=Bold" Padding="2,2,0,0,100" Borders="All">
+                  <StylePriority Ref="10" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+              <StylePriority Ref="11" UseFont="false" UseBackColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="12" ControlType="XRTableRow" Name="xrTableRow5" Weight="0.33333267211914069">
+              <Cells>
+                <Item1 Ref="13" ControlType="XRTableCell" Name="xrTableCell45" Weight="6.69791488647461" TextFormatString="{0:dd.MM.yyyy}" TextAlignment="MiddleRight" Font="Arial, 8pt" Padding="2,2,0,0,100">
+                  <StylePriority Ref="14" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item2>
+            <Item3 Ref="15" ControlType="XRTableRow" Name="xrTableRow3" Weight="0.79999999999999993" TextAlignment="MiddleLeft">
+              <Cells>
+                <Item1 Ref="16" ControlType="XRTableCell" Name="xrTableCell19" Weight="0.768224808402216" Text="Makbuz No" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="17" UseFont="false" UsePadding="false" />
+                </Item1>
+                <Item2 Ref="18" ControlType="XRTableCell" Name="xrTableCell20" Weight="0.10819912238032886" Text=":" TextAlignment="MiddleCenter" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="19" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="20" ControlType="XRTableCell" Name="xrTableCell21" Weight="1.4669251096152847" Font="Calibri Light, 10pt" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="[MakbuzNo]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="22" UseFont="false" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="23" ControlType="XRTableCell" Name="xrTableCell24" Weight="0.19800828164096318" Padding="2,2,0,0,100">
+                  <StylePriority Ref="24" UsePadding="false" />
+                </Item4>
+                <Item5 Ref="25" ControlType="XRTableCell" Name="xrTableCell25" Weight="0.816553978774964" Text="Cari Kodu - Adı" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="26" UseFont="false" UsePadding="false" />
+                </Item5>
+                <Item6 Ref="27" ControlType="XRTableCell" Name="xrTableCell26" Weight="0.099765335680837189" Text=":" TextAlignment="MiddleCenter" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="28" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="29" ControlType="XRTableCell" Name="xrTableCell27" Weight="3.2402382499800146" Font="Calibri Light, 10pt" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="Concat([CariKodu],' - ',[CariAdi])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="31" UseFont="false" UsePadding="false" />
+                </Item7>
+              </Cells>
+              <StylePriority Ref="32" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="33" ControlType="XRTableRow" Name="xrTableRow2" Weight="0.79999999999999993" TextAlignment="MiddleLeft">
+              <Cells>
+                <Item1 Ref="34" ControlType="XRTableCell" Name="xrTableCell10" Weight="0.768224808402216" Text="Tarih" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="35" UseFont="false" UsePadding="false" />
+                </Item1>
+                <Item2 Ref="36" ControlType="XRTableCell" Name="xrTableCell11" Weight="0.10819912238032886" Text=":" TextAlignment="MiddleCenter" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="37" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="38" ControlType="XRTableCell" Name="xrTableCell12" Weight="1.4669251096152847" TextFormatString="{0:dd.MM.yyyy}" Font="Calibri Light, 10pt" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="39" EventName="BeforePrint" PropertyName="Text" Expression="[Tarih]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="40" UseFont="false" UsePadding="false" />
+                </Item3>
+                <Item4 Ref="41" ControlType="XRTableCell" Name="xrTableCell15" Weight="0.19800828164096318" Padding="2,2,0,0,100">
+                  <StylePriority Ref="42" UsePadding="false" />
+                </Item4>
+                <Item5 Ref="43" ControlType="XRTableCell" Name="xrTableCell16" Weight="0.81655397877496383" Text="Şube" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="44" UseFont="false" UsePadding="false" />
+                </Item5>
+                <Item6 Ref="45" ControlType="XRTableCell" Name="xrTableCell17" Weight="0.099765327141227156" Text=":" TextAlignment="MiddleCenter" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="46" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="47" ControlType="XRTableCell" Name="xrTableCell18" Weight="3.2402382585196245" Font="Calibri Light, 10pt" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="48" EventName="BeforePrint" PropertyName="Text" Expression="[SubeAdi]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="49" UseFont="false" UsePadding="false" />
+                </Item7>
+              </Cells>
+              <StylePriority Ref="50" UseTextAlignment="false" />
+            </Item4>
+          </Rows>
+          <StylePriority Ref="51" UseFont="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="52" ControlType="DetailReportBand" Name="DetailReport" Level="0" DataMember="MakbuzHareketler" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="53" ControlType="DetailBand" Name="Detail1" HeightF="17.66667">
+          <Controls>
+            <Item1 Ref="54" ControlType="XRTable" Name="xrTable9" TextAlignment="MiddleCenter" SizeF="747.9999,17.66667" LocationFloat="0.000143051147,0" Font="Arial, 8pt" BackColor="Transparent" Borders="None">
+              <Rows>
+                <Item1 Ref="55" ControlType="XRTableRow" Name="xrTableRow19" Weight="1" Font="Calibri Light, 7pt">
+                  <Cells>
+                    <Item1 Ref="56" ControlType="XRTableCell" Name="xrTableCell89" Weight="0.33809557932989054" CanGrow="false" TextFormatString="{0:00}" Padding="2,2,0,0,100" Borders="Left, Top, Right">
+                      <Summary Ref="57" Running="Group" />
+                      <ExpressionBindings>
+                        <Item1 Ref="58" EventName="BeforePrint" PropertyName="Text" Expression="sumRecordNumber([Id])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="59" UsePadding="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="60" ControlType="XRTableCell" Name="xrTableCell90" Weight="0.92324857674808614" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="61" EventName="BeforePrint" PropertyName="Text" Expression="[TakipNo]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="62" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="63" ControlType="XRTableCell" Name="tableCell1" Weight="0.46828735895022056" Multiline="true" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="[OdemeTuruAdi]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="65" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="66" ControlType="XRTableCell" Name="xrTableCell87" Weight="0.54647951385951643" TextFormatString="{0:dd.MM.yyyy}" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="67" EventName="BeforePrint" PropertyName="Text" Expression="[Vade]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="68" UsePadding="false" UseBorders="false" />
+                    </Item4>
+                    <Item5 Ref="69" ControlType="XRTableCell" Name="xrTableCell88" Weight="0.64131738210837286" TextFormatString="{0:n2}" TextAlignment="MiddleRight" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="70" EventName="BeforePrint" PropertyName="Text" Expression="[Tutar]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="71" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item5>
+                    <Item6 Ref="72" ControlType="XRTableCell" Name="xrTableCell82" Weight="0.69301350684970364" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="73" EventName="BeforePrint" PropertyName="Text" Expression="[AsilBorclu]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="74" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item6>
+                    <Item7 Ref="75" ControlType="XRTableCell" Name="xrTableCell83" Weight="0.64264034620616206" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="76" EventName="BeforePrint" PropertyName="Text" Expression="[Ciranta]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="77" UsePadding="false" UseBorders="false" />
+                    </Item7>
+                    <Item8 Ref="78" ControlType="XRTableCell" Name="xrTableCell84" Weight="1.2081806453602324" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="79" EventName="BeforePrint" PropertyName="Text" Expression="Concat([CekBankaAdi],' - ',[CekBankaSubeAdi])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="80" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item8>
+                    <Item9 Ref="81" ControlType="XRTableCell" Name="xrTableCell85" Weight="0.63666968248066635" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="82" EventName="BeforePrint" PropertyName="Text" Expression="[BelgeNo]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="83" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item9>
+                    <Item10 Ref="84" ControlType="XRTableCell" Name="xrTableCell86" Weight="0.71219485194312993" TextAlignment="MiddleLeft" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <ExpressionBindings>
+                        <Item1 Ref="85" EventName="BeforePrint" PropertyName="Text" Expression="[CekHesapNo]" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="86" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item10>
+                  </Cells>
+                  <StylePriority Ref="87" UseFont="false" />
+                </Item1>
+              </Rows>
+              <StylePriority Ref="88" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+          </Controls>
+        </Item1>
+        <Item2 Ref="89" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="42.99997">
+          <Controls>
+            <Item1 Ref="90" ControlType="XRTable" Name="xrTable8" TextAlignment="MiddleCenter" SizeF="748.0001,42.99997" LocationFloat="0,0" Font="Calibri Light, 8pt, style=Bold" BackColor="Gainsboro" Borders="None">
+              <Rows>
+                <Item1 Ref="91" ControlType="XRTableRow" Name="xrTableRow17" Weight="1.4339611030378669">
+                  <Cells>
+                    <Item1 Ref="92" ControlType="XRTableCell" Name="xrTableCell70" Weight="6.8101288764495509" Text="Ödeme Belgesi Bilgileri" Font="Calibri Light, 10pt, style=Bold" Padding="2,2,0,0,100" Borders="Left, Top, Right">
+                      <StylePriority Ref="93" UseFont="false" UsePadding="false" UseBorders="false" />
+                    </Item1>
+                  </Cells>
+                </Item1>
+                <Item2 Ref="94" ControlType="XRTableRow" Name="xrTableRow18" Weight="1" Font="Calibri Light, 7pt, style=Bold">
+                  <Cells>
+                    <Item1 Ref="95" ControlType="XRTableCell" Name="xrTableCell79" Weight="0.33809685703240488" Text="Sıra No" Padding="2,2,0,0,100" Borders="Left, Top, Right">
+                      <StylePriority Ref="96" UsePadding="false" UseBorders="false" />
+                    </Item1>
+                    <Item2 Ref="97" ControlType="XRTableCell" Name="xrTableCell80" Weight="0.92324829538316489" Text="Takip No" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="98" UsePadding="false" UseBorders="false" />
+                    </Item2>
+                    <Item3 Ref="99" ControlType="XRTableCell" Name="xrTableCell77" Weight="0.46828702265171857" Text="Türü" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="100" UsePadding="false" UseBorders="false" />
+                    </Item3>
+                    <Item4 Ref="101" ControlType="XRTableCell" Name="xrTableCell78" Weight="0.546479768904389" Text="Vade" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="102" UsePadding="false" UseBorders="false" />
+                    </Item4>
+                    <Item5 Ref="103" ControlType="XRTableCell" Name="xrTableCell71" Weight="0.641317401891938" Text="Tutar" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="104" UsePadding="false" UseBorders="false" />
+                    </Item5>
+                    <Item6 Ref="105" ControlType="XRTableCell" Name="xrTableCell72" Weight="0.69301365510766288" Text="Asıl Borçlu" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="106" UsePadding="false" UseBorders="false" />
+                    </Item6>
+                    <Item7 Ref="107" ControlType="XRTableCell" Name="xrTableCell73" Weight="0.64263968583308528" Text="Ciranta" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="108" UsePadding="false" UseBorders="false" />
+                    </Item7>
+                    <Item8 Ref="109" ControlType="XRTableCell" Name="xrTableCell74" Weight="1.2081810492487568" Text="Banka / Şube" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="110" UsePadding="false" UseBorders="false" />
+                    </Item8>
+                    <Item9 Ref="111" ControlType="XRTableCell" Name="xrTableCell75" Weight="0.63666904655775525" Text="Belge No" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="112" UsePadding="false" UseBorders="false" />
+                    </Item9>
+                    <Item10 Ref="113" ControlType="XRTableCell" Name="xrTableCell76" Weight="0.71219609383867433" Text="Hesap No" Padding="2,2,0,0,100" Borders="Top, Right">
+                      <StylePriority Ref="114" UsePadding="false" UseBorders="false" />
+                    </Item10>
+                  </Cells>
+                  <StylePriority Ref="115" UseFont="false" />
+                </Item2>
+              </Rows>
+              <StylePriority Ref="116" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+        <Item3 Ref="117" ControlType="GroupFooterBand" Name="GroupFooter1" HeightF="17.66667">
+          <Controls>
+            <Item1 Ref="118" ControlType="XRTable" Name="xrTable12" TextAlignment="MiddleCenter" SizeF="748,17.66667" LocationFloat="2.0980835E-05,0" Font="Arial, 8pt" BackColor="Gainsboro" Borders="None">
+              <Rows>
+                <Item1 Ref="119" ControlType="XRTableRow" Name="xrTableRow22" Weight="1" Font="Calibri Light, 7pt">
+                  <Cells>
+                    <Item1 Ref="120" ControlType="XRTableCell" Name="xrTableCell108" Weight="2.27611287484946" Text="TOPLAMLAR" Font="Calibri Light, 7pt, style=Bold" Padding="2,2,0,0,100" Borders="All" />
+                    <Item2 Ref="121" ControlType="XRTableCell" Name="xrTableCell112" Weight="0.64131737617393547" TextFormatString="{0:n2}" Font="Calibri Light, 7pt, style=Bold" Padding="2,2,0,0,100" Borders="Top, Right, Bottom">
+                      <Summary Ref="122" Running="Report" />
+                      <ExpressionBindings>
+                        <Item1 Ref="123" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([MakbuzHareketler].[Tutar])" />
+                      </ExpressionBindings>
+                      <StylePriority Ref="124" UseFont="false" UsePadding="false" UseBorders="false" />
+                    </Item2>
+                    <Item3 Ref="125" ControlType="XRTableCell" Name="xrTableCell5" Weight="3.8926988838795795" Multiline="true" Font="Arial, 7pt, style=Bold" Padding="2,2,0,0,100" Borders="Top, Right, Bottom" />
+                  </Cells>
+                  <StylePriority Ref="126" UseFont="false" />
+                </Item1>
+              </Rows>
+              <StylePriority Ref="127" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+          </Controls>
+        </Item3>
+        <Item4 Ref="128" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="184">
+          <Controls>
+            <Item1 Ref="129" ControlType="XRTable" Name="xrTable3" SizeF="196.9749,123.9167" LocationFloat="551.0251,59.4166451">
+              <Rows>
+                <Item1 Ref="130" ControlType="XRTableRow" Name="xrTableRow4" Weight="1">
+                  <Cells>
+                    <Item1 Ref="131" ControlType="XRTableCell" Name="xrTableCell6" Weight="1" Multiline="true" Text="Tahsil Eden Adı, Soyadı, İmza" TextAlignment="MiddleCenter" Font="Calibri Light, 8pt, style=Bold" Padding="2,2,0,0,100" Borders="All" />
+                  </Cells>
+                </Item1>
+                <Item2 Ref="132" ControlType="XRTableRow" Name="xrTableRow9" Weight="3.9566680708137376">
+                  <Cells>
+                    <Item1 Ref="133" ControlType="XRTableCell" Name="xrTableCell7" Weight="1" Multiline="true" TextAlignment="MiddleCenter" Padding="2,2,0,0,100" Borders="Left, Right, Bottom" />
+                  </Cells>
+                </Item2>
+              </Rows>
+            </Item1>
+            <Item2 Ref="134" ControlType="XRPageInfo" Name="xrPageInfo1" PageInfo="DateTime" TextFormatString="{0:dd.MM.yyyy}" TextAlignment="MiddleCenter" SizeF="196.9749,23" LocationFloat="551.0251,36.41669" Font="Calibri Light, 8pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="135" UseFont="false" UseTextAlignment="false" />
+            </Item2>
+          </Controls>
+        </Item4>
+      </Bands>
+    </Item5>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v21.2" Name="ObjectDataSource" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0iT2JqZWN0RGF0YVNvdXJjZSIgLz4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

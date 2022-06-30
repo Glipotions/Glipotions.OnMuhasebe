@@ -43,6 +43,8 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using System.Text.Json.Serialization;
 using DevExpress.Blazor.Configuration;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
+using DevExpress.Blazor.Reporting.Controllers;
 
 namespace Glipotions.OnMuhasebe.Blazor;
 
@@ -111,6 +113,17 @@ public class OnMuhasebeBlazorModule : AbpModule
     //        .ReferenceHandler = ReferenceHandler.IgnoreCycles);
     //}
 
+    /// ÖZET
+    /// (5/5) 18. video 43. dk
+    /// 
+    private void ConfigureAntiForgery()
+    {
+        Configure<AbpAntiForgeryOptions>(options =>
+        {
+            options.AutoValidateFilter = type => type == typeof(DownloadExportResultControllerBase);
+        });
+    }
+
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
@@ -143,7 +156,7 @@ public class OnMuhasebeBlazorModule : AbpModule
                     bundle.AddFiles("/blazor-global-styles.css");
                     bundle.AddFiles("/Glipotions.OnMuhasebe.Blazor.styles.css");
                     bundle.AddFiles("/_content/DevExpress.Blazor/dx-blazor.bs5.css");
-                    //bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
+                    bundle.AddFiles("/_content/DevExpress.Blazor.Reporting.Viewer/css/dx-blazor-reporting-components.css");
                     bundle.AddFiles("/_content/Glipotions.Blazor.Core/css/component.css");
                 }
             );
@@ -279,6 +292,7 @@ public class OnMuhasebeBlazorModule : AbpModule
         var env = context.GetEnvironment();
         var app = context.GetApplicationBuilder();
 
+        app.UseDevExpressServerSideBlazorReportViewer();
         app.UseAbpRequestLocalization();
 
         if (env.IsDevelopment())

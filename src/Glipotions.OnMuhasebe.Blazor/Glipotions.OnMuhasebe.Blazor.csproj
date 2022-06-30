@@ -46,6 +46,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Reports\Makbuzlar\TahsilatMakbuzlari\Tahsilat Makbuzu.vsrepx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Makbuzlar\TahsilatMakbuzlari\Tahsilat Makbuzu.vsrepx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Abp\UiMessageAlert.razor" />
     <None Include="Pages\BankaHesaplar\BankaHesapEditPage.razor" />
     <None Include="Pages\BankaHesaplar\BankaHesapHareketListPage.razor" />
@@ -106,6 +114,15 @@
     <None Update="Pages\**\*.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Reports\Makbuzlar\TahsilatMakbuzlari\Tahsilat Makbuzu.cs">
+      <DependentUpon>Tahsilat Makbuzu.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Makbuzlar\TahsilatMakbuzlari\Tahsilat Makbuzu.Designer.cs">
+      <DependentUpon>Tahsilat Makbuzu.vsrepx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

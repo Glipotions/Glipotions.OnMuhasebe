@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.FaturaHareketler;
-using Glipotions.OnMuhasebe.Faturalar;
-using Glipotions.OnMuhasebe.Stoklar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-
-namespace Glipotions.OnMuhasebe.Depolar;
+﻿namespace Glipotions.OnMuhasebe.Depolar;
 
 public class DepoHareketAppService : OnMuhasebeAppService, IDepoHareketAppService
 {

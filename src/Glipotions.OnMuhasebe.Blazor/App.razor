@@ -1,11 +1,38 @@
 ﻿
-<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
+@inject IOptions<AbpRouterOptions> RouterOptions
+@inject IStringLocalizer<OnMuhasebeResource> L
+@inject NavigationManager NavigationManager
+
+@*(5/5) 21. Video*@
+@* 
+    AuthorizeRouteView ile giriş yetkisi yoksa ona göre yönlendirme yapmayı sağlayan yapı kuruldu
+    CascadingAuthenticationState ile kullanıcıya ulaşıp kullanıcının giriş yapıp yapmadığı kontrol edilir.
+
+
+*@
+<CircleLoading1 Caption="@L["PleaseWait"]" Text="@L["Loading"]">    
+    <CascadingAuthenticationState>
+        <Router AppAssembly="RouterOptions.Value.AppAssembly"
+                AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
+            <Found Context="routeData">
+                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    <NotAuthorized>
+                        @if (!context.User.Identity.IsAuthenticated)
+                        {
+                            NavigationManager.NavigateTo($"account/login?returnUrl={ Uri.EscapeDataString(NavigationManager.Uri) }", true);
+                        }
+                        else
+                        {
+                            <p>@L["NotAuthorized"]</p>
+                        }
+                    </NotAuthorized>
+                </AuthorizeRouteView>
+            </Found>
+            <NotFound>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p>@L["NothingAddress"]</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </CascadingAuthenticationState>    
+</CircleLoading1>

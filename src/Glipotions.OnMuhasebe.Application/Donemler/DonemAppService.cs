@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Donemler;
 
-namespace Glipotions.OnMuhasebe.Donemler;
-
+[Authorize(OnMuhasebePermissions.Donem.Default)]
 public class DonemAppService : OnMuhasebeAppService, IDonemAppService
 {
     private readonly IDonemRepository _donemRepository;
@@ -56,6 +50,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Donem.Create)]
     public virtual async Task<SelectDonemDto> CreateAsync(CreateDonemDto input)
     {
         await _donemManager.CheckCreateAsync(input.Kod);
@@ -71,6 +66,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Donem.Update)]
     public virtual async Task<SelectDonemDto> UpdateAsync(Guid id, UpdateDonemDto input)
     {
         var entity = await _donemRepository.GetAsync(id, x => x.Id == id);
@@ -84,6 +80,7 @@ public class DonemAppService : OnMuhasebeAppService, IDonemAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Donem.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _donemManager.CheckDeleteAsync(id);

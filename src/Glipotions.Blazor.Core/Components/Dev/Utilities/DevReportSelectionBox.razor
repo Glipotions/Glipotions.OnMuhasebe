@@ -27,7 +27,18 @@
         </div>
     </PageContent>
 </DevPopupPageLayout>
+@*  REPORT SELECTION BOX
+    (5/5) 15. Video 
+    Bu sayfa Popup olduğu için DevPopupPageLayout kullanıldı
+    Sayfanın görevi: yazdırma işleminde hangi şablonun yazdıralacağını seçilen yer
 
+    SelectButtonClick ile seçilen comboboxtaki adı SelectedReportName a ataması yapılır.
+
+    Directory.GetFiles ile directory deki dosyaların yüklenmesini sağlar, .vsrepx uzantılı tüm dosyaları getir
+        Path.GetFileNameWithoutExtension ile sadece rapor dosyalarının adını almayı sağlar.
+
+    .vsrepx devExpress'in .Net Core dan sonraki rapor dosya uzantısıdır.
+*@
 @code {
     private DevComboBoxEdit<string> _comboBoxEdit;
     private List<string> _dataSource;
@@ -56,5 +67,4 @@
         base.OnParametersSet();
         GetDataSource();
     }
-
 }

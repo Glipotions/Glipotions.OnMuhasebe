@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.BankaSubeler;
 
-namespace Glipotions.OnMuhasebe.BankaSubeler;
-
+[Authorize(OnMuhasebePermissions.BankaSube.Default)]
 public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
 {
     private readonly IBankaSubeRepository _bankaSubeRepository;
@@ -59,6 +54,8 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    
+    [Authorize(OnMuhasebePermissions.BankaSube.Create)]
     public virtual async Task<SelectBankaSubeDto> CreateAsync(CreateBankaSubeDto input)
     {
         await _bankaSubeManager.CheckCreateAsync(input.Kod, input.BankaId, input.OzelKod1Id, input.OzelKod2Id);
@@ -74,6 +71,7 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.BankaSube.Update)]
     public virtual async Task<SelectBankaSubeDto> UpdateAsync(Guid id, UpdateBankaSubeDto input)
     {
         var entity = await _bankaSubeRepository.GetAsync(id, x => x.Id == id);
@@ -87,6 +85,7 @@ public class BankaSubeAppService : OnMuhasebeAppService, IBankaSubeAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.BankaSube.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaSubeManager.CheckDeleteAsync(id);

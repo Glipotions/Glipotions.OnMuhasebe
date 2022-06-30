@@ -61,8 +61,7 @@ public abstract class BaseService<TDataGridItem, TDataSource> :
     public bool IsPopupListPage { get; set; }
     public bool EditPageVisible { get; set; }
     public string SelectedReportName { get; set; }
-    public string BaseReportFolder { get; set; }="";
-    //public string BaseReportFolder { get; set; } = nameof(Reports);
+    public string BaseReportFolder { get; set; } = nameof(Reports);
     public string ReportFolder { get; set; }
     public Action HasChanged { get; set; }
     public ComponentBase ActiveEditComponent { get; set; }

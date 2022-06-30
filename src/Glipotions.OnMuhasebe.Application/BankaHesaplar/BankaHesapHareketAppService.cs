@@ -7,28 +7,28 @@ using Glipotions.OnMuhasebe.OdemeBelgeleri;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 
-namespace Glipotions.OnMuhasebe.Kasalar;
+namespace Glipotions.OnMuhasebe.BankaHesaplar;
 
-public class KasaHareketAppService : OnMuhasebeAppService, IKasaHareketAppService
+public class BankaHesapHareketAppService : OnMuhasebeAppService, IBankaHesapHareketAppService
 {
     private readonly IMakbuzHareketRepository _makbuzHareketRepository;
 
-    public KasaHareketAppService(IMakbuzHareketRepository makbuzHareketRepository)
+    public BankaHesapHareketAppService(IMakbuzHareketRepository makbuzHareketRepository)
     {
         _makbuzHareketRepository = makbuzHareketRepository;
     }
     /// <ÖZET>
-    /// (5/5) 9. video
+    /// (5/5) 8. video 25. dk
     public virtual async Task<PagedResultDto<ListOdemeBelgesiHareketDto>> GetListAsync(
         MakbuzHareketListParameterDto input)
     {
         var hareketler = await _makbuzHareketRepository.GetPagedListAsync(input.SkipCount, input.MaxResultCount,
-            x => x.KasaId == input.EntityId &&
+            x => x.BankaHesapId == input.EntityId &&
                  x.Makbuz.SubeId == input.SubeId && x.Makbuz.DonemId == input.DonemId && x.Makbuz.Durum,
             x => x.Makbuz.Tarih,
             x => x.Makbuz);
 
-        var totalCount = await _makbuzHareketRepository.CountAsync(x => x.KasaId == input.EntityId &&
+        var totalCount = await _makbuzHareketRepository.CountAsync(x => x.BankaHesapId == input.EntityId &&
                                                                         x.Makbuz.SubeId == input.SubeId &&
                                                                         x.Makbuz.DonemId == input.DonemId &&
                                                                         x.Makbuz.Durum);

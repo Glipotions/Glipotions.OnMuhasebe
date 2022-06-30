@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.BankaHesaplar;
 
-namespace Glipotions.OnMuhasebe.BankaHesaplar;
-
+[Authorize(OnMuhasebePermissions.BankaHesap.Default)]
 public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
 {
     private readonly IBankaHesapRepository _bankaHesapRepository;
@@ -25,6 +17,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
     /// ObjectMapper Entity'i Select(Entity)Dto olarak mapler.
     /// x.Banka, x.BankaSube, x.OzelKod1, x.OzelKod2 --> Entitydeki Propertyler.
     /// mappedDto.HesapTuruAdi ile Localize işlemi yapılarak BankaHesapTuru enum ına göre hesap türü adı çekilir.
+    
     public virtual async Task<SelectBankaHesapDto> GetAsync(Guid id)
     {
         var entity = await _bankaHesapRepository.GetAsync(id, x => x.Id == id,
@@ -84,6 +77,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.BankaHesap.Create)]
     public virtual async Task<SelectBankaHesapDto> CreateAsync(CreateBankaHesapDto input)
     {
         await _bankaHesapManager.CheckCreateAsync(input.Kod, input.BankaSubeId, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -100,6 +94,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.BankaHesap.Update)]
     public virtual async Task<SelectBankaHesapDto> UpdateAsync(Guid id, UpdateBankaHesapDto input)
     {
         var entity = await _bankaHesapRepository.GetAsync(id, x => x.Id == id);
@@ -113,6 +108,7 @@ public class BankaHesapAppService : OnMuhasebeAppService, IBankaHesapAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.BankaHesap.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _bankaHesapManager.CheckDeleteAsync(id);

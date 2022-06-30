@@ -16,6 +16,12 @@ public class OdemeBelgesiService : BaseService<ListOdemeBelgesiDto, SelectMakbuz
     public string OdemeTurleri { get; set; }
     public bool KendiBelgemiz { get; set; }
 
+    /// <ÖZET>
+    /// (5/5) 5. video dk 20
+    /// Amaç: Ödeme belgeleri list pageden 1 veya 1 den fazla makbuz seçip bunlar makbuza eklendiği anda
+    ///     2. kez o butona basıp seçim yapılacağı zaman makbuza eklenmiş olanları görmemeyi sağlayan fonksiyon
+    ///     
+    /// ÖZET: LİSTE DIŞI KAYITLAR
     public void CiroEdilebilecekBelgeler(string odemeTurleri)
     {
         BeforeShowPopupListPage();
@@ -26,7 +32,11 @@ public class OdemeBelgesiService : BaseService<ListOdemeBelgesiDto, SelectMakbuz
                         x.BelgeDurumu == BelgeDurumu.TahsilEdildi ||
                         x.BelgeDurumu == BelgeDurumu.Odendi).Select(x => x.TakipNo).ToList();
     }
-
+    /// <ÖZET>
+    /// Seçili Ürünleri Makbuz belgesine ekleme fonksiyonu
+    /// Her eklenilen item için yeni bir id oluşturmak gerekiyor.
+    /// BelgeDurumu, KasaId, BankaHesapId
+    /// </summary>
     public override void AddSelectedItems()
     {
         if (SelectedItems == null) return;

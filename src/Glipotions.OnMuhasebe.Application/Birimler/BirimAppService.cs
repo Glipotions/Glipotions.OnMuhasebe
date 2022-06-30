@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Birimler;
 
-namespace Glipotions.OnMuhasebe.Birimler;
-
+[Authorize(OnMuhasebePermissions.Birim.Default)]
 public class BirimAppService : OnMuhasebeAppService, IBirimAppService
 {
     private readonly IBirimRepository _birimRepository;
@@ -57,6 +51,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Birim.Create)]
     public virtual async Task<SelectBirimDto> CreateAsync(CreateBirimDto input)
     {
         await _birimManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
@@ -72,6 +67,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Birim.Update)]
     public virtual async Task<SelectBirimDto> UpdateAsync(Guid id, UpdateBirimDto input)
     {
         var entity = await _birimRepository.GetAsync(id, x => x.Id == id);
@@ -85,6 +81,7 @@ public class BirimAppService : OnMuhasebeAppService, IBirimAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Birim.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _birimManager.CheckDeleteAsync(id);

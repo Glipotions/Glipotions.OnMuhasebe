@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Hizmetler;
 
-namespace Glipotions.OnMuhasebe.Hizmetler;
-
+[Authorize(OnMuhasebePermissions.Hizmet.Default)]
 public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
 {
     private readonly IHizmetRepository _hizmetRepository;

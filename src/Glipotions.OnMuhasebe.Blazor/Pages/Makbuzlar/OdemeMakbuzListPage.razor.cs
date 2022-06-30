@@ -27,7 +27,8 @@ public partial class OdemeMakbuzListPage
         if (listDataSource != null)
             Service.ListDataSource = listDataSource;
     }
-
+    /// <ÖZET>
+    /// insert sayfası açılmadan önce dolu olması gereken proplar doldurulur.
     protected override async Task BeforeInsertAsync()
     {
         Service.DataSource = new SelectMakbuzDto

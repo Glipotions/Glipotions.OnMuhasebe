@@ -28,9 +28,17 @@ public interface ICoreListPageService
     /// Popuplarda EditPage in Visible olup olmadığını tutan prop.
     /// örn: DevListPageLayout.razor dosyası
     public bool EditPageVisible { get; set; }
+    /// <ÖZET>
+    /// Seçilen Raporun Adı
     public string SelectedReportName { get; set; }
+    /// <ÖZET>
+    /// Rapor'un ana dosyasının yolu örn: Raporlar
     public string BaseReportFolder { get; set; }
+    /// <ÖZET>
+    /// Rapor dosyasının yolu örn Faturalar
     public string ReportFolder { get; set; }
+    /// <ÖZET>
+    /// ShowReportSelectBox Rapor seçimi için açılacak olan popup açılması için true yapılır.
     public bool ShowReportSelectBox { get; set; }
     public bool IsGrantedDefault { get; set; }
     public bool IsGrantedCreate { get; set; }

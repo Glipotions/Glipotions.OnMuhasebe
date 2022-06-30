@@ -1,0 +1,37 @@
+﻿@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject IStringLocalizer<OnMuhasebeResource> L
+
+@*
+    Kullancı Authorize ise Authorized içi işlemler yapılır 
+        değilse NotAuthorized içi işlemler yapılır
+
+    
+
+*@
+<AuthorizeView>
+    <Authorized>
+        <DxMenuItem Text="@(CurrentTenant.Name == null ? CurrentUser.UserName :
+                            @$"{CurrentTenant.Name}\{CurrentUser.UserName}")"
+                    IconCssClass="fas fa-user"
+                    BeginGroup="true"
+                    Position="ItemPosition.End">
+            <Items>
+                <DxMenuItem Text="@L["ManageProfile"]"
+                            NavigateUrl="Account/Manage"
+                            IconCssClass="far fa-address-card" />
+
+                <DxMenuItem Text="@L["Logout"]"
+                            NavigateUrl="Account/Logout"
+                            IconCssClass="fas fa-sign-out-alt" />
+            </Items>
+        </DxMenuItem>
+    </Authorized>
+    <NotAuthorized>
+        <DxMenuItem Text="@L["Login"]"
+                    NavigateUrl="Account/Login"
+                    IconCssClass="fas fa-user"
+                    BeginGroup="true"
+                    Position="ItemPosition.End"/>
+    </NotAuthorized>
+</AuthorizeView>

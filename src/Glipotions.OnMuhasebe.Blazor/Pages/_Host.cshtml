@@ -1,26 +1,41 @@
 ﻿@page "/"
-@namespace Glipotions.OnMuhasebe.Blazor.Pages
+
+@inject IStringLocalizer<OnMuhasebeResource> L
+
 @using System.Globalization
+@using Glipotions.OnMuhasebe.Blazor
+@using Glipotions.OnMuhasebe.Localization
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Localization
 @using Volo.Abp.AspNetCore.Components.Server.BasicTheme.Bundling
 @using Volo.Abp.Localization
+
 @{
     Layout = null;
     var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
 }
-
+@* (5/5) 22. video 
+    
+    HeadOutlet Arama motorlarında sonuçlarda öne çıkarma olayı
+*@
 <!DOCTYPE html>
 <html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Glipotions.OnMuhasebe.Blazor</title>
+    <title>@($"Abc {L["Software"]} {L["Pre-Accounting"]}")</title>
     <base href="~/" />
-
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
     <abp-style-bundle name="@BlazorBasicThemeBundles.Styles.Global" />
 </head>
 <body class="abp-application-layout @rtl">
-    
-    <component type="typeof(App)" render-mode="Server" />
+
+    <environment include="Staging,Production">
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </environment>
+    <environment include="Development">
+        <component type="typeof(App)" render-mode="Server" />
+    </environment>
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">

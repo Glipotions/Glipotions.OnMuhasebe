@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Glipotions.OnMuhasebe.FaturaHareketler;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Faturalar;
 
-namespace Glipotions.OnMuhasebe.Faturalar;
-
+[Authorize(OnMuhasebePermissions.Fatura.Default)]
 public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
 {
     private readonly IFaturaRepository _faturaRepository;
@@ -75,6 +67,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Fatura.Create)]
     public virtual async Task<SelectFaturaDto> CreateAsync(CreateFaturaDto input)
     {
         await _faturaManager.CheckCreateAsync(input.FaturaNo, input.CariId, input.OzelKod1Id,
@@ -104,6 +97,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
     /// RemoveAll ile silinir. Databaseden tam anlamıyla silinmiyor isDeleted=true durumuna getirilir.
     /// 
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Fatura.Update)]
     public virtual async Task<SelectFaturaDto> UpdateAsync(Guid id, UpdateFaturaDto input)
     {
         var entity = await _faturaRepository.GetAsync(id, x => x.Id == id,
@@ -141,6 +135,7 @@ public class FaturaAppService : OnMuhasebeAppService, IFaturaAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Fatura.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         var entity = await _faturaRepository.GetAsync(id, x => x.Id == id,

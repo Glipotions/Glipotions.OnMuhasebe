@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Glipotions.OnMuhasebe.Faturalar;
-using Glipotions.OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Cariler;
 
-namespace Glipotions.OnMuhasebe.Cariler;
-
+[Authorize(OnMuhasebePermissions.Cari.Default)]
 public class CariAppService : OnMuhasebeAppService, ICariAppService
 {
     private readonly ICariRepository _cariRepository;
@@ -75,6 +66,7 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Cari.Create)]
     public virtual async Task<SelectCariDto> CreateAsync(CreateCariDto input)
     {
         await _cariManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id);
@@ -90,6 +82,7 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Cari.Update)]
     public virtual async Task<SelectCariDto> UpdateAsync(Guid id, UpdateCariDto input)
     {
         var entity = await _cariRepository.GetAsync(id, x => x.Id == id);
@@ -103,6 +96,7 @@ public class CariAppService : OnMuhasebeAppService, ICariAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Cari.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _cariManager.CheckDeleteAsync(id);

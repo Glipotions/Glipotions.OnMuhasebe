@@ -16,7 +16,6 @@ public class MakbuzHareketService : BaseHareketService<SelectMakbuzHareketDto>, 
     public MakbuzService MakbuzService { get; set; } //Property injection
     /// <ÖZET>
     /// Güncellemeden önce şarta göre SelectedItem ı DataSource ataması yapılır.
-    /// </summary>
     public override void BeforeUpdate()
     {
         if (MakbuzService.MakbuzTuru == MakbuzTuru.Tahsilat ||

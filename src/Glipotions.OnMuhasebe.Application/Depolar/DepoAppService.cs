@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Depolar;
 
-namespace Glipotions.OnMuhasebe.Depolar;
-
+[Authorize(OnMuhasebePermissions.Depo.Default)]
 public class DepoAppService : OnMuhasebeAppService, IDepoAppService
 {
     private readonly IDepoRepository _depoRepository;
@@ -58,6 +52,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Depo.Create)]
     public virtual async Task<SelectDepoDto> CreateAsync(CreateDepoDto input)
     {
         await _depoManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -73,6 +68,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Depo.Update)]
     public virtual async Task<SelectDepoDto> UpdateAsync(Guid id, UpdateDepoDto input)
     {
         var entity = await _depoRepository.GetAsync(id, x => x.Id == id);
@@ -86,6 +82,7 @@ public class DepoAppService : OnMuhasebeAppService, IDepoAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Depo.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _depoManager.CheckDeleteAsync(id);

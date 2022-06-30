@@ -26,6 +26,9 @@
                                     L="L"
                                     NewButtonClick="async ()=> await BeforeInsertAsync()"
                                     NewButtonVisible="true"
+                                    PrintButtonClick="async ()=> await PrintAsync()"
+                                    PrintButtonEnabled="Service.ListDataSource.Count > 0"
+                                    PrintButtonVisible="true"
                                     UpdateButtonClick="async ()=> await BeforeUpdateAsync()"
                                     UpdateButtonEnabled="Service.ListDataSource.Count > 0"
                                     UpdateButtonVisible="true">
@@ -125,7 +128,7 @@
 
 </DevListPageLayout>
 
-@*@if (Service.ShowReportSelectBox)
+@if (Service.ShowReportSelectBox)
 {
     Service.ReportFolder = @$"{nameof(Reports.Makbuzlar)}\{nameof(Reports.Makbuzlar.TahsilatMakbuzlari)}";
 
@@ -147,7 +150,7 @@
                  DataSource="dataSource"
                  Report="report">
     </DevReportViewer>
-}*@
+}
 
 @code {
 

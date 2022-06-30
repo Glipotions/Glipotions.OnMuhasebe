@@ -363,6 +363,8 @@
     "OverdueReceivables": "Ödemesi Geciken Alacaklar",
     "MoreInformation": "Detaylı bilgi",
     "Reports": "Raporlar",
-    "Authorization": "Yetkilendirme"
+    "Authorization": "Yetkilendirme",
+    "GrantTotal": "Net Toplam"
+
   }
 }
