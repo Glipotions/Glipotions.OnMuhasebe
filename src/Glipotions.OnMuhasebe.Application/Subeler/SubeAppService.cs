@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Glipotions.OnMuhasebe.Permissions;
-using Microsoft.AspNetCore.Authorization;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Subeler;
 
-namespace Glipotions.OnMuhasebe.Subeler;
-
+[Authorize(OnMuhasebePermissions.Sube.Default)]
 public class SubeAppService : OnMuhasebeAppService, ISubeAppService
 {
     private readonly ISubeRepository _subeRepository;
@@ -42,6 +34,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
             );
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Create)]
     public virtual async Task<SelectSubeDto> CreateAsync(CreateSubeDto input)
     {
         await _subeManager.CheckCreateAsync(input.Kod);
@@ -51,6 +44,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
         return ObjectMapper.Map<Sube, SelectSubeDto>(entity);
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Update)]
     public virtual async Task<SelectSubeDto> UpdateAsync(Guid id, UpdateSubeDto input)
     {
         var entity = await _subeRepository.GetAsync(id, x => x.Id == id);
@@ -62,6 +56,7 @@ public class SubeAppService : OnMuhasebeAppService, ISubeAppService
         return ObjectMapper.Map<Sube, SelectSubeDto>(mappedEntity);
     }
 
+    [Authorize(OnMuhasebePermissions.Sube.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _subeManager.CheckDeleteAsync(id);

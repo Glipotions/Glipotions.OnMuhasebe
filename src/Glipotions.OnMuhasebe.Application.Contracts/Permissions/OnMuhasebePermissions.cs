@@ -11,6 +11,10 @@ public static class OnMuhasebePermissions
     public const string PrintConst = ".Print";
     public const string TransactionConst = ".Transaction";
 
+    public static class Ayar
+    {
+        public const string Default = $"{GroupName}.{nameof(Ayar)}";
+    }
     public static class Banka_
     {
         public const string Default = $"{GroupName}.{nameof(Banka_)}";//OnMuhasebe.Banka

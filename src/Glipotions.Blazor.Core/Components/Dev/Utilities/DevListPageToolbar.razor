@@ -4,21 +4,21 @@
            ItemSizeMode="ItemSizeMode">
 
     <DxToolbarItem Click="NewButtonClick"
-                   Enabled="NewButtonEnabled"
+                   Enabled="NewButtonEnabled && ListPageService.IsGrantedCreate"
                    IconCssClass="newimage"
                    Text="@L["New"]"
                    Tooltip="@L["AddNewItem"]"
                    Visible="NewButtonVisible" />
 
     <DxToolbarItem Click="UpdateButtonClick"
-                   Enabled="UpdateButtonEnabled"
+                   Enabled="UpdateButtonEnabled && ListPageService.IsGrantedUpdate"
                    IconCssClass="editimage"
                    Text="@L["Update"]"
                    Tooltip="@L["UpdateSelectedItem"]"
                    Visible="UpdateButtonVisible" />
 
     <DxToolbarItem Click="DeleteButtonClick"
-                   Enabled="DeleteButtonEnabled"
+                   Enabled="DeleteButtonEnabled && ListPageService.IsGrantedDelete"
                    IconCssClass="deleteimage"
                    Text="@L["Delete"]"
                    Tooltip="@L["DeleteSelectedItem"]"
@@ -39,7 +39,7 @@
 
     <DxToolbarItem BeginGroup="true"
                    Click="PrintButtonClick"
-                   Enabled="PrintButtonEnabled"
+                   Enabled="PrintButtonEnabled && ListPageService.IsGrantedPrint"
                    IconCssClass="printimage"
                    Text="@L["Print"]"
                    Tooltip="@L["Print"]"
@@ -47,7 +47,7 @@
 
     <DxToolbarItem BeginGroup="ReserveButtonBeginGroup"
                    Click="ReserveButtonClick"
-                   Enabled="ReserveButtonEnabled"
+                   Enabled="ReserveButtonEnabled && ListPageService.IsGrantedReserve"
                    IconCssClass="@ReserveButtonIconCssClass"
                    Text="@ReserveButtonText"
                    Tooltip="@ReserveButtonTooltip"

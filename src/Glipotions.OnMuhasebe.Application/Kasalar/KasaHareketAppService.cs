@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.MakbuzHareketler;
-using Glipotions.OnMuhasebe.Makbuzlar;
-using Glipotions.OnMuhasebe.OdemeBelgeleri;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-
-namespace Glipotions.OnMuhasebe.Kasalar;
+﻿namespace Glipotions.OnMuhasebe.Kasalar;
 
 public class KasaHareketAppService : OnMuhasebeAppService, IKasaHareketAppService
 {

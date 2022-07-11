@@ -40,11 +40,29 @@ public interface ICoreListPageService
     /// <ÖZET>
     /// ShowReportSelectBox Rapor seçimi için açılacak olan popup açılması için true yapılır.
     public bool ShowReportSelectBox { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedDefault { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedCreate { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedUpdate { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedDelete { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedPrint { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public bool IsGrantedReserve { get; set; }
     /// <ÖZET>
     /// Edit veya insert işlemi yaparken sayfayı göstermeye yarar.

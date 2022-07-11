@@ -2,7 +2,7 @@
 
 
 
-@*@attribute [Authorize(OnMuhasebePermissions.Birim.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Birim.Default)]
 @inherits BaseListPage<SelectBirimDto, ListBirimDto, BirimListParameterDto,
                        CreateBirimDto, UpdateBirimDto, CodeParameterDto>
 
@@ -77,10 +77,10 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Birim.Default;
-        //CreatePolicy = OnMuhasebePermissions.Birim.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Birim.Update;
-        //DeletePolicy = OnMuhasebePermissions.Birim.Delete;
+        DefaultPolicy = OnMuhasebePermissions.Birim.Default;
+        CreatePolicy = OnMuhasebePermissions.Birim.Create;
+        UpdatePolicy = OnMuhasebePermissions.Birim.Update;
+        DeletePolicy = OnMuhasebePermissions.Birim.Delete;
     }
 
 }

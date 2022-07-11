@@ -1,6 +1,6 @@
 ﻿@page "/branchcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Sube.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Sube.Default)]
 @inherits BaseListPage<SelectSubeDto, ListSubeDto, SubeListParameterDto,
                        CreateSubeDto, UpdateSubeDto, CodeParameterDto>
 
@@ -63,10 +63,10 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Sube.Default;
-        //CreatePolicy = OnMuhasebePermissions.Sube.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Sube.Update;
-        //DeletePolicy = OnMuhasebePermissions.Sube.Delete;
+        DefaultPolicy = OnMuhasebePermissions.Sube.Default;
+        CreatePolicy = OnMuhasebePermissions.Sube.Create;
+        UpdatePolicy = OnMuhasebePermissions.Sube.Update;
+        DeletePolicy = OnMuhasebePermissions.Sube.Delete;
     }
 
 }

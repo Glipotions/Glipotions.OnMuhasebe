@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.MakbuzHareketler;
-using Glipotions.OnMuhasebe.Permissions;
-using Microsoft.AspNetCore.Authorization;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Makbuzlar;
 
-namespace Glipotions.OnMuhasebe.Makbuzlar;
-
-//[Authorize(OnMuhasebePermissions.Makbuz.Default)]
+[Authorize(OnMuhasebePermissions.Makbuz.Default)]
 public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
 {
     private readonly IMakbuzRepository _makbuzRepository;
@@ -66,7 +56,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
             );
     }
 
-    //[Authorize(OnMuhasebePermissions.Makbuz.Create)]
+    [Authorize(OnMuhasebePermissions.Makbuz.Create)]
     public virtual async Task<SelectMakbuzDto> CreateAsync(CreateMakbuzDto input)
     {
         await _makbuzManager.CheckCreateAsync(input.MakbuzNo, input.MakbuzTuru.Value,
@@ -101,7 +91,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
     /// .. silinenleri tespit edip(deletedEntities) silme işlemi yapılır.
     /// tespit işlemi databasedeki ile inputtaki arasında karşılaştırma yapılarak bulunur.
     /// <returns></returns>
-    //[Authorize(OnMuhasebePermissions.Makbuz.Update)]
+    [Authorize(OnMuhasebePermissions.Makbuz.Update)]
     public virtual async Task<SelectMakbuzDto> UpdateAsync(Guid id, UpdateMakbuzDto input)
     {
         var entity = await _makbuzRepository.GetAsync(id, x => x.Id == id,
@@ -144,7 +134,7 @@ public class MakbuzAppService : OnMuhasebeAppService, IMakbuzAppService
     /// hem entitynin kendisi hem bağlı hareketlerin tamamının isDeleted durumu true yapılır.
     /// <param name="id"></param>
     /// <returns></returns>
-    //[Authorize(OnMuhasebePermissions.Makbuz.Delete)]
+    [Authorize(OnMuhasebePermissions.Makbuz.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         var entity = await _makbuzRepository.GetAsync(id, x => x.Id == id,

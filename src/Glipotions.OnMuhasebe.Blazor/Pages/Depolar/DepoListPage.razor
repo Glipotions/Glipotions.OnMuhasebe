@@ -1,6 +1,6 @@
 ﻿@page "/warehousecards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Depo.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Depo.Default)]
 @inherits BaseListPage<SelectDepoDto, ListDepoDto, DepoListParameterDto, CreateDepoDto, UpdateDepoDto, DepoCodeParameterDto>
 
 @inject DepoAppService CrudService
@@ -109,11 +109,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Depo.Default;
-        //CreatePolicy = OnMuhasebePermissions.Depo.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Depo.Update;
-        //DeletePolicy = OnMuhasebePermissions.Depo.Delete;
-        //ReservePolicy = OnMuhasebePermissions.Depo.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.Depo.Default;
+        CreatePolicy = OnMuhasebePermissions.Depo.Create;
+        UpdatePolicy = OnMuhasebePermissions.Depo.Update;
+        DeletePolicy = OnMuhasebePermissions.Depo.Delete;
+        ReservePolicy = OnMuhasebePermissions.Depo.Transaction;
     }
 
 }

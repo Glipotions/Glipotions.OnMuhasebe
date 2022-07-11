@@ -1,6 +1,6 @@
 ﻿@page "/customcodes"
 
-@*@attribute [Authorize(OnMuhasebePermissions.OzelKod.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.OzelKod.Default)]
 @inherits BaseListPage<SelectOzelKodDto, ListOzelKodDto, OzelKodListParameterDto,
                        CreateOzelKodDto, UpdateOzelKodDto, OzelKodCodeParameterDto>
 
@@ -63,10 +63,10 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.OzelKod.Default;
-        //CreatePolicy = OnMuhasebePermissions.OzelKod.Create;
-        //UpdatePolicy = OnMuhasebePermissions.OzelKod.Update;
-        //DeletePolicy = OnMuhasebePermissions.OzelKod.Delete;
+        DefaultPolicy = OnMuhasebePermissions.OzelKod.Default;
+        CreatePolicy = OnMuhasebePermissions.OzelKod.Create;
+        UpdatePolicy = OnMuhasebePermissions.OzelKod.Update;
+        DeletePolicy = OnMuhasebePermissions.OzelKod.Delete;
     }
 
 }

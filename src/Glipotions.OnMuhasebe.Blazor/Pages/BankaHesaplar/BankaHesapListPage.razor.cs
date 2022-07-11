@@ -13,6 +13,8 @@ public partial class BankaHesapListPage
     /// listDataSource HesapTuru, SubeId ve Durum'a göre doldurulur.
     /// SubeId nin doldurulmasının nedeni kullanıcı banka hesap eklediğinde hangi şubede olduğunu belirtmesi
     ///     gerektiğinden subeId nin dolu olması gerekir, geri kalanı kullanıcı doldurur.
+    /// 
+    /// eğer veri boşsa hata fırlatmaması için atama işlemi yapılmaz. (5/5) 26. video 31.dk 
     protected override async Task GetListDataSourceAsync()
     {
         var listDataSource = (await GetListAsync(new BankaHesapListParameterDto

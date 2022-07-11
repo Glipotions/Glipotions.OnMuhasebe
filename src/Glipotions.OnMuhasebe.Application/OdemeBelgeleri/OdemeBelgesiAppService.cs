@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.MakbuzHareketler;
-using Glipotions.OnMuhasebe.Makbuzlar;
-using Volo.Abp.Application.Dtos;
+﻿namespace Glipotions.OnMuhasebe.OdemeBelgeleri;
 
-namespace Glipotions.OnMuhasebe.OdemeBelgeleri;
-
-//[Authorize(OnMuhasebePermissions.OdemeBelgesi.Default)]
+[Authorize(OnMuhasebePermissions.OdemeBelgesi.Default)]
 public class OdemeBelgesiAppService : OnMuhasebeAppService, IOdemeBelgesiAppService
 {
     private readonly IOdemeBelgesiRepository _repository;

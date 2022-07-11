@@ -1,6 +1,6 @@
 ﻿@page "/collectionreceiptcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Makbuz.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Makbuz.Default)]
 @inherits BaseListPage<SelectMakbuzDto, ListMakbuzDto, MakbuzListParameterDto, CreateMakbuzDto, UpdateMakbuzDto, MakbuzNoParameterDto>
 
 @inject MakbuzAppService CrudService
@@ -160,11 +160,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Makbuz.Default;
-        //CreatePolicy = OnMuhasebePermissions.Makbuz.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Makbuz.Update;
-        //DeletePolicy = OnMuhasebePermissions.Makbuz.Delete;
-        //PrintPolicy = OnMuhasebePermissions.Makbuz.Print;
+        DefaultPolicy = OnMuhasebePermissions.Makbuz.Default;
+        CreatePolicy = OnMuhasebePermissions.Makbuz.Create;
+        UpdatePolicy = OnMuhasebePermissions.Makbuz.Update;
+        DeletePolicy = OnMuhasebePermissions.Makbuz.Delete;
+        PrintPolicy = OnMuhasebePermissions.Makbuz.Print;
     }
 
 }

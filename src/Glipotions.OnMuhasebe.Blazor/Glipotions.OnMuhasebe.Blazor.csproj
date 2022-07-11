@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Glipotions.Blazor.Core\Glipotions.Blazor.Core.csproj" />
+    <ProjectReference Include="..\Glipotions.OnMuhasebe.Application.Contracts\Glipotions.OnMuhasebe.Application.Contracts.csproj" />
     <ProjectReference Include="..\Glipotions.OnMuhasebe.Application\Glipotions.OnMuhasebe.Application.csproj" />
     <ProjectReference Include="..\Glipotions.OnMuhasebe.HttpApi\Glipotions.OnMuhasebe.HttpApi.csproj" />
     <ProjectReference Include="..\Glipotions.OnMuhasebe.EntityFrameworkCore\Glipotions.OnMuhasebe.EntityFrameworkCore.csproj" />

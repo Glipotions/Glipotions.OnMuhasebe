@@ -3,7 +3,7 @@
 @inject IStringLocalizer<OnMuhasebeResource> L
 @inject AppService AppService
 @inject NavigationManager NavigationManager
-@*@inject IAuthorizationService AuthorizationService*@
+@inject IAuthorizationService AuthorizationService
 
 @*  ÖZET
     CollapseItemsToHamburgerMenu= Pencere Küçültüldüğünde Otomatik olarak
@@ -23,8 +23,8 @@
                 ItemsPosition="ItemPosition.Start"
                 CollapseItemsToHamburgerMenu="true">
             <Items>
-@*                <AuthorizeView Context="AuthorizeContext">
-                    <Authorized>*@
+                <AuthorizeView Context="AuthorizeContext">
+                    <Authorized>
                         <DxMenuItem Text="@L["Home"]"
                                     NavigateUrl="/"
                                     IconCssClass="fa fa-home"
@@ -33,77 +33,77 @@
                         <DxMenuItem Text="@L["Cards"]"
                                     IconCssClass="fa fa-clone">
                             <Items>
-                                @*@if (_birim)*@
+                                @if (_birim)
                                 {
                                     <DxMenuItem Text="@L["UnitCards"]"
                                             NavigateUrl="unitcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_banka)*@
+                                @if (_banka)
                                 {
                                     <DxMenuItem Text="@L["BankCards"]"
                                             NavigateUrl="bankcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_bankaHesap)*@
+                                @if (_bankaHesap)
                                 {
                                     <DxMenuItem Text="@L["BankAccountCards"]"
                                             NavigateUrl="bankaccountcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_cari)*@
+                                @if (_cari)
                                 {
                                     <DxMenuItem Text="@L["CustomerCards"]"
                                             NavigateUrl="customercards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_kasa)*@
+                                @if (_kasa)
                                 {
                                     <DxMenuItem Text="@L["CashCards"]"
                                             NavigateUrl="cashcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_depo)*@
+                                @if (_depo)
                                 {
                                     <DxMenuItem Text="@L["WarehouseCards"]"
                                             NavigateUrl="warehousecards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_stok)*@
+                                @if (_stok)
                                 {
                                     <DxMenuItem Text="@L["StockCards"]"
                                             NavigateUrl="stockcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_hizmet)*@
+                                @if (_hizmet)
                                 {
                                     <DxMenuItem Text="@L["ServiceCards"]"
                                             NavigateUrl="servicecards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_masraf)*@
+                                @if (_masraf)
                                 {
                                     <DxMenuItem Text="@L["ExpenseCards"]"
                                             NavigateUrl="expensecards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_sube)*@
+                                @if (_sube)
                                 {
                                     <DxMenuItem Text="@L["BranchCards"]"
                                             NavigateUrl="branchcards"
                                             IconCssClass="fa fa-clone" />
                                 }
 
-                                @*@if (_donem)*@
+                                @if (_donem)
                                 {
                                     <DxMenuItem Text="@L["PeriodCards"]"
                                             NavigateUrl="periodcards"
@@ -112,7 +112,7 @@
                             </Items>
                         </DxMenuItem>
 
-                        @*@if (_fatura)*@
+                        @if (_fatura)
                         {
                             <DxMenuItem Text="@L["Invoices"]"
                                     IconCssClass="fas fa-file-invoice">
@@ -128,7 +128,7 @@
                             </DxMenuItem>
                         }
 
-                        @*@if (_makbuz)*@
+                        @if (_makbuz)
                         {
                             <DxMenuItem Text="@L["Receipts"]"
                                     IconCssClass="fas fa-receipt">
@@ -152,7 +152,7 @@
                             </DxMenuItem>
                         }
 
-                        @*@if (_odemeBelgesi)*@
+                        @if (_odemeBelgesi)
                         {
                             <DxMenuItem Text="@L["MeansOfPayment"]"
                                     IconCssClass="fa fa-money-check">
@@ -172,7 +172,7 @@
                             </DxMenuItem>
                         }
 
-                        @*@if (_parametre)*@
+                        @if (_parametre)
                         {
                             <DxMenuItem Text="@L["Parameters"]"
                                     IconCssClass="fas fa-clipboard-check">
@@ -184,13 +184,13 @@
                             </DxMenuItem>
                         }
 
-                        @*@if (_tenant || _role || _user || _ayar)*@
+                        @if (_tenant || _role || _user || _ayar)
                         {
                             <DxMenuItem Text="@L["Administration"]"
                                     IconCssClass="fas fa-wrench">
                                 <Items>
 
-                                    @*@if (_tenant)*@
+                                    @if (_tenant)
                                     {
                                         <DxMenuItem Text="@L["TenantManagement"]"
                                             IconCssClass="fas fa-user">
@@ -202,19 +202,19 @@
                                         </DxMenuItem>
                                     }
 
-                                    @*@if (_role || _user)*@
+                                    @if (_role || _user)
                                     {
                                         <DxMenuItem Text="@L["IdentityManagement"]"
                                             IconCssClass="fas fa-user-lock">
                                             <Items>
-                                                @*@if (_role)*@
+                                                @if (_role)
                                                 {
                                                     <DxMenuItem Text="@L["Roles"]"
                                                     NavigateUrl="Identity/Roles"
                                                     IconCssClass="fas fa-user-lock" />
                                                 }
 
-                                                @*@if (_user)*@
+                                                @if (_user)
                                                 {
                                                     <DxMenuItem Text="@L["Users"]"
                                                     NavigateUrl="Identity/Users"
@@ -224,7 +224,7 @@
                                         </DxMenuItem>
                                     }
 
-                                    @*@if (_ayar)*@
+                                    @if (_ayar)
                                     {
                                         <DxMenuItem Text="@L["Settings"]"
                                             NavigateUrl="setting-management"
@@ -246,8 +246,8 @@
                                 @AppService.FirmaParametre.DonemAdi
                             </TextTemplate>
                         </DxMenuItem>
-@*                    </Authorized>
-                </AuthorizeView>*@
+                    </Authorized>
+                </AuthorizeView>
 
                 <LoginDisplay />
 
@@ -279,10 +279,10 @@
         AppService.HasChanged = StateHasChanged;
     }
 
-@*    bool _birim, _banka, _bankaHesap, _cari, _kasa, _depo, _stok, _hizmet, _masraf, _sube, _donem, _fatura,
-    _makbuz, _odemeBelgesi, _parametre, _tenant, _role, _user, _ayar;*@
+    bool _birim, _banka, _bankaHesap, _cari, _kasa, _depo, _stok, _hizmet, _masraf, _sube, _donem, _fatura,
+    _makbuz, _odemeBelgesi, _parametre, _tenant, _role, _user, _ayar;
 
-@*    protected override async Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
         _birim = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Birim.Default);
         _banka = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Banka_.Default);
@@ -305,5 +305,5 @@
         _role = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Roles.Default);
         _user = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.Default);
         _ayar = await AuthorizationService.IsGrantedAsync(OnMuhasebePermissions.Ayar.Default);
-    }*@
+    }
 }

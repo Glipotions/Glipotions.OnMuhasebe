@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Masraflar;
 
-namespace Glipotions.OnMuhasebe.Masraflar;
-
+[Authorize(OnMuhasebePermissions.Masraf.Default)]
 public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
 {
     private readonly IMasrafRepository _masrafRepository;
@@ -56,6 +50,7 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Masraf.Create)]
     public virtual async Task<SelectMasrafDto> CreateAsync(CreateMasrafDto input)
     {
         await _masrafManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id, input.OzelKod2Id);
@@ -71,6 +66,7 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Masraf.Update)]
     public virtual async Task<SelectMasrafDto> UpdateAsync(Guid id, UpdateMasrafDto input)
     {
         var entity = await _masrafRepository.GetAsync(id, x => x.Id == id);
@@ -84,6 +80,7 @@ public class MasrafAppService : OnMuhasebeAppService, IMasrafAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Masraf.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _masrafManager.CheckDeleteAsync(id);

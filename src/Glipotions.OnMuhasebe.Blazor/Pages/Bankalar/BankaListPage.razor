@@ -1,6 +1,6 @@
 ﻿@page "/bankcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Banka_.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Banka_.Default)]
 @inherits BaseListPage<SelectBankaDto, ListBankaDto, BankaListParameterDto,
                        CreateBankaDto, UpdateBankaDto, CodeParameterDto>
 
@@ -94,11 +94,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Banka_.Default;
-        //CreatePolicy = OnMuhasebePermissions.Banka_.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Banka_.Update;
-        //DeletePolicy = OnMuhasebePermissions.Banka_.Delete;
-        //ReservePolicy = OnMuhasebePermissions.Banka_.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.Banka_.Default;
+        CreatePolicy = OnMuhasebePermissions.Banka_.Create;
+        UpdatePolicy = OnMuhasebePermissions.Banka_.Update;
+        DeletePolicy = OnMuhasebePermissions.Banka_.Delete;
+        ReservePolicy = OnMuhasebePermissions.Banka_.Transaction;
     }
 
 }

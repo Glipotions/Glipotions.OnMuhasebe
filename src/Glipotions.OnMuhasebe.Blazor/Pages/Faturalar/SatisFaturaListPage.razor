@@ -1,7 +1,7 @@
 ﻿@page "/salesinvoicecards"
 @using System.Reflection
 
-@*@attribute [Authorize(OnMuhasebePermissions.Fatura.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Fatura.Default)]
 @inherits BaseListPage<SelectFaturaDto, ListFaturaDto, FaturaListParameterDto,
                        CreateFaturaDto, UpdateFaturaDto, FaturaNoParameterDto>
 
@@ -157,11 +157,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Fatura.Default;
-        //CreatePolicy = OnMuhasebePermissions.Fatura.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Fatura.Update;
-        //DeletePolicy = OnMuhasebePermissions.Fatura.Delete;
-        //PrintPolicy = OnMuhasebePermissions.Fatura.Print;
+        DefaultPolicy = OnMuhasebePermissions.Fatura.Default;
+        CreatePolicy = OnMuhasebePermissions.Fatura.Create;
+        UpdatePolicy = OnMuhasebePermissions.Fatura.Update;
+        DeletePolicy = OnMuhasebePermissions.Fatura.Delete;
+        PrintPolicy = OnMuhasebePermissions.Fatura.Print;
     }
 
 }

@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Glipotions.OnMuhasebe.Permissions;
-using Microsoft.AspNetCore.Authorization;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Stoklar;
 
-namespace Glipotions.OnMuhasebe.Stoklar;
-
-//[Authorize(OnMuhasebePermissions.Stok.Default)]
+[Authorize(OnMuhasebePermissions.Stok.Default)]
 public class StokAppService : OnMuhasebeAppService, IStokAppService
 {
     private readonly IStokRepository _stokRepository;
@@ -60,7 +51,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
-    //[Authorize(OnMuhasebePermissions.Stok.Create)]
+    [Authorize(OnMuhasebePermissions.Stok.Create)]
     public virtual async Task<SelectStokDto> CreateAsync(CreateStokDto input)
     {
         await _stokManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id,
@@ -77,7 +68,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
-    //[Authorize(OnMuhasebePermissions.Stok.Update)]
+    [Authorize(OnMuhasebePermissions.Stok.Update)]
     public virtual async Task<SelectStokDto> UpdateAsync(Guid id, UpdateStokDto input)
     {
         var entity = await _stokRepository.GetAsync(id, x => x.Id == id);
@@ -91,7 +82,7 @@ public class StokAppService : OnMuhasebeAppService, IStokAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
-    //[Authorize(OnMuhasebePermissions.Stok.Delete)]
+    [Authorize(OnMuhasebePermissions.Stok.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _stokManager.CheckDeleteAsync(id);

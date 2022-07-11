@@ -13,8 +13,8 @@ public class OnMuhasebePermissionDefinitionProvider : PermissionDefinitionProvid
             L($"{localizePrefix}:{OnMuhasebePermissions.GroupName}"));
 
         //ayar
-        //var ayar = mainGroup.AddPermission(OnMuhasebePermissions.Ayar.Default,
-        //    L($"{localizePrefix}:{nameof(OnMuhasebePermissions.Ayar)}"));
+        var ayar = mainGroup.AddPermission(OnMuhasebePermissions.Ayar.Default,
+            L($"{localizePrefix}:{nameof(OnMuhasebePermissions.Ayar)}"));
 
         //banka
         var banka = mainGroup.AddPermission(OnMuhasebePermissions.Banka_.Default,

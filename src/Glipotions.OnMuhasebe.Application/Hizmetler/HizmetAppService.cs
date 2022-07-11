@@ -50,6 +50,7 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Hizmet.Create)]
     public virtual async Task<SelectHizmetDto> CreateAsync(CreateHizmetDto input)
     {
         await _hizmetManager.CheckCreateAsync(input.Kod, input.BirimId, input.OzelKod1Id, input.OzelKod2Id);
@@ -65,6 +66,7 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Hizmet.Update)]
     public virtual async Task<SelectHizmetDto> UpdateAsync(Guid id, UpdateHizmetDto input)
     {
         var entity = await _hizmetRepository.GetAsync(id, x => x.Id == id);
@@ -78,6 +80,7 @@ public class HizmetAppService : OnMuhasebeAppService, IHizmetAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Hizmet.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _hizmetManager.CheckDeleteAsync(id);

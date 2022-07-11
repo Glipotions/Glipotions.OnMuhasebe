@@ -32,11 +32,29 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
         LocalizationResource = typeof(OnMuhasebeResource);
     }
 
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string DefaultPolicy { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string CreatePolicy { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string UpdatePolicy { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string DeletePolicy { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string PrintPolicy { get; set; }
+    /// <ÖZET>
+    /// Yetkilendirme politikaları
+    /// (5/5) 25. video 34.dk
     public string ReservePolicy { get; set; }
 
     #region Services
@@ -202,6 +220,10 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     #endregion
 
     /// <ÖZET>
+    /// (5/5) 26. video YETKİLENDİRME KISMI
+    /// BaseServicedeki IsGranted.. lar doldurulur.
+    /// 
+    /// ***************************************
     /// (3/5) 31. Video 13.dk
     /// BaseService.HasChanged = StateHasChanged bu atama ile 
     ///     componentlerin CommonServiceden HasChanged kullananların değiştirilmesini sağlar.
@@ -209,23 +231,23 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     /// ListPage çalıştırıldığı anda Burası çalışır ilk çalışan yerdir.
     protected override async Task OnParametersSetAsync()
     {
-        //if (DefaultPolicy != null) BaseService.IsGrantedDefault =
-        //        await AuthorizationService.IsGrantedAsync(DefaultPolicy);
+        if (DefaultPolicy != null) BaseService.IsGrantedDefault =
+                await AuthorizationService.IsGrantedAsync(DefaultPolicy);
 
-        //if (CreatePolicy != null) BaseService.IsGrantedCreate =
-        //        await AuthorizationService.IsGrantedAsync(CreatePolicy);
+        if (CreatePolicy != null) BaseService.IsGrantedCreate =
+                await AuthorizationService.IsGrantedAsync(CreatePolicy);
 
-        //if (UpdatePolicy != null) BaseService.IsGrantedUpdate =
-        //        await AuthorizationService.IsGrantedAsync(UpdatePolicy);
+        if (UpdatePolicy != null) BaseService.IsGrantedUpdate =
+                await AuthorizationService.IsGrantedAsync(UpdatePolicy);
 
-        //if (DeletePolicy != null) BaseService.IsGrantedDelete =
-        //        await AuthorizationService.IsGrantedAsync(DeletePolicy);
+        if (DeletePolicy != null) BaseService.IsGrantedDelete =
+                await AuthorizationService.IsGrantedAsync(DeletePolicy);
 
-        //if (PrintPolicy != null) BaseService.IsGrantedPrint =
-        //        await AuthorizationService.IsGrantedAsync(PrintPolicy);
+        if (PrintPolicy != null) BaseService.IsGrantedPrint =
+                await AuthorizationService.IsGrantedAsync(PrintPolicy);
 
-        //if (ReservePolicy != null) BaseService.IsGrantedReserve =
-        //        await AuthorizationService.IsGrantedAsync(ReservePolicy);
+        if (ReservePolicy != null) BaseService.IsGrantedReserve =
+                await AuthorizationService.IsGrantedAsync(ReservePolicy);
 
         await GetListDataSourceAsync();
         BaseService.HasChanged = StateHasChanged;
@@ -243,6 +265,9 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
     /// IsActiveCards durumu neyse durum o olarak seçilir.=> Aktif Pasif Kart
     /// Asenkron olduğu için parantez içinde yapıldı, tüm itemler gelince sıradaki işleme geçer
     /// BaseService.IsLoaded = true; ile veriler yüklendi bilgisi alınıyor ve splashscreen kapanır.
+    /// 
+    /// eğer veri boşsa hata fırlatmaması için atama işlemi yapılmaz. (5/5) 26. video 31.dk
+
     protected virtual async Task GetListDataSourceAsync()
     {
         var listDataSource = (await GetListAsync(new TGetListInput
@@ -311,17 +336,19 @@ public abstract class BaseListPage<TGetOutputDto, TGetListOutputDto, TGetListInp
         BaseService.ShowEditPage();
     }
     /// <ÖZET>
+    /// Update yetkisi yoksa return edilecek. öncesinde ilk satırı seçme özelliği false edilir.
+    /// 
     /// (3/5) 36. Video 16.DK
     /// ListDataSource.Count eğer 0 a eşitse hiçbir işlem yapmamayı sağlar.
     /// </summary>
     /// <returns></returns>
     protected virtual async Task BeforeUpdateAsync()
     {
-        //if (!BaseService.IsGrantedUpdate)
-        //{
-        //    BaseService.SelectFirstDataRow = false;
-        //    return;
-        //}
+        if (!BaseService.IsGrantedUpdate)
+        {
+            BaseService.SelectFirstDataRow = false;
+            return;
+        }
 
         if (BaseService.ListDataSource.Count == 0) return;
 

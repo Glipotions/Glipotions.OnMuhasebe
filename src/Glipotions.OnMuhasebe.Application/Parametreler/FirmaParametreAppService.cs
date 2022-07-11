@@ -1,10 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Volo.Abp.Application.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Glipotions.OnMuhasebe.Parametreler;
-
+[Authorize]
 public class FirmaParametreAppService : OnMuhasebeAppService, IFirmaParametreAppService
 {
     private readonly IFirmaParametreRepository _firmaParametreRepository;
@@ -21,10 +18,10 @@ public class FirmaParametreAppService : OnMuhasebeAppService, IFirmaParametreApp
     /// ObjectMapper Entity'i Select(Entity)Dto olarak mapler.
     public virtual async Task<SelectFirmaParametreDto> GetAsync(Guid userId)
     {
-        var entity = await _firmaParametreRepository.GetAsync(x => x.UserId == userId, x => x.Sube, x => x.Donem, x=>x.Depo);
+        var entity = await _firmaParametreRepository.GetAsync(x => x.UserId == userId, x => x.Sube, x => x.Donem, x => x.Depo);
 
         if (entity == null) return null;
-             
+
         return ObjectMapper.Map<FirmaParametre, SelectFirmaParametreDto>(entity);
     }
     /// <Özet>
@@ -73,8 +70,8 @@ public class FirmaParametreAppService : OnMuhasebeAppService, IFirmaParametreApp
         return ObjectMapper.Map<FirmaParametre, SelectFirmaParametreDto>(mappedEntity);
     }
     [NonAction]
-    public Task<bool> UserAnyAsync(Guid userId)
+    public virtual async Task<bool> UserAnyAsync(Guid userId)
     {
-        throw new NotImplementedException();
+        return await _firmaParametreRepository.AnyAsync(x => x.UserId == userId);
     }
 }

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.FaturaHareketler;
-using Glipotions.OnMuhasebe.Faturalar;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-
-namespace Glipotions.OnMuhasebe.Hizmetler;
+﻿namespace Glipotions.OnMuhasebe.Hizmetler;
 
 public class HizmetHareketAppService : OnMuhasebeAppService, IHizmetHareketAppService
 {

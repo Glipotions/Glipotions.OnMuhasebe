@@ -1,6 +1,6 @@
 ﻿@page "/cashcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Kasa.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Kasa.Default)]
 @inherits BaseListPage<SelectKasaDto, ListKasaDto, KasaListParameterDto, CreateKasaDto, UpdateKasaDto, KasaCodeParameterDto>
 
 @inject KasaAppService CrudService
@@ -114,11 +114,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Kasa.Default;
-        //CreatePolicy = OnMuhasebePermissions.Kasa.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Kasa.Update;
-        //DeletePolicy = OnMuhasebePermissions.Kasa.Delete;
-        //ReservePolicy = OnMuhasebePermissions.Kasa.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.Kasa.Default;
+        CreatePolicy = OnMuhasebePermissions.Kasa.Create;
+        UpdatePolicy = OnMuhasebePermissions.Kasa.Update;
+        DeletePolicy = OnMuhasebePermissions.Kasa.Delete;
+        ReservePolicy = OnMuhasebePermissions.Kasa.Transaction;
     }
 
 }

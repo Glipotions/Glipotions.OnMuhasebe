@@ -1,6 +1,6 @@
 ﻿@page "/customercards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Cari.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Cari.Default)]
 @inherits BaseListPage<SelectCariDto, ListCariDto, CariListParameterDto, CreateCariDto, UpdateCariDto, CodeParameterDto>
 
 @inject CariAppService CrudService
@@ -126,11 +126,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Cari.Default;
-        //CreatePolicy = OnMuhasebePermissions.Cari.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Cari.Update;
-        //DeletePolicy = OnMuhasebePermissions.Cari.Delete;
-        //ReservePolicy = OnMuhasebePermissions.Cari.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.Cari.Default;
+        CreatePolicy = OnMuhasebePermissions.Cari.Create;
+        UpdatePolicy = OnMuhasebePermissions.Cari.Update;
+        DeletePolicy = OnMuhasebePermissions.Cari.Delete;
+        ReservePolicy = OnMuhasebePermissions.Cari.Transaction;
     }
 
 }

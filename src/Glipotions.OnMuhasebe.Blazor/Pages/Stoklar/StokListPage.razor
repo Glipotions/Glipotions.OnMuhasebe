@@ -1,6 +1,6 @@
 ﻿@page "/stockcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.Stok.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.Stok.Default)]
 @inherits BaseListPage<SelectStokDto, ListStokDto, StokListParameterDto, 
 CreateStokDto, UpdateStokDto, CodeParameterDto>
 
@@ -127,11 +127,11 @@ CreateStokDto, UpdateStokDto, CodeParameterDto>
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.Stok.Default;
-        //CreatePolicy = OnMuhasebePermissions.Stok.Create;
-        //UpdatePolicy = OnMuhasebePermissions.Stok.Update;
-        //DeletePolicy = OnMuhasebePermissions.Stok.Delete;
-        //ReservePolicy = OnMuhasebePermissions.Stok.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.Stok.Default;
+        CreatePolicy = OnMuhasebePermissions.Stok.Create;
+        UpdatePolicy = OnMuhasebePermissions.Stok.Update;
+        DeletePolicy = OnMuhasebePermissions.Stok.Delete;
+        ReservePolicy = OnMuhasebePermissions.Stok.Transaction;
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿@page "/bankbranches"
 
-@*@attribute [Authorize(OnMuhasebePermissions.BankaSube.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.BankaSube.Default)]
 @inherits BaseListPage<SelectBankaSubeDto, ListBankaSubeDto, BankaSubeListParameterDto,
                        CreateBankaSubeDto, UpdateBankaSubeDto, BankaSubeCodeParameterDto>
 
@@ -71,10 +71,10 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.BankaSube.Default;
-        //CreatePolicy = OnMuhasebePermissions.BankaSube.Create;
-        //UpdatePolicy = OnMuhasebePermissions.BankaSube.Update;
-        //DeletePolicy = OnMuhasebePermissions.BankaSube.Delete;
+        DefaultPolicy = OnMuhasebePermissions.BankaSube.Default;
+        CreatePolicy = OnMuhasebePermissions.BankaSube.Create;
+        UpdatePolicy = OnMuhasebePermissions.BankaSube.Update;
+        DeletePolicy = OnMuhasebePermissions.BankaSube.Delete;
     }
 
 }

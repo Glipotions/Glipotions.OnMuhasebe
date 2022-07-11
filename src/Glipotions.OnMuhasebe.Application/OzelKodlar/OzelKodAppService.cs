@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.OzelKodlar;
 
-namespace Glipotions.OnMuhasebe.OzelKodlar;
-
+[Authorize(OnMuhasebePermissions.OzelKod.Default)]
 public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
 {
     private readonly IOzelKodRepository _ozelKodRepository;
@@ -57,6 +51,7 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.OzelKod.Create)]
     public virtual async Task<SelectOzelKodDto> CreateAsync(CreateOzelKodDto input)
     {
         await _ozelKodManager.CheckCreateAsync(input.Kod, input.KodTuru, input.KartTuru);
@@ -72,6 +67,7 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.OzelKod.Update)]
     public virtual async Task<SelectOzelKodDto> UpdateAsync(Guid id, UpdateOzelKodDto input)
     {
         var entity = await _ozelKodRepository.GetAsync(id, x => x.Id == id);
@@ -85,6 +81,7 @@ public class OzelKodAppService : OnMuhasebeAppService, IOzelKodAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.OzelKod.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _ozelKodManager.CheckDeleteAsync(id);

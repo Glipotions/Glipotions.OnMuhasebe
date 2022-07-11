@@ -1,6 +1,6 @@
 ﻿@page "/bankaccountcards"
 
-@*@attribute [Authorize(OnMuhasebePermissions.BankaHesap.Default)]*@
+@attribute [Authorize(OnMuhasebePermissions.BankaHesap.Default)]
 @inherits BaseListPage<SelectBankaHesapDto, ListBankaHesapDto, BankaHesapListParameterDto, CreateBankaHesapDto, UpdateBankaHesapDto, BankaHesapCodeParameterDto>
 
 @inject BankaHesapAppService CrudService
@@ -136,11 +136,11 @@
         BaseCrudService = CrudService;
         BaseService = Service;
 
-        //DefaultPolicy = OnMuhasebePermissions.BankaHesap.Default;
-        //CreatePolicy = OnMuhasebePermissions.BankaHesap.Create;
-        //UpdatePolicy = OnMuhasebePermissions.BankaHesap.Update;
-        //DeletePolicy = OnMuhasebePermissions.BankaHesap.Delete;
-        //ReservePolicy = OnMuhasebePermissions.BankaHesap.Transaction;
+        DefaultPolicy = OnMuhasebePermissions.BankaHesap.Default;
+        CreatePolicy = OnMuhasebePermissions.BankaHesap.Create;
+        UpdatePolicy = OnMuhasebePermissions.BankaHesap.Update;
+        DeletePolicy = OnMuhasebePermissions.BankaHesap.Delete;
+        ReservePolicy = OnMuhasebePermissions.BankaHesap.Transaction;
     }
 
 }

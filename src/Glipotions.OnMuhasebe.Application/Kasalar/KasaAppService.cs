@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Glipotions.OnMuhasebe.CommonDtos;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
+﻿namespace Glipotions.OnMuhasebe.Kasalar;
 
-namespace Glipotions.OnMuhasebe.Kasalar;
-
+[Authorize(OnMuhasebePermissions.Kasa.Default)]
 public class KasaAppService : OnMuhasebeAppService, IKasaAppService
 {
     private readonly IKasaRepository _kasaRepository;
@@ -59,6 +53,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
     /// 
     /// Databaseden entity geliyor, 
     /// return kısmında ise bu entity'i tekrar mapleyerek Select(Entity)Dto olarak döndürüyor.
+    [Authorize(OnMuhasebePermissions.Kasa.Create)]
     public virtual async Task<SelectKasaDto> CreateAsync(CreateKasaDto input)
     {
         await _kasaManager.CheckCreateAsync(input.Kod, input.OzelKod1Id, input.OzelKod2Id, input.SubeId);
@@ -74,6 +69,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
     /// <param name="id"></param>
     /// <param name="input"></param> UI dan gelir
     /// <returns> Maplenmiş entity return edilir. </returns>
+    [Authorize(OnMuhasebePermissions.Kasa.Update)]
     public virtual async Task<SelectKasaDto> UpdateAsync(Guid id, UpdateKasaDto input)
     {
         var entity = await _kasaRepository.GetAsync(id, x => x.Id == id);
@@ -87,6 +83,7 @@ public class KasaAppService : OnMuhasebeAppService, IKasaAppService
     }
     /// <Özet>
     /// CheckUpdateAsync ile Manager sınıfından database kontrolü yapılır.
+    [Authorize(OnMuhasebePermissions.Kasa.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _kasaManager.CheckDeleteAsync(id);

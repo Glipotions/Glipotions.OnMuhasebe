@@ -21,6 +21,7 @@ global using Glipotions.OnMuhasebe.Hizmetler;
 global using Glipotions.OnMuhasebe.Makbuzlar;
 global using Glipotions.OnMuhasebe.MakbuzHareketler;
 global using Glipotions.OnMuhasebe.Masraflar;
+global using Glipotions.OnMuhasebe.OdemeBelgeleri;
 global using Glipotions.OnMuhasebe.OzelKodlar;
 global using Glipotions.OnMuhasebe.Parametreler;
 global using Glipotions.OnMuhasebe.Permissions;

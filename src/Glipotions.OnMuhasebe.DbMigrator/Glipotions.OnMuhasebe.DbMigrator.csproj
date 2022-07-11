@@ -30,6 +30,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="5.3.0" />
     <ProjectReference Include="..\Glipotions.OnMuhasebe.Application.Contracts\Glipotions.OnMuhasebe.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Glipotions.OnMuhasebe.Blazor\Glipotions.OnMuhasebe.Blazor.csproj" />
     <ProjectReference Include="..\Glipotions.OnMuhasebe.EntityFrameworkCore\Glipotions.OnMuhasebe.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
